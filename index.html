@@ -1,0 +1,1825 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>Allianz Wasserstraße</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #7e1889;
+    --blue: #1b42cc;
+    --teal: #39c7c9;
+    --mint: #cbefe7;
+    --sky: #a9cbf7;
+    --ink: #2b2e34;
+    --paper: #f6f7f4;
+    --white: #ffffff;
+    --line: #e2e3e0;
+    --max: 1240px;
+    --head: "Barlow Semi Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --text: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  html { color-scheme: light; }
+  body {
+    margin: 0;
+    font-family: var(--text);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--white);
+  }
+  h1, h2, h3 { font-family: var(--head); font-weight: 600; line-height: 1.1; letter-spacing: -.005em; margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  a { color: inherit; }
+  img, svg { display: block; max-width: 100%; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+  /* Label (Dachzeile) */
+  .label {
+    display: flex; width: fit-content; align-items: center; gap: 12px;
+    font-family: var(--head); font-weight: 600; font-size: 14px;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--purple);
+  }
+  .label::before { content: ""; width: 28px; height: 2px; background: currentColor; }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 112px; }
+  .logo img { height: 78px; width: auto; }
+  .nav { display: flex; align-items: center; gap: 36px; }
+  .nav a {
+    font-family: var(--text); font-weight: 500; font-size: 17px;
+    text-decoration: none; color: var(--ink);
+    padding: 6px 0; border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  .nav a:hover { color: var(--purple); border-color: var(--purple); }
+  /* Kontakt-Button in derselben Größe wie die mehr-Buttons */
+  .nav a.cta { background: var(--purple); color: #fff; padding: 9px 22px; border: 2px solid var(--purple); font-size: 16px; font-weight: 600; letter-spacing: .02em; line-height: 1.3; }
+  .nav a.cta:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .burger { display: none; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--purple); }
+  /* Untermenü „Aktuell“: klappt beim Überfahren unter dem Header auf */
+  .nav-group { position: relative; display: flex; align-items: center; }
+  .nav-parent { display: inline-flex; align-items: center; gap: 6px; }
+  .nav-parent svg { width: 12px; height: 12px; transition: transform .2s; }
+  .nav-group:hover .nav-parent svg, .nav-group:focus-within .nav-parent svg { transform: rotate(180deg); }
+  .subnav { position: absolute; top: 100%; right: -20px; padding-top: 36px; display: none; z-index: 11; }
+  .nav-group:hover .subnav, .nav-group:focus-within .subnav { display: block; }
+  .nav-group.shut .subnav { display: none; }
+  .subnav-inner { min-width: 260px; white-space: nowrap; background: #fff; border-top: 3px solid var(--purple); box-shadow: 0 14px 32px rgba(43,46,52,.14); }
+  .nav .subnav a { display: block; padding: 13px 20px; border-bottom: 1px solid var(--line); }
+  .nav .subnav a:last-child { border-bottom: 0; }
+  .nav .subnav a:hover { background: var(--paper); color: var(--purple); border-color: var(--line); }
+
+  /* ---------- Bühne ---------- */
+  .stage { position: relative; background: var(--paper); overflow: hidden; }
+  .stage-img { width: 100%; height: clamp(420px, 62vw, 640px); }
+  .stage-img img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 55%; }
+  .stage-copy {
+    position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%);
+  }
+  .stage-box {
+    max-width: 620px;
+    background: rgba(255,255,255,.8);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    padding: 40px 44px 44px;
+    box-shadow: 0 12px 32px rgba(43,46,52,.10);
+  }
+  .stage .label { margin-bottom: 18px; }
+  .stage h1 { font-size: clamp(34px, 4vw, 52px); font-weight: 700; color: var(--purple); }
+  .stage .sub { font-family: var(--text); font-weight: 500; font-size: clamp(18px, 1.8vw, 21px); color: var(--blue); margin-top: 16px; line-height: 1.45; }
+  /* Einheitlicher Button: Links ("mehr →") und Ausklapper ("mehr +", "Die Mitglieder +") */
+  .btn, .toggle summary {
+    display: inline-flex; align-items: center; gap: 12px; cursor: pointer; list-style: none;
+    background: var(--purple); color: #fff; text-decoration: none;
+    font-family: var(--text); font-weight: 600; font-size: 16px; letter-spacing: .02em; line-height: 1.3;
+    padding: 9px 22px; border: 2px solid var(--purple);
+    transition: background .2s, border-color .2s;
+  }
+  .btn { margin-top: 28px; }
+  .btn:hover, .toggle summary:hover { background: var(--blue); border-color: var(--blue); }
+  .toggle { margin-top: 24px; }
+  .toggle summary::-webkit-details-marker { display: none; }
+  .toggle summary::after { content: "+"; font-size: 20px; line-height: 1; }
+  .toggle[open] > summary::after { content: "–"; }
+
+  /* ---------- 2-Spalten-Raster ---------- */
+  section.grid-section { padding: 96px 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .card { overflow: hidden; }
+  .card h2 { font-size: clamp(28px, 3vw, 38px); }
+  .card p + p { margin-top: 14px; }
+
+  /* 1: Textkasten klassisch */
+  .text-a { background: var(--paper); padding: 42px 48px 48px; border-top: 6px solid var(--purple); }
+  .text-a h2 { color: var(--purple); margin-bottom: 20px; }
+  .text-a .label, .wide-copy .label { margin-bottom: 18px; }
+  .members-toggle h3 { font-size: 21px; color: var(--purple); margin: 26px 0 14px; }
+  .members { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .members li { display: grid; gap: 2px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 16px; line-height: 1.5; }
+  .members strong { font-weight: 600; color: var(--ink); }
+  .readmore[open] > summary .when-closed, .readmore:not([open]) > summary .when-open { display: none; }
+  .readmore p { margin-top: 14px; }
+  .text-a .more {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 24px;
+    font-weight: 600; color: var(--blue); text-decoration: none;
+    border-bottom: 2px solid var(--blue); padding-bottom: 2px;
+  }
+  .text-a .more:hover { color: var(--purple); border-color: var(--purple); }
+
+  /* 2: Textkasten anderes Layout */
+  .text-b { background: var(--sky); color: var(--ink); padding: 48px; display: flex; flex-direction: column; }
+  .text-b .label { color: var(--purple); margin-bottom: 18px; }
+  .text-b h2 { color: var(--purple); margin-bottom: 20px; }
+  .text-b p { color: var(--ink); }
+  .stats { margin-top: auto; padding-top: 28px; }
+  .stat-total, .equation { border-top: 1px solid rgba(43,46,52,.25); padding: 14px 0; }
+  .stat-total { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; }
+  .stat-total strong { font-family: var(--head); font-weight: 700; font-size: 44px; line-height: 1; color: var(--blue); font-variant-numeric: tabular-nums; }
+  .stat-total span { font-size: 16px; }
+  .equation { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .equation .num { font-family: var(--head); font-weight: 700; font-size: 34px; line-height: 1; color: var(--blue); font-variant-numeric: tabular-nums; }
+  .equation .eq { font-family: var(--head); font-weight: 600; font-size: 30px; line-height: 1; color: var(--purple); margin: 0 8px; }
+  .equation svg { width: 72px; height: 28px; flex: none; fill: var(--purple); color: var(--purple); }
+  .equation svg .win { fill: var(--sky); }
+  .equation svg.icon-long { width: 116px; }
+  .equation svg.icon-convoy6 { width: 162px; }
+  .text-b .readmore { margin-top: 20px; }
+
+  /* 3: Bild mit Headline */
+  .image-card { position: relative; min-height: 420px; background: var(--sky); display: flex; flex-direction: column; justify-content: flex-end; }
+  .image-card svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  /* Kleiner Kasten unten links; wächst beim Ausklappen mit dem Kasten nach oben */
+  .image-card .overlay { position: relative; max-width: 64%; padding: 18px 24px 20px; background: var(--purple); color: #fff; }
+  .image-card h2 { color: #fff; font-size: clamp(21px, 2vw, 25px); }
+  .image-card .overlay p { color: #f5e6f7; font-size: 14.5px; line-height: 1.45; margin-top: 8px; }
+  .toggle.on-dark { margin-top: 12px; }
+  .toggle.on-dark summary { padding: 6px 16px; font-size: 15px; }
+  .toggle.on-dark summary { background: #fff; color: var(--purple); border-color: #fff; }
+  .toggle.on-dark summary:hover { background: var(--mint); border-color: var(--mint); }
+  /* Aufgeklappt: Schleusen- und Videokasten über die volle Breite, damit Karte und Grafik lesbar sind */
+  .grid:has(.image-card .toggle[open]) > .image-card,
+  .grid:has(.image-card .toggle[open]) > #grafiken { grid-column: 1 / -1; }
+  .image-card:has(.toggle[open]) .overlay { max-width: min(80%, 760px); }
+  .lock-graphics { display: grid; gap: 26px; margin-top: 20px; }
+  .lock-map { position: static !important; width: 100% !important; height: auto !important; max-width: 640px; display: block; }
+  .port-chart { margin: 0; max-width: 640px; }
+  .port-chart figcaption { font-family: var(--head); font-weight: 600; font-size: 18px; color: #fff; }
+  .image-card .overlay .chart-key { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-top: 4px; }
+  .chart-key .swatch { width: 16px; height: 10px; background: var(--mint); flex: none; }
+  .bars { list-style: none; margin: 12px 0 0; padding: 0; }
+  .bars li { display: grid; grid-template-columns: 18px 236px 1fr 136px; align-items: center; gap: 10px; padding: 6px 4px; font-size: 14px; line-height: 1.3; color: #fff; border-top: 1px solid rgba(255,255,255,.15); }
+  .bars li:hover { background: rgba(255,255,255,.08); }
+  .bars .rank { color: #e3c8e7; font-variant-numeric: tabular-nums; }
+  .bars .track { height: 12px; }
+  .bars .bar { display: block; height: 100%; min-width: 2px; background: #c39bc9; }
+  .bars li.prio .bar { background: var(--mint); }
+  .bars .val { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .image-card .overlay .chart-note { font-size: 12.5px; color: #e3c8e7; margin-top: 10px; }
+
+  /* 4: Video */
+  .video-card { position: relative; min-height: 420px; background: var(--ink); cursor: pointer; }
+  .video-card svg.poster { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .video-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 84px; height: 84px; border: 0; cursor: pointer;
+    background: var(--white); color: var(--purple); display: grid; place-items: center;
+    transition: background .2s, color .2s;
+  }
+  .video-card:hover .play { background: var(--purple); color: #fff; }
+  .video-meta {
+    position: absolute; left: 0; bottom: 0; right: 0; display: flex; justify-content: space-between; align-items: center;
+    color: #fff; font-size: 15px; padding: 16px 24px; background: rgba(43,46,52,.75);
+  }
+  .video-meta .tag { font-variant-numeric: tabular-nums; }
+  .video-head { position: absolute; left: 0; top: 0; z-index: 1; max-width: 80%; padding: 18px 24px 20px; background: var(--purple); }
+  .video-head .label { color: var(--mint); margin-bottom: 8px; }
+  .video-head h2 { color: #fff; font-size: clamp(21px, 2vw, 25px); }
+  .play { z-index: 1; }
+
+  /* ---------- Breite Teaser ---------- */
+  section.wide-section { padding: 0 0 96px; }
+  .wide { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; background: var(--mint); }
+  .wide + .wide { margin-top: 32px; }
+  .wide.reverse { grid-template-columns: 1fr 1fr; background: var(--paper); }
+  .wide.reverse .wide-img { order: 2; }
+  .wide-img { min-height: 380px; position: relative; overflow: hidden; }
+  .wide-img svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  /* Fotos ersetzen die Illustrationen, sobald die Datei in img/ liegt */
+  img.photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .wide-copy { padding: 56px; display: flex; flex-direction: column; justify-content: center; }
+  .wide-copy h2 { font-size: clamp(30px, 3.4vw, 44px); color: var(--purple); }
+  .wide-copy .sub { font-family: var(--text); font-weight: 500; font-size: 20px; color: var(--blue); margin-top: 14px; line-height: 1.45; }
+  .wide-copy p.body { margin-top: 18px; }
+  .wide-copy .btn { align-self: flex-start; }
+  .wide-img.map { background: var(--blue); }
+  /* Breite Kästen aufgeklappt: Bildspalte ausblenden, Kasten über die volle Breite, Foto im Text */
+  .wide.expand-full:has(.readmore[open]) { grid-template-columns: 1fr; }
+  .wide.expand-full:has(.readmore[open]) .wide-img { display: none; }
+  .wide.expand-full:has(.readmore[open]) .wide-copy > * { max-width: 820px; }
+  .inline-photo { margin: 26px 0 12px; }
+  .inline-photo img { width: 100%; height: auto; aspect-ratio: 1672 / 941; object-fit: cover; }
+  /* Leitthema: Foto als Band über die volle Breite, Text und Kennzahlen darunter */
+  .wide.feature { grid-template-columns: 1fr; }
+  .grid > .wide.feature { grid-column: 1 / -1; }
+  .wide.feature .wide-img { min-height: 0; aspect-ratio: 8 / 3; grid-row: 1; grid-column: 1; }
+  .feature-head {
+    grid-row: 1; grid-column: 1; align-self: end; justify-self: start; z-index: 1;
+    max-width: 600px; padding: 26px 36px 30px; background: var(--purple);
+  }
+  .feature-head .label { color: var(--mint); margin-bottom: 12px; }
+  .feature-head h2 { color: #fff; font-size: clamp(28px, 3.2vw, 42px); }
+  .wide.feature .wide-copy { grid-row: 2; }
+  .feature-text > :first-child { margin-top: 0; }
+  .feature-sub { font-size: 22px; color: var(--purple); margin-bottom: 10px; }
+  .feature-sub + .sub { margin-top: 0; }
+  .toggle + .toggle { margin-top: 12px; }
+  .readmore strong { font-weight: 600; color: var(--purple); }
+  .wide.feature img.photo { object-position: 50% 78%; }
+  .wide.feature .wide-copy { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: start; }
+  .wide.feature .figures { grid-template-columns: 1fr; gap: 0; margin-top: 4px; }
+  .wide.feature .figures div { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(126,24,137,.3); }
+  .wide.feature .figures div:first-child { border-top: 2px solid var(--purple); }
+  .wide.feature .figures strong { font-size: 40px; white-space: nowrap; }
+  .wide.feature .figures span { margin-top: 0; font-size: 16px; }
+  .wide-img.lowwater { background: linear-gradient(var(--sky) 50%, var(--blue) 50%); }
+  .figures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 26px; }
+  .figures div { border-top: 2px solid var(--purple); padding-top: 12px; }
+  .figures strong { display: block; font-family: var(--head); font-weight: 700; font-size: clamp(24px, 2.3vw, 30px); line-height: 1.1; color: var(--purple); font-variant-numeric: tabular-nums; }
+  .figures span { display: block; font-size: 15px; line-height: 1.35; margin-top: 4px; }
+
+  /* ---------- Agenda Wasserstraße 2035 ---------- */
+  .agenda { background: var(--paper); padding: 56px; border-top: 6px solid var(--purple); }
+  .agenda + .wide { margin-top: 32px; }
+  .agenda-head { display: grid; grid-template-columns: 1fr 1.25fr; column-gap: 56px; align-items: start; }
+  .agenda-head .label { grid-column: 1 / -1; margin-bottom: 18px; }
+  .agenda-head .sub { margin-top: 8px; }
+  .agenda-head h2 { font-size: clamp(34px, 4vw, 52px); font-weight: 700; color: var(--purple); }
+  .agenda-head .sub { font-weight: 500; font-size: 19px; line-height: 1.5; color: var(--blue); }
+  .agenda-sub { font-size: 24px; color: var(--ink); margin: 48px 0 0; }
+  .principles { margin-top: 16px; border-top: 2px solid var(--purple); }
+  .principle { border-bottom: 1px solid var(--line); }
+  .principle summary {
+    display: grid; grid-template-columns: 64px 1fr 28px; align-items: center; gap: 8px;
+    padding: 18px 0; cursor: pointer; list-style: none;
+  }
+  .principle summary::-webkit-details-marker { display: none; }
+  .principle summary::after { content: "+"; font-family: var(--head); font-size: 30px; line-height: 1; color: var(--purple); text-align: right; }
+  .principle[open] summary::after { content: "–"; }
+  .principle summary:hover .ptitle { color: var(--purple); }
+  .pnum { font-family: var(--head); font-weight: 700; font-size: 34px; line-height: 1; color: var(--purple); font-variant-numeric: tabular-nums; }
+  .ptitle { font-family: var(--head); font-weight: 600; font-size: 24px; line-height: 1.2; color: var(--ink); transition: color .2s; }
+  .pbody { padding: 0 0 28px 72px; max-width: 980px; }
+  .pbody p { max-width: 760px; }
+  .pbody p + p { margin-top: 14px; }
+  .pbody strong { font-weight: 600; color: var(--purple); }
+  .cluster-fig { margin: 28px 0 4px; display: grid; grid-template-columns: minmax(0, 640px); gap: 8px; align-items: start; }
+  .cluster-map { width: 100%; height: auto; display: block; border: 1px solid var(--line); }
+  .cluster-fig figcaption { display: grid; gap: 14px; }
+  .cluster-title { font-family: var(--head); font-weight: 600; font-size: 20px; color: var(--purple); }
+  .cluster-legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .cluster-legend li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; font-size: 14.5px; line-height: 1.4; }
+  .cluster-legend strong { display: block; font-weight: 600; }
+  .cluster-legend .cn { width: 28px; height: 28px; display: grid; place-items: center; font-family: var(--head); font-weight: 700; font-size: 15px; color: var(--ink); background: var(--sky); }
+  .cluster-legend .c1 { background: var(--teal); }
+  .cluster-legend .c2 { background: var(--purple); color: #fff; }
+  .cluster-legend .c3 { background: var(--blue); color: #fff; }
+  .cluster-note { font-size: 13px; color: #6b6e75; }
+  /* Ausklapper „Die Binnenschifffahrt in Zahlen“ unter den Prinzipien */
+  .pnum-icon { display: flex; align-items: center; }
+  .pnum-icon svg { width: 30px; height: 30px; fill: var(--purple); }
+  .facts-body h3 { font-size: 22px; color: var(--purple); margin: 34px 0 4px; }
+  .facts-body h3:first-child { margin-top: 4px; }
+  .facts-body h4 { font-family: var(--head); font-weight: 600; font-size: 18px; line-height: 1.3; color: var(--ink); margin: 18px 0 0; }
+  .facts-body ul { max-width: 760px; margin: 10px 0 0; padding-left: 22px; }
+  .facts-body li + li { margin-top: 4px; }
+  .facts-body ul + p, .facts-body ul + ul { margin-top: 14px; }
+  .facts-body ul.cols { columns: 3; column-gap: 32px; }
+  .facts-body ul.cols li { break-inside: avoid; margin: 0 0 4px; }
+  .facts-body .port-chart { max-width: 760px; margin-top: 10px; }
+  .facts-body .port-chart figcaption { color: var(--ink); font-size: 17px; }
+  .facts-body .chart-key { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-top: 4px; }
+  .facts-body .chart-key .swatch { background: var(--purple); }
+  .facts-body .bars li { color: var(--ink); border-top-color: var(--line); }
+  .facts-body .bars li:hover { background: rgba(43,46,52,.04); }
+  .facts-body .bars .rank { color: #6b6e75; }
+  .facts-body .bars .bar { background: var(--sky); }
+  .facts-body .bars li.prio .bar { background: var(--purple); }
+  .facts-body .chart-note { font-size: 12.5px; color: #6b6e75; margin-top: 10px; }
+  .facts-source { font-size: 13px !important; color: #6b6e75; margin-top: 16px; }
+  /* Eigener Kasten „Die Binnenschifffahrt in Zahlen“ unter der Agenda */
+  .facts-box { background: var(--sky); padding: 6px 56px; border-top: 6px solid var(--blue); }
+  .agenda + .facts-box, .facts-box + .wide { margin-top: 32px; }
+  .facts-box .principle { border-bottom: 0; }
+  .facts-box .principle summary { padding: 26px 0; }
+  .facts-box .ptitle { font-size: 26px; }
+  .facts-box .pbody { padding-bottom: 44px; }
+  .facts-box .facts-body .bars .bar { background: #fff; }
+  .facts-box .facts-body .bars li { border-top-color: rgba(43,46,52,.18); }
+  .facts-box .facts-body .bars li:hover { background: rgba(255,255,255,.3); }
+  .facts-box .facts-body .bars .rank, .facts-box .facts-body .chart-note, .facts-box .facts-source { color: #4a4d55; }
+  /* ---------- Pressemitteilungen ---------- */
+  .press { background: #fff; border: 1px solid var(--line); border-top: 6px solid var(--purple); padding: 48px 56px 52px; }
+  .press + .agenda { margin-top: 32px; }
+  .grid > .press-wide { grid-column: 1 / -1; }
+  .wide-section .wrap > .event:first-of-type { margin-top: 0; }
+  .press .label { margin-bottom: 18px; }
+  .press-date { font-family: var(--head); font-weight: 600; font-size: 16px; letter-spacing: .02em; color: #6b6e75; margin-bottom: 10px; }
+  .press h2 { font-size: clamp(28px, 3.2vw, 42px); font-weight: 700; color: var(--purple); max-width: 900px; }
+  .press .sub { font-weight: 500; font-size: clamp(18px, 1.7vw, 20px); line-height: 1.5; color: var(--blue); margin-top: 16px; max-width: 860px; }
+  .press-actions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 14px 16px; margin-top: 28px; }
+  .press-actions > .toggle { margin-top: 0; }
+  .press-actions > .toggle[open] { flex-basis: 100%; }
+  .press-body { max-width: 820px; }
+  .press-body .press-place { margin-top: 24px; font-weight: 600; }
+  .press-body .press-contact { margin-top: 28px; font-size: 16px; }
+  .press-contact a { color: var(--blue); }
+  .btn.btn-outline { margin-top: 0; background: #fff; color: var(--purple); }
+  .btn.btn-outline:hover { background: var(--purple); border-color: var(--purple); color: #fff; }
+  /* ---------- Kongress 2027: Termin mit Programm, bewusst ohne Namen ---------- */
+  .event { background: #fff; border: 1px solid var(--line); border-top: 6px solid var(--blue); padding: 48px 56px 52px; margin-top: 32px; }
+  .event + .li-box, .event + .agenda { margin-top: 32px; }
+  .event .label { margin-bottom: 18px; color: var(--blue); }
+  .event-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px; align-items: start; }
+  .event h2 { font-size: clamp(28px, 3.2vw, 42px); font-weight: 700; color: var(--purple); }
+  .event .sub { font-weight: 500; font-size: clamp(18px, 1.7vw, 20px); line-height: 1.5; color: var(--blue); margin-top: 16px; max-width: 760px; }
+  .event-facts { margin: 0; background: var(--paper); border-top: 4px solid var(--purple); padding: 6px 24px; }
+  .event-facts div { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .event-facts div:last-child { border-bottom: 0; }
+  .event-facts dt { font-family: var(--head); font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); }
+  .event-facts dd { margin: 4px 0 0; font-weight: 600; font-size: 17px; line-height: 1.4; }
+  .btn.event-cta { display: flex; justify-content: center; margin-top: 16px; }
+  .event-prog { list-style: none; margin: 24px 0 0; padding: 0; max-width: 860px; border-top: 1px solid var(--line); }
+  .event-prog li { display: grid; grid-template-columns: 72px 1fr; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .event-prog time { font-family: var(--head); font-weight: 700; font-size: 18px; line-height: 1.4; color: var(--purple); }
+  .event-prog p { margin: 0; font-size: 17px; line-height: 1.45; font-weight: 500; }
+  .event-prog p + p { margin-top: 8px; }
+  .event-prog .pause p { color: #6b6e75; font-weight: 400; }
+  .event-note { margin-top: 16px; font-size: 15px; color: #6b6e75; }
+  @media (max-width: 960px) { .event-grid { grid-template-columns: 1fr; gap: 28px; } }
+  @media (max-width: 760px) {
+    .event { padding: 30px 24px 34px; }
+    .event-prog li { grid-template-columns: 54px 1fr; gap: 14px; }
+  }
+  /* ---------- Impressum & Datenschutz (erscheinen über die Footer-Links) ---------- */
+  [id] { scroll-margin-top: 124px; }
+  .legal { background: var(--white); padding: 72px 0 80px; border-top: 1px solid var(--line); }
+  .legal:not(:target) { display: none; }
+  .legal-inner { max-width: 820px; }
+  .legal-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .legal h2 { color: var(--purple); font-size: clamp(32px, 4vw, 44px); }
+  .legal h3 { font-size: 21px; color: var(--ink); margin: 32px 0 8px; }
+  .legal p { font-size: 17px; }
+  .legal p + p { margin-top: 10px; }
+  .legal a { color: var(--blue); }
+  .legal-close { font-weight: 600; text-decoration: none; color: var(--purple) !important; }
+  .legal-close:hover { text-decoration: underline; }
+  .legal-date { margin-top: 32px !important; font-size: 15px !important; color: #6b6e75; }
+  .legal h4 { font-family: var(--head); font-weight: 600; font-size: 18px; line-height: 1.3; color: var(--ink); margin: 20px 0 6px; }
+  .legal ul { margin: 10px 0 0; padding-left: 22px; font-size: 17px; }
+  .legal li + li { margin-top: 4px; }
+  .legal ul + p { margin-top: 10px; }
+  .todo { background: var(--mint); padding: 0 4px; }
+  /* Vergleichsgrafik Schubverband / Lkw / Güterzug */
+  .compare { margin: 20px 0 0; padding: 22px 22px 18px; background: #fff; }
+  .compare svg { display: block; width: 100%; height: auto; }
+  .compare img { display: block; width: 100%; height: auto; }
+  /* Ausklapper Versorgung: zwei Vergleiche nebeneinander */
+  .text-b.text-b-wide > details.readmore { grid-column: 1 / -1; }
+  .cmp-cols { display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; align-items: start; }
+  .cmp-col { display: grid; grid-row: span 2; grid-template-rows: subgrid; align-content: start; }
+  .cmp-col > p { margin-top: 14px; }
+  .cmp-col > .compare { align-self: start; }
+  .compare svg.cmp-icons { margin-top: 2px; }
+  .text-b .compare p { margin: 0; }
+  .text-b .compare .cmp-head { font-size: 15px; color: var(--ink); margin-bottom: 10px; }
+  .cmp-head strong { font-family: var(--head); font-weight: 700; font-size: 20px; color: var(--purple); margin-right: 6px; }
+  .text-b .compare .cmp-note { font-size: 13.5px; color: #5d6068; margin-top: 8px; }
+  .text-b .compare .cmp-sep { text-align: center; font-family: var(--head); font-weight: 600; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); margin: 18px 0; }
+  /* ---------- Grafik-Slider ---------- */
+  .slider-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); min-width: 0; }
+  .slider-viewport { flex: 1; overflow: hidden; touch-action: pan-y; display: flex; }
+  .slider-viewport:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+  .slider-track { display: flex; width: 100%; transition: transform .5s ease; }
+  .slider-track.dragging { transition: none; }
+  .slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; display: flex; flex-direction: column; }
+  .slide-head { background: var(--purple); padding: 16px 22px 18px; }
+  .slide-head .label { color: var(--mint); margin-bottom: 8px; }
+  .slide-head h2 { color: #fff; font-size: clamp(19px, 1.8vw, 23px); }
+  .chem-body { display: grid; grid-template-columns: 1.35fr 1fr; gap: 14px; padding: 14px 18px 4px; align-items: start; }
+  .chem-map { width: 100%; height: auto; display: block; }
+  .chem-legend { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 7px; font-size: 13px; line-height: 1.3; }
+  .chem-legend li { display: flex; align-items: center; gap: 8px; }
+  .lg-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--purple); flex: none; }
+  .lg-port { width: 11px; height: 11px; background: var(--ink); flex: none; }
+  .lg-line { width: 18px; height: 4px; background: #8db6f2; flex: none; }
+  .chem-lead { margin-top: 14px; font-size: 13.5px; line-height: 1.45; color: var(--ink); }
+  .chem-lead strong { display: block; font-family: var(--head); font-weight: 600; font-size: 16px; color: var(--purple); margin-bottom: 4px; }
+  .chain { list-style: none; margin: 8px 0 0; padding: 10px 18px 12px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; border-top: 1px solid var(--line); }
+  .chain li { display: grid; justify-items: center; text-align: center; gap: 3px; }
+  .chain-ico { width: 40px; height: 40px; background: var(--mint); display: grid; place-items: center; margin-bottom: 3px; }
+  .chain-ico svg { width: 26px; height: 26px; }
+  .chain strong { font-family: var(--head); font-weight: 600; font-size: 13.5px; line-height: 1.15; color: var(--ink); }
+  .chain span:last-child { font-size: 11.5px; line-height: 1.3; color: #5d6068; }
+  .chem-claim { margin-top: auto; background: var(--purple); color: #fff; font-family: var(--head); font-weight: 600; font-size: 15px; line-height: 1.3; padding: 10px 18px; }
+  .slide.placeholder { background: var(--paper); align-items: center; justify-content: center; }
+  .ph-inner { display: grid; justify-items: center; gap: 8px; color: #6b6e75; font-size: 15px; }
+  .ph-num { font-family: var(--head); font-weight: 700; font-size: 56px; line-height: 1; color: var(--sky); }
+  /* Leiste unten: so flach wie möglich, gerade hoch genug für die Pfeile */
+  .slider-nav { display: flex; align-items: center; gap: 10px; height: 28px; padding: 0 3px; background: var(--ink); color: #fff; }
+  .sl-btn { width: 22px; height: 22px; display: grid; place-items: center; background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.35); cursor: pointer; transition: background .2s, border-color .2s; }
+  .sl-btn:hover { background: var(--purple); border-color: var(--purple); }
+  .sl-btn svg { width: 13px; height: 13px; }
+  .sl-dots { display: flex; gap: 5px; flex: 1; height: 100%; justify-content: center; }
+  .sl-dot { width: 22px; height: 100%; padding: 0; border: 0; background: linear-gradient(rgba(255,255,255,.35), rgba(255,255,255,.35)) center / 100% 3px no-repeat; cursor: pointer; }
+  .sl-dot[aria-selected="true"] { background-image: linear-gradient(var(--mint), var(--mint)); }
+  .sl-count { font-size: 12px; font-variant-numeric: tabular-nums; min-width: 38px; text-align: right; }
+  /* Anzeigen-Karussell oben rechts */
+  .ad-slider { border-top: 6px solid var(--purple); }
+  .ad-slide { justify-content: center; background: #fff; }
+  .ad-slide img { width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
+  /* Versorgungssicherheit über beide Spalten: Text links, Kennzahlen rechts */
+  .text-b.text-b-wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; align-items: start; }
+  .text-b-wide > :not(.stats) { grid-column: 1; }
+  .text-b-wide > .stats { grid-column: 2; grid-row: 2 / span 5; align-self: stretch; display: flex; flex-direction: column; margin-top: -10px; padding-top: 0; }
+  .fill-wrap { flex: 1 1 0; position: relative; min-height: 40px; margin: 2px 0 14px; }
+  .equation .eq-group { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; }
+  /* zugeklappt steht „mehr“ links, damit die Waggons rechts bis unten reichen; aufgeklappt über die volle Breite */
+  .text-b.text-b-wide > details.readmore:not([open]) { grid-column: 1; }
+  .fill-wrap svg { position: absolute; top: 0; left: 0; width: 100%; height: auto; display: block; }
+  /* ---------- Footer ---------- */
+  footer { background: var(--ink); color: #c9ccd3; font-size: 16px; }
+  .footer-top { display: grid; grid-template-columns: 1.3fr 1fr 1.7fr; gap: 40px 56px; padding: 72px 0 48px; }
+  .footer-nav ul { columns: 2; column-gap: 40px; }
+  .footer-nav li { break-inside: avoid; margin-top: 0 !important; padding-bottom: 8px; }
+  .footer-logo { background: #fff; padding: 14px 18px; display: inline-block; }
+  .footer-logo img { height: 50px; width: auto; }
+  footer h3 { font-size: 15px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #fff; margin-bottom: 16px; }
+  footer ul { list-style: none; margin: 0; padding: 0; }
+  footer li + li { margin-top: 8px; }
+  footer a { text-decoration: none; color: #c9ccd3; }
+  footer a:hover { color: var(--teal); }
+  footer .claim { margin-top: 18px; max-width: 300px; }
+  .newsletter { display: flex; margin-top: 14px; }
+  .newsletter input { flex: 1; min-width: 0; border: 0; padding: 12px 16px; font: inherit; }
+  .newsletter button { border: 0; padding: 0 20px; background: var(--teal); color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
+  .newsletter button:hover { background: var(--mint); }
+  .newsletter-msg { margin-top: 10px; font-size: 14px; line-height: 1.45; color: var(--mint); }
+  .newsletter-msg a { color: var(--mint); text-decoration: underline; }
+  .social { display: flex; gap: 8px; margin-top: 20px; }
+  .social a { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.2); display: grid; place-items: center; }
+  .social a:hover { background: var(--purple); border-color: var(--purple); color: #fff; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.12); padding: 22px 0 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 14px; }
+  .footer-bottom nav { display: flex; gap: 24px; flex-wrap: wrap; }
+  .stripe { height: 6px; background: linear-gradient(90deg, var(--purple) 0 40%, var(--blue) 40% 70%, var(--teal) 70% 85%, var(--mint) 85%); }
+
+  /* ---------- Responsive ---------- */
+  @media (min-width: 961px) and (max-width: 1180px) {
+    .figures { grid-template-columns: 1fr; gap: 14px; }
+  }
+  @media (max-width: 960px) {
+    .agenda-head { grid-template-columns: 1fr; }
+    .cluster-fig { grid-template-columns: 1fr; }
+    .grid { grid-template-columns: 1fr; }
+    .text-b.text-b-wide { grid-template-columns: 1fr; }
+    .text-b-wide > .stats { grid-column: 1; grid-row: auto; padding-top: 28px; }
+    .fill-wrap { flex: none; min-height: 0; }
+    .fill-wrap svg { position: static; }
+    .cmp-cols { grid-template-columns: 1fr; }
+    .wide, .wide.reverse { grid-template-columns: 1fr; }
+    .wide.reverse .wide-img { order: 0; }
+    .wide.feature .wide-copy { grid-template-columns: 1fr; gap: 28px; }
+    .wide-img { min-height: 260px; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .footer-nav { grid-column: 1 / -1; }
+  }
+  @media (max-width: 760px) {
+    body { font-size: 17px; }
+    .equation svg { width: 60px; height: 23px; }
+    .equation svg.icon-long { width: 86px; height: 21px; }
+    .equation svg.icon-convoy6 { width: 120px; }
+    .equation { gap: 8px; }
+    .equation .num { font-size: 26px; }
+    .equation .eq { margin: 0 2px; }
+    .wrap { padding: 0 16px; }
+    .site-header .wrap { height: 84px; }
+    .logo img { height: 58px; }
+    .burger { display: block; }
+    .nav {
+      display: none; position: absolute; top: 84px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
+      background: #fff; padding: 8px 16px 20px; border-bottom: 1px solid var(--line);
+    }
+    .nav a { padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .nav a.cta { margin-top: 12px; text-align: center; }
+    .nav.open { display: flex; }
+    .nav-group, .nav-group.shut { display: block; }
+    .nav .nav-parent { display: flex; }
+    .nav-parent svg { display: none; }
+    .subnav, .nav-group.shut .subnav { position: static; display: block; padding: 0; }
+    .subnav-inner { min-width: 0; border-top: 0; box-shadow: none; }
+    .nav .subnav a, .nav .subnav a:last-child { padding: 12px 0 12px 18px; font-size: 16px; border-bottom: 1px solid var(--line); }
+    .nav .subnav a:hover { background: none; }
+    .stage-img { height: 300px; }
+    .stage-img img { object-position: 90% 60%; }
+    .stage-copy { position: static; transform: none; margin-top: -48px; padding-bottom: 32px; }
+    .stage-box { padding: 28px 22px 30px; }
+    section.grid-section { padding: 56px 0; }
+    section.wide-section { padding-bottom: 56px; }
+    .text-a, .text-b, .wide-copy { padding: 32px 24px; }
+    .text-a { padding-top: 26px; }
+    .image-card { min-height: 300px; }
+    .chem-body { grid-template-columns: 1fr; }
+    .chain { grid-template-columns: repeat(3, 1fr); row-gap: 14px; }
+    .video-head { max-width: none; }
+    .image-card .overlay { padding: 22px 24px; max-width: none; }
+    .image-card:has(.toggle[open]) .overlay { max-width: none; }
+    .bars li { grid-template-columns: 18px 1fr auto; row-gap: 4px; }
+    .bars .track { grid-column: 2 / -1; grid-row: 2; }
+    .footer-top { grid-template-columns: 1fr; padding-top: 52px; }
+    .agenda { padding: 32px 24px; }
+    .press { padding: 30px 24px 34px; }
+    .agenda-head { grid-template-columns: 1fr; }
+    .agenda-sub { margin-top: 32px; font-size: 21px; }
+    .principle summary { grid-template-columns: 44px 1fr 24px; }
+    .pnum { font-size: 28px; }
+    .ptitle { font-size: 19px; }
+    .pbody { padding-left: 0; }
+    .facts-body ul.cols { columns: 2; }
+    .facts-box { padding: 4px 24px; }
+    .facts-box .ptitle { font-size: 21px; }
+    .cluster-fig { grid-template-columns: 1fr; }
+    .figures { grid-template-columns: 1fr; gap: 14px; }
+    .wide.feature .wide-img { aspect-ratio: 3 / 2; }
+    .feature-head { grid-row: 2; justify-self: stretch; max-width: none; padding: 22px 24px 24px; }
+    .wide.feature .wide-copy { grid-row: 3; }
+    .wide.feature img.photo { object-position: 70% 50%; }
+    .wide.feature .figures div { grid-template-columns: 124px 1fr; }
+    .wide.feature .figures strong { font-size: 30px; }
+  }
+
+  /* Redaktioneller Beitrag (seit 16.11.2026) */
+  .press.beitrag { border-top-color: var(--blue); }
+  .grid > .press-wide + .press-wide { margin-top: 0; }
+  .beitrag .label { color: var(--blue); }
+  .figures.four { grid-template-columns: repeat(4, 1fr); max-width: 1000px; margin-top: 30px; }
+  .beitrag-body .lead { margin-top: 24px; font-weight: 500; font-size: 19px; line-height: 1.55; }
+  .beitrag-body h3 { font-size: 25px; font-weight: 700; color: var(--purple); margin: 38px 0 0; }
+  .beitrag-chart { margin: 26px 0 8px; }
+  .beitrag-chart figcaption { font-size: 13px; line-height: 1.45; color: #6b6e75; margin-top: 10px; }
+  .beitrag-chart figcaption.bk-title { font-family: var(--head); font-weight: 600; font-size: 18px; color: var(--ink); margin: 0 0 12px; }
+  .lauf-row { display: grid; grid-template-columns: 170px 1fr; gap: 16px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
+  .lauf-row:last-child { border-bottom: 1px solid var(--line); }
+  .lauf-name strong { display: block; font-weight: 600; font-size: 16px; line-height: 1.25; color: var(--ink) !important; }
+  .lauf-name span { font-size: 13px; color: #6b6e75; }
+  .lauf-bar { display: flex; height: 32px; }
+  .lauf-bar span { display: flex; align-items: center; padding: 0 10px; font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; }
+  .lauf-bar .b { background: var(--purple); color: #fff; }
+  .lauf-bar .u { background: var(--sky); color: var(--ink); }
+  .bk-key { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-top: 10px !important; }
+  .bk-key .sw { width: 14px; height: 14px; display: inline-block; }
+  .bk-key .sw.b { background: var(--purple); }
+  .bk-key .sw.u { background: var(--sky); margin-left: 12px; }
+  .ws-chart { list-style: none; margin: 0; padding: 0; max-width: 760px; }
+  .ws-chart li { display: grid; grid-template-columns: 58px 1fr 54px; gap: 12px; align-items: center; padding: 3px 0; font-size: 14px; }
+  .ws-chart .ws-k { color: #6b6e75; font-variant-numeric: tabular-nums; }
+  .ws-chart .ws-bar { display: block; height: 18px; }
+  .ws-chart .ws-bar span { display: block; height: 100%; background: var(--sky); }
+  .ws-chart li.hi .ws-bar span { background: var(--purple); }
+  .ws-chart .ws-v { font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+  .ws-chart li.hi .ws-k, .ws-chart li.hi .ws-v { color: var(--purple); font-weight: 700; }
+  .ws-chart.zaehl li { grid-template-columns: 190px 1fr 64px; padding: 4px 0; font-size: 15px; }
+  .ws-chart.zaehl .ws-k { color: var(--ink); }
+  .empf { list-style: none; counter-reset: empf; margin: 20px 0 0; padding: 0; }
+  .empf li { counter-increment: empf; position: relative; padding: 14px 0 14px 58px; border-top: 1px solid var(--line); font-size: 17px; line-height: 1.5; }
+  .empf li:last-child { border-bottom: 1px solid var(--line); }
+  .empf li::before { content: counter(empf); position: absolute; left: 0; top: 16px; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background: var(--purple); color: #fff; font-family: var(--head); font-weight: 700; font-size: 20px; }
+  .empf li strong { display: block; font-family: var(--head); font-weight: 700; font-size: 20px; line-height: 1.25; color: var(--purple); }
+  .beitrag-source { font-size: 13px; line-height: 1.5; color: #6b6e75; margin-top: 24px !important; }
+  /* Wirtschaftsfaktor Personenschifffahrt im Look des Niedrigwasser-Blocks: eigenes Foto, Blau auf Hellblau (seit 23.11.2026) */
+  .wide.feature.pax { background: var(--sky); }
+  .wide.feature.pax img.photo { object-position: 45% 85%; }
+  .wide.feature.pax .feature-head { justify-self: end; background: var(--blue); }
+  .wide.feature.pax .figures strong { color: var(--blue); }
+  .wide.feature.pax .figures div { border-top-color: rgba(27,66,204,.3); }
+  .wide.feature.pax .figures div:first-child { border-top-color: var(--blue); }
+  .pax .press-date { margin-bottom: 0; color: #3f4249; }
+  .pax .lauf-bar .u, .pax .ws-chart .ws-bar span { background: #fff; }
+  .pax .lauf-row, .pax .empf li { border-color: rgba(43,46,52,.18); }
+  .pax .beitrag-chart figcaption, .pax .beitrag-source, .pax .lauf-name span { color: #3f4249; }
+  .zitat { margin: 24px 0 0; padding: 2px 0 2px 22px; border-left: 4px solid var(--blue); font-family: var(--head); font-weight: 600; font-size: 21px; line-height: 1.35; color: var(--ink); }
+  .zitat cite { display: block; margin-top: 10px; font-family: var(--text); font-style: normal; font-weight: 500; font-size: 14px; line-height: 1.4; color: #3f4249; }
+  .beitrag-body ul.wm { margin: 14px 0 0; padding-left: 22px; }
+  .beitrag-body ul.wm li + li { margin-top: 8px; }
+  .beitrag-pdf { margin-top: 24px !important; }
+  .wide-copy .btn.more-link { margin-top: 14px; }
+  @media (max-width: 760px) {
+    .wide.feature.pax .feature-head { justify-self: stretch; }
+  }
+  @media (max-width: 760px) {
+    .figures.four { grid-template-columns: 1fr 1fr; }
+    .lauf-row { grid-template-columns: 1fr; gap: 6px; }
+    .ws-chart.zaehl li { grid-template-columns: 128px 1fr 48px; gap: 8px; font-size: 13px; }
+    .beitrag-body h3 { font-size: 22px; }
+    .empf li { padding-left: 50px; }
+  }
+</style>
+<meta name="description" content="Die Allianz Wasserstraße setzt sich für moderne Binnenwasserstraßen, Schleusen und eine Niedrigwasser-Flotte ein – für Industrie, Versorgung und Tourismus in Deutschland.">
+<link rel="canonical" href="https://allianz-wasserstrasse.de/">
+<link rel="icon" href="img/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="Allianz Wasserstraße">
+<meta property="og:title" content="Allianz Wasserstraße e. V. – Damit Deutschland in Fluss bleibt">
+<meta property="og:description" content="Wasserstraßen sind Lebensadern der deutschen Industrie. Unsere Agenda Wasserstraße 2035.">
+<meta property="og:url" content="https://allianz-wasserstrasse.de/">
+<meta property="og:image" content="https://allianz-wasserstrasse.de/img/header-rhein-5.webp">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Allianz Wasserstraße e. V.",
+  "alternateName": "Allianz Wasserstraße",
+  "url": "https://allianz-wasserstrasse.de/",
+  "logo": "https://allianz-wasserstrasse.de/img/logo.png",
+  "email": "office@allianz-wasserstrasse.de",
+  "description": "Bündnis für leistungsfähige Binnenwasserstraßen und Binnenschifffahrt in Deutschland.",
+  "address": {"@type": "PostalAddress", "streetAddress": "Reinhardtstraße 55", "postalCode": "10117", "addressLocality": "Berlin", "addressCountry": "DE"}
+}
+</script>
+</head>
+<body>
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="Allianz Wasserstraße – Startseite">
+      <img src="img/logo.png" alt="Allianz Wasserstraße – Damit Deutschland in Fluss bleibt.">
+    </a>
+    <button class="burger" aria-label="Menü öffnen" aria-expanded="false" onclick="const n=document.querySelector('.nav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#die-allianz">Die Allianz</a>
+      <div class="nav-group">
+        <a href="#beitrag-personenschifffahrt" class="nav-parent" aria-haspopup="true">Aktuell<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="subnav"><div class="subnav-inner">
+          <a class="pdf-dl" href="presse/PM_Allianz-Wasserstrasse_251126.pdf" download="PM_Allianz-Wasserstrasse_251126.pdf" target="_blank" rel="noopener">Pressemitteilung 25.11.2026</a>
+          <a href="#beitrag-personenschifffahrt">Wirtschaftsfaktor Personenschifffahrt</a>
+          <a href="#beitrag-personal">Beitrag: Personal der Wasserstraßenverwaltung</a>
+          <a class="pdf-dl" href="presse/PM_Allianz-Wasserstrasse_101126.pdf" download="PM_Allianz-Wasserstrasse_101126.pdf" target="_blank" rel="noopener">Pressemitteilung 10.11.2026</a>
+          <a href="#kongress-2027">Kongress 2027</a>
+          <a href="#agenda-2035">Agenda Wasserstraße 2035</a>
+        </div></div>
+      </div>
+      <a href="mailto:office@allianz-wasserstrasse.de" class="cta">Kontakt</a>
+    </nav>
+  </div>
+</header>
+<script>
+  // Menü: nach Klick auf einen Eintrag das mobile Menü schließen und das Untermenü einklappen
+  (() => {
+    const nav = document.querySelector('.nav'), burger = document.querySelector('.burger'), group = document.querySelector('.nav-group');
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false');
+      if (group.contains(a)) { group.classList.add('shut'); a.blur(); }
+    }));
+    group.addEventListener('mouseleave', () => group.classList.remove('shut'));
+  })();
+</script>
+
+<main>
+<!-- ================= BÜHNE ================= -->
+<section class="stage">
+  <div class="stage-img">
+    <img src="img/header-rhein-5.webp" alt="Güterschiff und Flusskreuzfahrtschiff auf dem Rhein im Abendlicht, am Ufer Hafenkräne" width="1671" height="941">
+  </div>
+  <div class="stage-copy">
+    <div class="wrap">
+      <div class="stage-box">
+        <h1>Wasserstraßen sind Lebensadern der deutschen Industrie.</h1>
+        <p class="sub">Immense Wirtschaftskraft hängt von der verlässlichen Versorgung durch die Binnenschifffahrt ab. Die Allianz Wasserstraße ist der Zusammenschluss führender Unternehmen im System Wasserstraße.</p>
+        <a class="btn" href="#die-allianz">mehr
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2-SPALTEN-RASTER ================= -->
+<section class="grid-section" id="allianz">
+  <div class="wrap grid">
+
+    <!-- 1: Textkasten -->
+    <article class="card text-a" id="die-allianz">
+      <span class="label">Die Allianz</span>
+      <h2>Gemeinsam Deutschlands<br>Wirtschaftskraft sichern.</h2>
+      <p>Die Binnenschifffahrt ist ein zentraler Versorgungsträger der deutschen Industrie, sie verbindet die Nordseehäfen mit den Industriezentren an Rhein, Ruhr, Main und Neckar und ist ein wichtiger Teil des Tourismus.</p>
+      <p>2025 wurden auf deutschen Wasserstraßen mehr als 171 Millionen Tonnen Güter transportiert, davon rund 120 Millionen Tonnen im grenzüberschreitenden Verkehr.</p>
+      <p>Gemessen an der strategischen Bedeutung ist die Binnenschifffahrt die Achillesferse der deutschen Industrie.</p>
+      <details class="toggle readmore">
+        <summary><span class="when-closed">mehr</span><span class="when-open">weniger</span></summary>
+        <p>Die Mitglieder der Allianz sind als Unternehmen angewiesen auf die Funktionsfähigkeit des Systems Wasserstraße: Unsere Kunden sind von einer verlässlichen Logistik übers Wasser abhängig. Deshalb haben wir einen klaren Fokus auf die richtigen Prioritäten, auf mehr Geschwindigkeit und eine pünktliche Fertigstellung aller Projekte. Hier werden wir uns einbringen und legen neue Vorschläge auf den Tisch.</p>
+        <p>Gemeinsam mit den Industrien und Regionen, die auf die Wasserstraße angewiesen sind, wollen wir die Modernisierung und den bedarfsgerechten Ausbau der schiffbaren Infrastruktur und der Flotten vorantreiben.</p>
+        <p>Wir sehen uns als Ergänzung zu den Verbänden im System Wasserstraße. Unsere Rolle als Unternehmen ist eine andere als die der Verbände, die z.&#8239;B. in der Initiative System Wasserstraße vertreten sind.</p>
+        <details class="toggle members-toggle">
+          <summary>Die Mitglieder</summary>
+          <h3>Die Gründungsmitglieder der Allianz Wasserstraße e.&#8239;V.</h3>
+          <ul class="members">
+            <li><strong>duisport – Duisburger Hafen AG</strong><span>betreibt den größten Binnenhafen der Welt und eine der bedeutendsten Logistikdrehscheiben Europas – 2025 mit 50,8 Mio. Tonnen Gruppenumschlag, darin 4,1 Mio. Container (TEU) und rund 1.400 Beschäftigten.</span></li>
+            <li><strong>HGK AG</strong><span>betreibt mit ihrem Business-Segment Schifffahrt die größte Binnenschiffsflotte Europas, bedient vor allem das Rheinland, mit rund 2.700 Beschäftigten, 73,1 Mio. Tonnen Transport- und Umschlagsleistung, darin 1,1 Mio. Container (TEU), 646,7 Mio. Euro Gruppenumsatz (2025).</span></li>
+            <li><strong>Rhenus Port Logistics</strong><span>ist das internationale Hafenlogistik-Geschäftsfeld der Rhenus-Gruppe, 8,2 Mrd. Euro Umsatz, 39.000 Beschäftigte und über 1.300 Standorte weltweit.</span></li>
+            <li><strong>Viking River Cruises AG</strong><span>ist eines der weltweit führenden Kreuzfahrtunternehmen mit einer Flotte von 103 Schiffen, darunter 89 Flusskreuzfahrtschiffe, auf sieben Kontinenten, fünf Ozeanen und 21 Flüssen weltweit. Umsatz von 6,5 Milliarden US-Dollar in 2025, 15.000 Mitarbeitende.</span></li>
+          </ul>
+        </details>
+      </details>
+    </article>
+
+    <!-- 2: Anzeigen-Karussell -->
+    <article class="card slider-card ad-slider" id="anzeigen" data-item="Motiv" aria-roledescription="Karussell" aria-label="Anzeigenmotive der Allianz Wasserstraße">
+      <div class="slider-viewport" tabindex="0">
+        <div class="slider-track">
+          <div class="slide ad-slide" role="group" aria-roledescription="Folie" aria-label="1 von 8"><img src="img/web-anzeige-01-weizen.jpg" width="1200" height="1005" draggable="false" alt="Anzeige „Weizen streamen?“ Bis das geht, sorgt die Binnenschifffahrt für einen günstigen Transport. Deshalb jetzt die wichtigen Cluster zuerst modernisieren und den Bau neuer Schiffe für Niedrigwasser unterstützen."></div>
+          <div class="slide ad-slide" role="group" aria-roledescription="Folie" aria-label="2 von 8"><img src="img/web-anzeige-02-stahl.jpg" width="1200" height="1005" draggable="false" alt="Anzeige „Stahl per WhatsApp?“ Bis das geht, sorgt die Binnenschifffahrt für einen sicheren Transport. Deshalb jetzt die wichtigen Cluster zuerst modernisieren und den Bau neuer Schiffe für Niedrigwasser unterstützen."></div>
+          <div class="slide ad-slide" role="group" aria-roledescription="Folie" aria-label="3 von 8"><img src="img/web-anzeige-03-kohle.jpg" width="1200" height="1005" draggable="false" alt="Anzeige „Kohle beamen?“ Bis das geht, sorgt die Binnenschifffahrt für einen sicheren Transport. Deshalb jetzt die wichtigen Cluster zuerst modernisieren und den Bau neuer Schiffe für Niedrigwasser unterstützen."></div>
+          <div class="slide ad-slide" role="group" aria-roledescription="Folie" aria-label="4 von 8"><img src="img/web-anzeige-04-airdrop.jpg" width="1200" height="1005" draggable="false" alt="Anzeige „Mit AirDrop verreisen?“ Bis das geht, sorgt die Binnenschifffahrt für erlebnisreichen Tourismus. Deshalb jetzt die wichtigen Cluster zuerst modernisieren und den Bau neuer Schiffe für Niedrigwasser unterstützen."></div>
+          <div class="slide ad-slide" role="group" aria-roledescription="Folie" aria-label="5 von 8"><img src="img/web-anzeige-05-container.jpg" width="1200" height="1005" draggable="false" alt="Anzeige „Container per Drohne?“ Bis das geht, sorgt die Binnenschifffahrt für einen flexiblen Transport. Deshalb jetzt die wichtigen Cluster zuerst modernisieren und den Bau neuer Schiffe für Niedrigwasser unterstützen."></div>
+          <div class="slide ad-slide" role="group" aria-roledescription="Folie" aria-label="6 von 8"><img src="img/web-anzeige-06-kreuzfahrt.jpg" width="1200" height="1005" draggable="false" alt="Anzeige „Kreuzfahrt per Drohne?“ Bis das geht, sorgt die Binnenschifffahrt für erlebnisreichen Tourismus. Deshalb jetzt die wichtigen Cluster zuerst modernisieren und den Bau neuer Schiffe für Niedrigwasser unterstützen."></div>
+          <div class="slide ad-slide" role="group" aria-roledescription="Folie" aria-label="7 von 8"><img src="img/web-anzeige-07-bruecken.jpg" width="1200" height="1005" draggable="false" alt="Anzeige „Brücken halten alles?“ Bis das so ist, sorgt die Binnenschifffahrt für sichere Schwergut-Transporte. Deshalb jetzt die wichtigen Cluster zuerst modernisieren und den Bau neuer Schiffe für Niedrigwasser unterstützen."></div>
+          <div class="slide ad-slide" role="group" aria-roledescription="Folie" aria-label="8 von 8"><img src="img/web-anzeige-08-windraeder.jpg" width="1200" height="1005" draggable="false" alt="Anzeige „Windräder per Heli?“ Bis das geht, sorgt die Binnenschifffahrt für sichere Schwergut-Transporte. Deshalb jetzt die wichtigen Cluster zuerst modernisieren und den Bau neuer Schiffe für Niedrigwasser unterstützen."></div>
+        </div>
+      </div>
+      <div class="slider-nav">
+        <button class="sl-btn sl-prev" type="button" aria-label="Vorheriges Motiv"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <div class="sl-dots" role="tablist" aria-label="Motiv auswählen"></div>
+        <span class="sl-count" aria-live="polite">1 / 8</span>
+        <button class="sl-btn sl-next" type="button" aria-label="Nächstes Motiv"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </article>
+
+    <!-- Redaktioneller Beitrag aus dem Positionspapier Wirtschaftsfaktor Personenschifffahrt (seit 24.11.2026, an der Stelle der PM vom 10.11.) -->
+    <article class="wide feature pax" id="beitrag-personenschifffahrt">
+      <div class="wide-img">
+        <img class="photo" src="img/wirtschaftsfaktor-personenschifffahrt.jpg" alt="Ausflugsschiff und Flusskreuzfahrtschiff vor einem Ort am Flussufer im Abendlicht" onerror="this.remove()">
+      </div>
+      <div class="feature-head">
+        <span class="label">Wirtschaftsfaktor Personenschifffahrt</span>
+        <h2>Wo Schiffe anlegen, profitieren die Städte.</h2>
+      </div>
+      <div class="wide-copy">
+        <div class="feature-text">
+        <p class="press-date">25. November 2026 · Lesezeit rund 5 Minuten</p>
+        <p class="sub">Flusskreuzfahrten und Ausflugsschiffe lösen entlang der deutschen Wasserstraßen rund 1,2 Milliarden Euro Umsatz im Jahr aus. Der Sommer 2026 hat gezeigt, wie schnell Niedrigwasser und Schleusensperrungen dieses Geschäft treffen – und mit ihm Gastronomie, Handel und Hotels in den Anlegeorten. Die Allianz Wasserstraße fordert deshalb neben modernen Schleusen ein besseres Wassermanagement, damit die Schiffe auch in trockenen Sommern fahren können.</p>
+        <div class="press-actions">
+          <details class="toggle readmore">
+            <summary><span class="when-closed">weiterlesen</span><span class="when-open">weniger</span></summary>
+            <div class="press-body beitrag-body">
+              <p class="lead">Wer in Köln, Passau oder Würzburg an einem Sommertag ans Ufer geht, sieht, was die Personenschifffahrt für die Städte bedeutet: Kreuzfahrtschiffe legen an, Ausflugsschiffe starten zu Rundfahrten, Gäste gehen in Restaurants, Geschäfte und Museen. Nach einer Studie im Auftrag des Bundeswirtschaftsministeriums lösen Flusskreuzfahrten und Tagesausflüge in Deutschland einen direkten Bruttoumsatz von rund 1,2 Milliarden Euro im Jahr aus, umgerechnet in heutige Preise. Davon leben Gastronomie, Handel, Busunternehmen, Gästeführer und Hotels.</p>
+
+              <h3>Die Gäste kommen aus der ganzen Welt.</h3>
+              <p>2025 reisten 1,5 Millionen Gäste auf Flusskreuzfahrten in Europa, 8 Prozent mehr als im Vorjahr; der Ticketumsatz stieg auf 3,7 Milliarden Euro. Die größte Gruppe kommt inzwischen aus Deutschland, Österreich und der Schweiz (39 Prozent), knapp dahinter folgen die USA und Kanada (37 Prozent). Aus Deutschland buchten 2025 rund 863.000 Menschen eine Flusskreuzfahrt, gut ein Drittel mehr als 2022. Gäste von außerhalb Europas bleiben länger und geben mehr aus: Sie stellen 45 Prozent der Passagiere, aber 66 Prozent des Umsatzes.</p>
+              <figure class="beitrag-chart">
+                <figcaption class="bk-title">Gäste aus Übersee und aus Europa, 2025</figcaption>
+                <div class="lauf"><div class="lauf-row"><div class="lauf-name"><strong>Anteil an den Gästen</strong><span>1,5 Mio. Passagiere</span></div><div class="lauf-bar" role="img" aria-label="Anteil an den Gästen: Übersee 45 Prozent, Europa 55 Prozent"><span class="b" style="flex:45">Übersee 45&nbsp;%</span><span class="u" style="flex:55">Europa 55&nbsp;%</span></div></div><div class="lauf-row"><div class="lauf-name"><strong>Anteil am Umsatz</strong><span>3,7 Mrd. € Ticketumsatz</span></div><div class="lauf-bar" role="img" aria-label="Anteil am Umsatz: Übersee 66 Prozent, Europa 34 Prozent"><span class="b" style="flex:66">Übersee 66&nbsp;%</span><span class="u" style="flex:34">Europa 34&nbsp;%</span></div></div></div>
+                <figcaption>Übersee: Gäste von außerhalb Europas, vor allem aus den USA und Kanada. Quelle: ZKR, Marktbeobachtung 2026, nach IG River Cruise.</figcaption>
+              </figure>
+
+              <h3>Rhein und Donau sind die Hauptachsen.</h3>
+              <p>Die meisten Flusskreuzfahrten auf deutschen Wasserstraßen führen über den Rhein und über Main und Main-Donau-Kanal zur Donau. 2025 passierten 4.706 Kreuzfahrtschiffe mit fast 823.000 Gästen die deutsch-niederländische Grenze bei Lobith, an der Donauschleuse Jochenstein waren es 4.606 Schiffe. Köln ist mit mindestens 460.000 Gästen im Jahr der größte Kreuzfahrthafen Deutschlands, es folgen Passau, Würzburg und Bamberg. Die Flotte wächst: Europaweit fahren 420 Flusskreuzfahrtschiffe, für 2026 und 2027 werden 42 neue erwartet.</p>
+              <figure class="beitrag-chart">
+                <figcaption class="bk-title">Flusskreuzfahrtschiffe an ausgewählten Zählstellen, 2025</figcaption>
+                <ul class="ws-chart zaehl"><li class="hi"><span class="ws-k">Lobith (Niederrhein)</span><span class="ws-bar"><span style="width:100.0%"></span></span><span class="ws-v">4.706</span></li><li class="hi"><span class="ws-k">Jochenstein (Donau)</span><span class="ws-bar"><span style="width:97.9%"></span></span><span class="ws-v">4.606</span></li><li><span class="ws-k">Iffezheim (Oberrhein)</span><span class="ws-bar"><span style="width:71.0%"></span></span><span class="ws-v">3.340</span></li><li><span class="ws-k">Koblenz (Mosel)</span><span class="ws-bar"><span style="width:33.7%"></span></span><span class="ws-v">1.587</span></li><li><span class="ws-k">Fankel (Mosel)</span><span class="ws-bar"><span style="width:23.6%"></span></span><span class="ws-v">1.109</span></li><li><span class="ws-k">Zeltingen (Mosel)</span><span class="ws-bar"><span style="width:21.5%"></span></span><span class="ws-v">1.012</span></li></ul>
+                <figcaption>Lobith: Zählstelle an der Grenze zu den Niederlanden. Quelle: ZKR, Marktbeobachtung 2026, nach Rijkswaterstaat, WSV und Moselkommission.</figcaption>
+              </figure>
+
+              <h3>Ausflugsschiffe sind das Massenverkehrsmittel des Tourismus.</h3>
+              <p>Noch mehr Menschen erreicht das Geschäft mit Tagesausflügen. In Deutschland waren 2025 rund 950 Ausflugsschiffe mit gut 210.000 Plätzen gemeldet. Eine amtliche Fahrgastzahl gibt es nicht; nach Erfahrungswerten nutzen sie rund 24 Millionen Fahrgäste im Jahr. Schwerpunkte sind Berlin, der Rhein mit dem Welterbe Oberes Mittelrheintal, Hamburg, Dresden und die Mosel. In der Personen-Binnenschifffahrt arbeiten in Deutschland 5.862 Menschen, mehr als in jedem anderen Land Europas.</p>
+
+              <h3>Der Sommer 2026 hat gezeigt, wie verwundbar das Geschäft ist.</h3>
+              <p>Die Gäste kommen nur, wenn die Schiffe fahren können. Im Sommer 2026 sank der Pegel Kaub auf 24 Zentimeter, so tief wie nie. Die Köln-Düsseldorfer verlor nach eigenen Angaben allein im August fast zwei Millionen Euro Umsatz, ihre Linie zwischen Mainz, Rüdesheim und St.&nbsp;Goar fiel vom 3. September bis 18. Oktober aus. nicko cruises musste rund 30 Abfahrten absagen, doppelt so viele wie üblich; in Köln, Düsseldorf und Duisburg konnten Kreuzfahrtgäste zeitweise weder ein- noch aussteigen. An der Donau war der Donaudurchbruch bei Weltenburg für Ausflugsschiffe gesperrt, in Dresden fuhr die Weiße Flotte nur noch Stadtfahrten. Dazu kommen Schleusenunfälle wie in Müden (2024) und St.&nbsp;Aldegund (2025), die die Mosel wochenlang lahmlegten.</p>
+              <blockquote class="zitat">„Wenn die Gäste wegen Niedrigwasser oder defekter Schleusen ausbleiben, fehlt dieser Umsatz. Gerade am Mittelrhein und an der Mosel ist die Personenschifffahrt ein erheblicher Wirtschaftsfaktor.“<cite>Thomas Bogler, Mitglied des Vorstands der Allianz Wasserstraße und Vice President der Viking River Cruises AG</cite></blockquote>
+              <h3>Ohne besseres Wassermanagement geht es nicht.</h3>
+              <p>Niedrigwasser ist kein Ausnahmefall mehr: Klimaprojektionen erwarten häufigere und längere Trockenphasen. Die Abladeoptimierung am Mittelrhein, die die Fahrrinne vertieft, muss deshalb rasch kommen. Allein wird sie aber nicht reichen.</p>
+              <blockquote class="zitat">„Die gesamte Planung sollte auf den Prüfstand und ergänzt werden mit neuen Maßnahmen für eine nachhaltige Wasserführung. […] Alle Optionen müssen auf den Tisch, damit die Wasserstraßen zukunftsfest werden.“<cite>Thomas Bogler</cite></blockquote>
+              <p>Die Allianz Wasserstraße schlägt vor, alle Möglichkeiten zu prüfen, mit denen sich der Wasserhaushalt der Flüsse stabilisieren lässt:</p>
+              <ul class="wm"><li><strong>Wasser speichern:</strong> Talsperren und Speicherseen im Rheineinzugsgebiet könnten in nassen Zeiten mehr Wasser zurückhalten und bei Niedrigwasser abgeben.</li><li><strong>Grundwasser auffüllen:</strong> An den Nebenflüssen und in ihren Einzugsgebieten ließen sich Versickerung und Grundwasserneubildung verbessern.</li><li><strong>Wasser in der Landschaft halten:</strong> Entwässerungen lassen sich anpassen und Auen wieder an die Flüsse anbinden.</li></ul>
+
+              <h3>Was jetzt zu tun ist.</h3>
+              <p>Die Allianz Wasserstraße empfiehlt sechs Schritte:</p>
+              <ol class="empf"><li><strong>Touristische Wasserstraßen in die Cluster einbeziehen.</strong><span>Mosel, Main, Elbe und die Berliner Gewässer sind auch dort wirtschaftlich bedeutsam, wo wenig Güter fahren.</span></li><li><strong>Schleusen in der Saison verlässlich öffnen.</strong><span>Ferngesteuerte Schleusen, eine neu geordnete Verwaltung und ein digitales Slot-Management, über das Schiffe ihre Schleusung im Voraus buchen, machen Fahrpläne planbar.</span></li><li><strong>Liegestellen und Landstrom ausbauen.</strong><span>Fast alle Kreuzfahrtschiffe haben einen Landstromanschluss; an Land fehlen Liegeplätze mit ausreichender Strom- und Wasserversorgung.</span></li><li><strong>Niedrigwasser am Rhein entschärfen.</strong><span>Die Abladeoptimierung am Mittelrhein hilft auch der Fahrgastschifffahrt und sollte bis 2030 fertig sein.</span></li><li><strong>Ein besseres Wassermanagement.</strong><span>Die Planung für den Rhein und seine Nebenflüsse um Maßnahmen für eine nachhaltige Wasserführung ergänzen: Speicher, Versickerung, Auen.</span></li><li><strong>Fahrgäste amtlich zählen.</strong><span>Bund und Länder sollten die Fahrgastzahlen erheben, damit die Bedeutung der Personenschifffahrt sichtbar wird.</span></li></ol>
+              <p class="beitrag-source">Quellen: Bundeswirtschaftsministerium, Potenziale des Wassertourismus in Deutschland (2016), umgerechnet mit dem Verbraucherpreisindex; ZKR, Marktbeobachtung Jahresbericht 2026; DRV, Der deutsche Reisemarkt – Zahlen und Fakten 2026; BDB, Daten &amp; Fakten 2025/2026; IHK Köln/ift, Fahrgastschifffahrt in Köln (2020); Eurostat; Kölner Stadt-Anzeiger, touristik aktuell, dpa (2026). Zitate: Pressemitteilung der Allianz Wasserstraße vom 25. November 2026. Alle Zahlen und Grafiken im Positionspapier „Wirtschaftsfaktor Personenschifffahrt“.</p>
+              <p class="beitrag-pdf"><a class="btn btn-outline pdf-dl" href="papiere/Agenda-Binnenschifffahrt-2035_Wirtschaftsfaktor-Personenschifffahrt.pdf" download="Wirtschaftsfaktor-Personenschifffahrt.pdf" target="_blank" rel="noopener">Positionspapier (PDF)
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M6.5 10l5.5 5.5 5.5-5.5M5 20h14"/></svg>
+                </a></p>
+            </div>
+          </details>
+          <a class="btn btn-outline pdf-dl" href="presse/PM_Allianz-Wasserstrasse_251126.pdf" download="PM_Allianz-Wasserstrasse_251126.pdf" target="_blank" rel="noopener">Pressemitteilung mit Positionspapier (PDF)
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M6.5 10l5.5 5.5 5.5-5.5M5 20h14"/></svg>
+          </a>
+        </div>
+        </div>
+        <div class="feature-side">
+        <div class="figures">
+          <div><strong>1,2&nbsp;Mrd.&nbsp;€</strong><span>Umsatz im Jahr entlang der Wasserstraßen, in heutigen Preisen</span></div>
+          <div><strong>1,5&nbsp;Mio.</strong><span>Gäste auf Flusskreuzfahrten in Europa 2025, 8 Prozent mehr als im Vorjahr</span></div>
+          <div><strong>24&nbsp;Mio.</strong><span>Fahrgäste auf rund 950 Ausflugsschiffen in Deutschland (Schätzung)</span></div>
+          <div><strong>5.862</strong><span>Beschäftigte in der Personenschifffahrt in Deutschland, mehr als in jedem anderen Land Europas</span></div>
+        </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Redaktioneller Beitrag aus dem Positionspapier Personalsituation (seit 16.11.2026) -->
+    <article class="press press-wide beitrag" id="beitrag-personal">
+      <span class="label">Beitrag</span>
+      <p class="press-date">16. November 2026 · Lesezeit rund 4 Minuten</p>
+      <h2>Der Wasserstraße gehen die Fachleute aus.</h2>
+      <p class="sub">Fast jede zweite Beamtenstelle in der Wasserstraßenverwaltung des Bundes ist unbesetzt, eine Ruhestandswelle steht bevor, und der Nachwuchs im Wasserbau bricht ein. Eine Untersuchung des IW im Auftrag der Allianz Wasserstraße zeigt: Entscheidend ist, Planung und Bau besser zu organisieren.</p>
+      <div class="figures four">
+        <div><strong>41,5&nbsp;%</strong><span>der Beamtenstellen sind unbesetzt – 764 von 1.839</span></div>
+        <div><strong>48&nbsp;%</strong><span>der Stellen in A&nbsp;14 sind frei, dort arbeiten erfahrene Ingenieurinnen und Ingenieure</span></div>
+        <div><strong>60&nbsp;%</strong><span>der Wasserstraßen- und Brückenwärter sind 50 Jahre oder älter</span></div>
+        <div><strong>–42&nbsp;%</strong><span>Studierende im Wasserbau seit dem Wintersemester 2020/21</span></div>
+      </div>
+      <div class="press-actions">
+        <details class="toggle readmore">
+          <summary><span class="when-closed">weiterlesen</span><span class="when-open">weniger</span></summary>
+          <div class="press-body beitrag-body">
+            <p class="lead">An Geld für die Bundeswasserstraßen mangelt es derzeit weniger als an den Menschen, die es verbauen. Allein für Ersatzinvestitionen sieht der Investitionsrahmenplan 2025–2029 des Bundes rund 9,2 Milliarden Euro vor. Der Regierungsentwurf für den Haushalt 2027 legt aus dem Sondervermögen Infrastruktur und Klimaneutralität weitere 1,2 Milliarden Euro für Erhalt und Ersatz dazu. Damit das Geld in Schleusen, Wehre und Fahrrinnen fließt, müssen Projekte geplant, ausgeschrieben und überwacht werden. Genau dafür fehlen der Verwaltung die Fachleute.</p>
+
+            <h3>Die größten Lücken klaffen bei den Ingenieuren.</h3>
+            <p>Der Bundeshaushalt 2026 sieht für die Wasserstraßen- und Schifffahrtsverwaltung (WSV) einschließlich der Bundesanstalten für Wasserbau und für Gewässerkunde 1.839 Planstellen für Beamtinnen und Beamte vor. Am 1. Oktober 2025 waren nur 1.075 davon besetzt, das sind 58,5 Prozent. Bei den Tarifbeschäftigten liegt die Besetzungsquote dagegen bei gut 92 Prozent.</p>
+            <figure class="beitrag-chart">
+              <figcaption class="bk-title">Besetzung der Beamtenstellen nach Laufbahngruppe, 1. Oktober 2025</figcaption>
+              <div class="lauf"><div class="lauf-row"><div class="lauf-name"><strong>Höherer Dienst</strong><span>587 Planstellen</span></div><div class="lauf-bar" role="img" aria-label="Höherer Dienst: 369 besetzt, 218 unbesetzt (37 Prozent)"><span class="b" style="flex:369">369</span><span class="u" style="flex:218">218 offen · 37&nbsp;%</span></div></div><div class="lauf-row"><div class="lauf-name"><strong>Gehobener Dienst</strong><span>845 Planstellen</span></div><div class="lauf-bar" role="img" aria-label="Gehobener Dienst: 470 besetzt, 375 unbesetzt (44 Prozent)"><span class="b" style="flex:470">470</span><span class="u" style="flex:375">375 offen · 44&nbsp;%</span></div></div><div class="lauf-row"><div class="lauf-name"><strong>Mittlerer Dienst</strong><span>405 Planstellen</span></div><div class="lauf-bar" role="img" aria-label="Mittlerer Dienst: 236 besetzt, 169 unbesetzt (42 Prozent)"><span class="b" style="flex:236">236</span><span class="u" style="flex:169">169 offen · 42&nbsp;%</span></div></div></div>
+              <p class="bk-key"><span class="sw b"></span>besetzt <span class="sw u"></span>unbesetzt</p>
+              <figcaption>Planstellen von WSV, BfG und BAW. Quelle: Bundeshaushalt 2026, Einzelplan 12, Kapitel 1218; Auswertung IW Consult 2026.</figcaption>
+            </figure>
+            <p>Am größten sind die Lücken dort, wo Ingenieurinnen und Ingenieure arbeiten. In der Besoldungsgruppe A&nbsp;14, in der typischerweise erfahrene Ingenieure eingesetzt sind, ist fast jede zweite Stelle frei, in A&nbsp;11 und A&nbsp;13 des gehobenen Dienstes mehr als die Hälfte. Hinzu kommt die Struktur: Die Arbeit verteilt sich auf 17 Wasserstraßen- und Schifffahrtsämter und acht Wasserstraßen-Neubauämter. Das Personal ist nicht immer dort, wo die wichtigsten Vorhaben anstehen, und Zuständigkeiten überschneiden sich.</p>
+
+            <h3>Die Ruhestandswelle trifft auf einen leeren Arbeitsmarkt.</h3>
+            <p>Auch außerhalb der Verwaltung sind die Fachleute knapp. Für Expertinnen und Experten der Wasserwirtschaft, zu denen die Wasserbauingenieure gehören, und für Wasserstraßen- und Brückenwärter gibt es in Deutschland mehr offene Stellen als Arbeitsuchende. 60 Prozent der Wasserstraßen- und Brückenwärter sind 50 Jahre oder älter, 44 Prozent sogar 55 oder älter. Nur gut jeder Zehnte ist jünger als 35. Bei den Expertinnen und Experten der Wasserwirtschaft sind ausgerechnet die Jahrgänge zwischen 45 und 54 schwach besetzt. Aus ihnen müssten in den nächsten Jahren die Führungskräfte kommen.</p>
+
+            <h3>Der Nachwuchs bleibt aus.</h3>
+            <p>Die Zahl der Studierenden im Wasserbau ist seit dem Wintersemester 2020/21 von 1.428 auf 834 gefallen, allein im letzten Jahr um 19 Prozent. Jedes Jahr schließen rund 280 Studierende ein Studium im Wasserbau ab. Fast 40 Prozent dieser Abschlüsse entfallen auf ausländische Studierende, von denen die Mehrheit Deutschland nach dem Studium verlässt.</p>
+            <figure class="beitrag-chart">
+              <figcaption class="bk-title">Studierende im Wasserbau nach Wintersemester</figcaption>
+              <ul class="ws-chart"><li><span class="ws-k">13/14</span><span class="ws-bar"><span style="width:89.9%"></span></span><span class="ws-v">1.284</span></li><li><span class="ws-k">14/15</span><span class="ws-bar"><span style="width:95.2%"></span></span><span class="ws-v">1.359</span></li><li><span class="ws-k">15/16</span><span class="ws-bar"><span style="width:98.4%"></span></span><span class="ws-v">1.405</span></li><li><span class="ws-k">16/17</span><span class="ws-bar"><span style="width:99.6%"></span></span><span class="ws-v">1.423</span></li><li><span class="ws-k">17/18</span><span class="ws-bar"><span style="width:98.7%"></span></span><span class="ws-v">1.410</span></li><li><span class="ws-k">18/19</span><span class="ws-bar"><span style="width:97.1%"></span></span><span class="ws-v">1.387</span></li><li><span class="ws-k">19/20</span><span class="ws-bar"><span style="width:98.6%"></span></span><span class="ws-v">1.408</span></li><li class="hi"><span class="ws-k">20/21</span><span class="ws-bar"><span style="width:100.0%"></span></span><span class="ws-v">1.428</span></li><li><span class="ws-k">21/22</span><span class="ws-bar"><span style="width:98.7%"></span></span><span class="ws-v">1.410</span></li><li><span class="ws-k">22/23</span><span class="ws-bar"><span style="width:90.9%"></span></span><span class="ws-v">1.298</span></li><li><span class="ws-k">23/24</span><span class="ws-bar"><span style="width:85.2%"></span></span><span class="ws-v">1.217</span></li><li><span class="ws-k">24/25</span><span class="ws-bar"><span style="width:72.4%"></span></span><span class="ws-v">1.034</span></li><li class="hi"><span class="ws-k">25/26</span><span class="ws-bar"><span style="width:58.4%"></span></span><span class="ws-v">834</span></li></ul>
+              <figcaption>Quelle: Statistisches Bundesamt, Studierendenstatistik, 2026; Auswertung IW Consult 2026.</figcaption>
+            </figure>
+
+            <h3>Die Lösung liegt in der Organisation.</h3>
+            <p>Zusätzliche Stellen würden an der Lage wenig ändern, solange sich schon die vorhandenen nicht besetzen lassen. Die Verwaltung muss mit dem vorhandenen Personal mehr erreichen, und der Stellenabbau beim Bund darf das Management und die Instandhaltung von Schleusen und den Ausbau der Wasserstraßen nicht treffen. Wie es gehen kann, zeigt die Autobahn GmbH des Bundes: Sie plant, baut, betreibt und erhält die Autobahnen seit 2021 aus einer Hand. Die Allianz Wasserstraße empfiehlt acht Schritte:</p>
+            <ol class="empf"><li><strong>Effizienzsteigerung durch Neuordnung.</strong><span>Weil sich die vorhandenen Planstellen nicht besetzen lassen, müssen Verfahren und Zuständigkeiten an die reale Personallage angepasst werden.</span></li><li><strong>Neuordnung in Clustern.</strong><span>Wasserstraßen enden nicht an Landesgrenzen. Ihr Ausbau sollte nach Relevanz priorisiert, finanziert und umgesetzt werden.</span></li><li><strong>Übergreifende Bearbeitung der Cluster.</strong><span>Jedes Cluster erhält eine Gesamtverantwortung für die dauerhafte und sichere Verfügbarkeit der Wasserstraße.</span></li><li><strong>Eine Gesellschaft nach dem Vorbild der Autobahn GmbH.</strong><span>Planung, Bau, Betrieb und Erhaltung aus einer Hand, gegliedert nach den Wasserstraßen-Clustern.</span></li><li><strong>Zusammenlegung gleichartiger Aufgaben.</strong><span>Fernsteuerung von Schleusen, digitale Bauwerksinspektionen, modellbasiertes Planen und die standardisierte Erneuerung von Schleusen bundesweit bündeln.</span></li><li><strong>Vergabe an Private.</strong><span>Planung, Bauüberwachung und Projektsteuerung in größerem Umfang an Ingenieurbüros und die Bauwirtschaft vergeben.</span></li><li><strong>Schneller einstellen.</strong><span>Unbesetzte Beamtenstellen zügig für Tarifbeschäftigte öffnen, Einstellungen in wenigen Wochen statt Monaten abschließen.</span></li><li><strong>Umsetzung mit dem Haushalt 2027.</strong><span>Die Neuordnung der Zuständigkeiten, der Mittelzuweisung und des Beschäftigungsangebots sollte der Bundestag mit dem Haushalt 2027 auf den Weg bringen.</span></li></ol>
+            <p class="beitrag-source">Quellen: Bundeshaushalt 2026, Einzelplan 12, Kapitel 1218 (Stellenbesetzung zum 1. Oktober 2025); IW-Fachkräftedatenbank auf Basis von Sonderauswertungen der Bundesagentur für Arbeit und der IAB-Stellenerhebung, 2026; Statistisches Bundesamt, Studierenden- und Prüfungsstatistik, 2026; Auswertung IW Consult, 2026; Investitionsrahmenplan 2025–2029; Deutscher Bundestag, hib 651/2026. Alle Zahlen und Grafiken im Positionspapier „Aktuelle Personalsituation im Management der Bundeswasserstraßen“.</p>
+          </div>
+        </details>
+        <a class="btn btn-outline pdf-dl" href="papiere/Positionspapier_Personalsituation-Bundeswasserstrassen.pdf" download="Positionspapier_Personalsituation-Bundeswasserstrassen.pdf" target="_blank" rel="noopener">Positionspapier (PDF)
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M6.5 10l5.5 5.5 5.5-5.5M5 20h14"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 3: Versorgungssicherheit über beide Spalten -->
+    <article class="card text-b text-b-wide" id="versorgung">
+      <span class="label">Garant der Versorgungssicherheit</span>
+      <h2>Rückgrat der Industrie.</h2>
+      <p>Stahlwerke, Raffinerien, Chemie, Energie, Bau- und Ernährungswirtschaft hängen an der Binnenschifffahrt. Jedes Jahr werden ca. 171 Mio. t Güter auf deutschen Wasserstraßen bewegt.</p>
+      <p>2024 bestanden rund 83&nbsp;% des Transportaufkommens auf den deutschen Binnenwasserstraßen aus trockenen oder flüssigen Massengütern. Also Eisenerz, Kohle, Sand, Kies und Steine, Getreide etc. sowie Diesel, Heizöl, Benzin, Chemikalien, Flüssiggas, Pflanzenöle und zukünftig vielleicht Wasserstoff.</p>
+      <p>Diese Güter kann man nur in geringem Umfang von der Wasserstraße auf die Straße oder Schiene verlagern.</p>
+      <div class="stats">
+        <div class="stat-total"><strong>171 Mio. t</strong><span>Gütertransport pro Jahr</span></div>
+        <div class="equation" role="img" aria-label="1 Frachtschiff entspricht 160 Lkw, dargestellt als 160 Lkw-Symbole">
+          <span class="num">1</span><svg viewBox="0 0 72 28" aria-hidden="true"><path d="M2 16H70L66 25H8Z"/><rect x="8" y="11" width="44" height="5"/><rect x="55" y="5" width="11" height="11"/><rect class="win" x="57" y="7" width="7" height="3"/><rect x="60" y="1" width="2" height="4"/></svg>
+          <span class="eq">=</span>
+          <span class="num">160 Lkw</span>
+        </div>
+        <div class="fill-wrap truck-wrap" aria-hidden="true"></div>
+        <div class="equation" role="img" aria-label="1 Schubverband mit sechs Leichtern entspricht 291 Güterwaggons">
+          <span class="num">1</span><svg class="icon-long icon-convoy6" viewBox="0 0 162 28" aria-hidden="true"><path d="M5 15H23V24H8L1 18V15Z"/><path d="M5 15Q13 8 21 15Z"/><rect x="24" y="15" width="22" height="9"/><path d="M26 15Q35 8 44 15Z"/><rect x="47" y="15" width="22" height="9"/><path d="M49 15Q58 8 67 15Z"/><rect x="70" y="15" width="22" height="9"/><path d="M72 15Q81 8 90 15Z"/><rect x="93" y="15" width="22" height="9"/><path d="M95 15Q104 8 113 15Z"/><rect x="116" y="15" width="22" height="9"/><path d="M118 15Q127 8 136 15Z"/><path d="M139 15H157Q161 15 161 19V24H139Z"/><rect x="143" y="11" width="16" height="4"/><rect x="145" y="3" width="12" height="8"/><rect class="win" x="147" y="5" width="8" height="3"/></svg>
+          <span class="eq-group"><span class="eq">=</span><span class="num">291 Güterwaggons</span></span>
+        </div>
+        <div class="fill-wrap train-wrap" aria-hidden="true"><svg class="train-grid" viewBox="0 0 480 143" aria-hidden="true"><defs><pattern id="eq-wag" width="20" height="11" patternUnits="userSpaceOnUse"><rect x="1" y="1" width="18" height="6" fill="#7e1889"/><rect x="0" y="7" width="20" height="1" fill="#7e1889"/><circle cx="4" cy="9.2" r="1.3" fill="#7e1889"/><circle cx="7.2" cy="9.2" r="1.3" fill="#7e1889"/><circle cx="12.8" cy="9.2" r="1.3" fill="#7e1889"/><circle cx="16" cy="9.2" r="1.3" fill="#7e1889"/></pattern></defs><rect width="480" height="132" fill="url(#eq-wag)"/><rect y="132" width="60" height="11" fill="url(#eq-wag)"/><g transform="translate(60 132)"><path d="M1 7V2.5Q1 1 2.5 1H19V7Z" fill="#2b2e34"/><rect x="3" y="2.5" width="4" height="2" fill="#fff"/><rect x="0" y="7" width="20" height="1" fill="#2b2e34"/><circle cx="4" cy="9.2" r="1.3" fill="#2b2e34"/><circle cx="7.2" cy="9.2" r="1.3" fill="#2b2e34"/><circle cx="12.8" cy="9.2" r="1.3" fill="#2b2e34"/><circle cx="16" cy="9.2" r="1.3" fill="#2b2e34"/></g></svg></div>
+      </div>
+      <details class="toggle readmore">
+        <summary><span class="when-closed">mehr</span><span class="when-open">weniger</span></summary>
+        <div class="cmp-cols">
+          <div class="cmp-col"><p>Ein einziges Frachtschiff trägt bis zu 3.200 t. Das entspricht 160 Lkw à 20 t oder 58 Güterwaggons à 55 t.</p><figure class="compare"><div class="cmp-block"><p class="cmp-head"><strong>1 Frachtschiff</strong> bis zu 3.200 t</p><svg class="cmp-icons" viewBox="0 0 480 40" role="img" aria-label="Frachtschiff"><path d="M2 22H118L113 34H9Z" fill="#1b42cc"/><rect x="10" y="16" width="78" height="6" fill="#1b42cc"/><rect x="96" y="8" width="16" height="14" fill="#1b42cc"/><rect x="98" y="10.5" width="12" height="3.5" fill="#fff"/><rect x="103" y="2" width="2" height="6" fill="#1b42cc"/></svg></div><p class="cmp-sep">entspricht</p><div class="cmp-block"><p class="cmp-head"><strong>160 Lkw</strong> je 20 t</p><svg class="cmp-icons" viewBox="0 0 480 36" role="img" aria-label="160 Lkw-Symbole"><defs><pattern id="cmp1-lkw" width="12" height="9" patternUnits="userSpaceOnUse"><rect x=".8" y="1" width="7" height="5" fill="#1b42cc"/><path d="M8.3 2.6H10.1L11.5 4.4V6H8.3Z" fill="#1b42cc"/><circle cx="2.6" cy="7.3" r="1.1" fill="#1b42cc"/><circle cx="9.8" cy="7.3" r="1.1" fill="#1b42cc"/></pattern></defs><rect width="480" height="36" fill="url(#cmp1-lkw)"/></svg></div><p class="cmp-sep">oder</p><div class="cmp-block"><p class="cmp-head"><strong>58 Güterwaggons</strong> je 55 t</p><svg class="cmp-icons" viewBox="0 0 480 36" role="img" aria-label="58 Güterwaggons und eine Lok"><defs><pattern id="cmp1-wag" width="24" height="12" patternUnits="userSpaceOnUse"><rect x="1" y="1.5" width="22" height="6.5" fill="#1b42cc"/><rect x="0" y="8" width="24" height="1" fill="#1b42cc"/><circle cx="4.5" cy="10.2" r="1.4" fill="#1b42cc"/><circle cx="8" cy="10.2" r="1.4" fill="#1b42cc"/><circle cx="16" cy="10.2" r="1.4" fill="#1b42cc"/><circle cx="19.5" cy="10.2" r="1.4" fill="#1b42cc"/></pattern></defs><rect width="480" height="24" fill="url(#cmp1-wag)"/><rect y="24" width="432" height="12" fill="url(#cmp1-wag)"/><g transform="translate(432 24)"><path d="M1 8V3Q1 1.5 2.5 1.5H23V8Z" fill="#2b2e34"/><rect x="3" y="3" width="5" height="2.4" fill="#fff"/><rect x="0" y="8" width="24" height="1" fill="#2b2e34"/><circle cx="5" cy="10.2" r="1.4" fill="#2b2e34"/><circle cx="9" cy="10.2" r="1.4" fill="#2b2e34"/><circle cx="15" cy="10.2" r="1.4" fill="#2b2e34"/><circle cx="19" cy="10.2" r="1.4" fill="#2b2e34"/></g></svg></div></figure></div>
+          <div class="cmp-col"><p>Ein 6er-Schubverband transportiert rund 16.000 t – das entspricht rund 800 Lkw oder 291 Güterwaggons, einem Güterzug von rund 3,6 km Länge.</p><figure class="compare"><div class="cmp-block"><p class="cmp-head"><strong>1 Schubverband</strong> 6 Leichter, rund 16.000 t</p><svg class="cmp-icons" viewBox="0 0 480 40" role="img" aria-label="Schubverband aus sechs Leichtern und einem Schubboot"><path d="M2 26L7 20H64V34H7Z" fill="#1b42cc"/><rect x="67" y="20" width="62" height="14" fill="#1b42cc"/><rect x="132" y="20" width="62" height="14" fill="#1b42cc"/><rect x="197" y="20" width="62" height="14" fill="#1b42cc"/><rect x="262" y="20" width="62" height="14" fill="#1b42cc"/><rect x="327" y="20" width="62" height="14" fill="#1b42cc"/><path d="M393 20H470Q476 20 476 26V34H393Z" fill="#1b42cc"/><rect x="408" y="12" width="44" height="8" fill="#1b42cc"/><rect x="418" y="2" width="24" height="10" fill="#1b42cc"/><rect x="421" y="4.5" width="18" height="3.5" fill="#fff"/></svg></div><p class="cmp-sep">entspricht</p><div class="cmp-block"><p class="cmp-head"><strong>800 Lkw</strong> je 20 t</p><svg class="cmp-icons" viewBox="0 0 480 180" role="img" aria-label="800 Lkw-Symbole"><defs><pattern id="cmp2-lkw" width="12" height="9" patternUnits="userSpaceOnUse"><rect x=".8" y="1" width="7" height="5" fill="#1b42cc"/><path d="M8.3 2.6H10.1L11.5 4.4V6H8.3Z" fill="#1b42cc"/><circle cx="2.6" cy="7.3" r="1.1" fill="#1b42cc"/><circle cx="9.8" cy="7.3" r="1.1" fill="#1b42cc"/></pattern></defs><rect width="480" height="180" fill="url(#cmp2-lkw)"/></svg></div><p class="cmp-sep">oder</p><div class="cmp-block"><p class="cmp-head"><strong>291 Güterwaggons</strong> je 55 t – Zug von rund 3,6 km</p><svg class="cmp-icons" viewBox="0 0 480 180" role="img" aria-label="291 Güterwaggons und eine Lok"><defs><pattern id="cmp2-wag" width="24" height="12" patternUnits="userSpaceOnUse"><rect x="1" y="1.5" width="22" height="6.5" fill="#1b42cc"/><rect x="0" y="8" width="24" height="1" fill="#1b42cc"/><circle cx="4.5" cy="10.2" r="1.4" fill="#1b42cc"/><circle cx="8" cy="10.2" r="1.4" fill="#1b42cc"/><circle cx="16" cy="10.2" r="1.4" fill="#1b42cc"/><circle cx="19.5" cy="10.2" r="1.4" fill="#1b42cc"/></pattern></defs><rect width="480" height="168" fill="url(#cmp2-wag)"/><rect y="168" width="264" height="12" fill="url(#cmp2-wag)"/><g transform="translate(264 168)"><path d="M1 8V3Q1 1.5 2.5 1.5H23V8Z" fill="#2b2e34"/><rect x="3" y="3" width="5" height="2.4" fill="#fff"/><rect x="0" y="8" width="24" height="1" fill="#2b2e34"/><circle cx="5" cy="10.2" r="1.4" fill="#2b2e34"/><circle cx="9" cy="10.2" r="1.4" fill="#2b2e34"/><circle cx="15" cy="10.2" r="1.4" fill="#2b2e34"/><circle cx="19" cy="10.2" r="1.4" fill="#2b2e34"/></g></svg></div></figure></div>
+        </div>
+      </details>
+    </article>
+    <script>
+      // Lkw und Waggons: gleiche Symbolgröße; die Spaltenzahl wird so gewählt, dass beide Grafiken den freien Platz rechts füllen
+      (() => {
+        const box = document.getElementById('versorgung'); if (!box) return;
+        const wT = box.querySelector('.truck-wrap'), wW = box.querySelector('.train-wrap');
+        if (!wT || !wW) return;
+        const P = '#7e1889', INK = '#2b2e34', CW = 20, CH = 11, NT = 160, NW = 291;
+        const narrow = window.matchMedia('(max-width: 960px)');
+        let last = '';
+        const wheels = (xs, c) => xs.map(x => `<circle cx="${x}" cy="9.2" r="1.3" fill="${c}"/>`).join('');
+        const truck = `<rect x="1" y="1" width="12" height="6" fill="${P}"/><path d="M13.6 2.6H16.4L18.8 5.2V7H13.6Z" fill="${P}"/><rect x="0.5" y="7" width="18.5" height="1" fill="${P}"/>${wheels([3.6, 6.4, 16], P)}`;
+        const wagon = `<rect x="1" y="1" width="18" height="6" fill="${P}"/><rect x="0" y="7" width="20" height="1" fill="${P}"/>${wheels([4, 7.2, 12.8, 16], P)}`;
+        const loco = `<path d="M1 7V2.5Q1 1 2.5 1H19V7Z" fill="${INK}"/><rect x="3" y="2.5" width="4" height="2" fill="#fff"/><rect x="0" y="7" width="20" height="1" fill="${INK}"/>${wheels([4, 7.2, 12.8, 16], INK)}`;
+        function grid(id, n, cols, cell, extra) {
+          const rows = Math.ceil((n + (extra ? 1 : 0)) / cols), full = Math.floor(n / cols), rest = n % cols;
+          let s = `<svg viewBox="0 0 ${cols * CW} ${rows * CH}"><defs><pattern id="${id}" width="${CW}" height="${CH}" patternUnits="userSpaceOnUse">${cell}</pattern></defs>`;
+          if (full) s += `<rect width="${cols * CW}" height="${full * CH}" fill="url(#${id})"/>`;
+          if (rest) s += `<rect y="${full * CH}" width="${rest * CW}" height="${CH}" fill="url(#${id})"/>`;
+          if (extra) s += `<g transform="translate(${rest * CW} ${full * CH})">${extra}</g>`;
+          return s + '</svg>';
+        }
+        function draw() {
+          const W = wW.clientWidth, A = wT.clientHeight + wW.clientHeight;
+          let cols = 24;
+          if (!narrow.matches && W > 0 && A > 0) {
+            for (let c = 8; c <= 80; c++) { if ((Math.ceil(NT / c) + Math.ceil((NW + 1) / c)) * CH * W / (c * CW) <= A) { cols = c; break; } }
+          }
+          const key = cols + '|' + W;
+          if (key === last) return;
+          last = key;
+          wT.style.flexGrow = Math.ceil(NT / cols); wW.style.flexGrow = Math.ceil((NW + 1) / cols);
+          wT.innerHTML = grid('eq-lkw', NT, cols, truck);
+          wW.innerHTML = grid('eq-wag', NW, cols, wagon, loco);
+        }
+        draw();
+        if ('ResizeObserver' in window) { const ro = new ResizeObserver(draw); ro.observe(wT); ro.observe(wW); }
+        narrow.addEventListener('change', () => { last = ''; draw(); });
+      })();
+    </script>
+
+
+    <!-- 4: Bild mit Headline -->
+    <article class="card image-card" id="schleusen">
+      <svg viewBox="0 0 600 420" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schiff in einer Schleuse">
+        <rect width="600" height="420" fill="#a9cbf7"/>
+        <circle cx="470" cy="80" r="40" fill="#fff" opacity=".8"/>
+        <rect x="0" y="170" width="140" height="250" fill="#8a8fa0"/>
+        <rect x="460" y="170" width="140" height="250" fill="#8a8fa0"/>
+        <rect x="0" y="170" width="140" height="14" fill="#6d7282"/><rect x="460" y="170" width="140" height="14" fill="#6d7282"/>
+        <rect x="140" y="110" width="320" height="26" fill="#2b2e34"/>
+        <rect x="170" y="60" width="26" height="76" fill="#2b2e34"/><rect x="404" y="60" width="26" height="76" fill="#2b2e34"/>
+        <rect x="140" y="136" width="320" height="120" fill="#555a66"/>
+        <g stroke="#6d7282" stroke-width="4"><path d="M140 176 H460 M140 216 H460 M300 136 V256"/></g>
+        <rect x="140" y="256" width="320" height="164" fill="#1b42cc"/>
+        <rect x="140" y="256" width="320" height="30" fill="#4f8fe0"/>
+        <path d="M210 250 H390 L375 300 H225Z" fill="#2b2e34"/>
+        <rect x="222" y="226" width="156" height="24" fill="#39c7c9"/><rect x="240" y="204" width="120" height="22" fill="#7e1889"/>
+        <rect x="270" y="176" width="60" height="28" fill="#fff"/>
+        <rect x="278" y="184" width="44" height="10" fill="#1b42cc" opacity=".8"/>
+        <path d="M150 330 q20 -6 40 0 t40 0 M360 360 q20 -6 40 0 t40 0" stroke="#fff" stroke-width="3" opacity=".4" fill="none"/>
+        <circle cx="110" cy="150" r="10" fill="#39c7c9"/><circle cx="490" cy="150" r="10" fill="#39c7c9"/>
+      </svg>
+      <img class="photo" src="img/schleuse.webp" alt="Schubverband mit Schüttgut fährt auf eine Schleuse am Rhein zu" style="object-position: 92% 50%" onerror="this.remove()">
+      <div class="overlay">
+        <h2>Die wichtigen Schleusen und Wehre erneuern.</h2>
+        <details class="toggle readmore on-dark">
+          <summary><span class="when-closed">mehr</span><span class="when-open">weniger</span></summary>
+          <p>Von 617 Anlagen sind 529 älter als 40 Jahre, mehr als 200 sogar älter als 100 Jahre.</p>
+          <p>Bei der Erneuerung muss Priorität haben, wo das Gros des Transportes ist.</p>
+          <p>Der Rhein und das westdeutsche Kanalnetz stehen wirtschaftlich mit großem Abstand an erster Stelle. Auf sie entfallen mehr als 80 Prozent des Binnenhafen-Umschlages. Dahinter folgen der Mittellandkanal mit Elbe-Seitenkanal sowie die Unterelbe mit Hamburg. Main, Mosel, Weser und Neckar sind bedeutende regionale Industriekorridore.</p>
+          <p>Entsprechend der Bedeutung müssten auch 80 Prozent der Investitionen in die drei Cluster Niederrhein, Mittelrhein und Westdeutsches Kanalnetz fließen. Der aktuell ausgewiesene Finanzbedarf der drei Cluster liegt zusammen bei rund 2,95 Milliarden Euro.</p>
+          <div class="lock-graphics">
+            <svg viewBox="0 0 640 400" preserveAspectRatio="xMidYMid meet" class="lock-map" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematische Karte: Niederrhein, Mittelrhein und westdeutsches Kanalnetz als prioritäre Abschnitte">
+          <rect width="640" height="400" fill="#7e1889"/>
+          <g stroke="#fff" stroke-opacity=".07" stroke-width="1">
+            <path d="M0 40 H640 M0 80 H640 M0 120 H640 M0 160 H640 M0 200 H640 M0 240 H640 M0 280 H640 M0 320 H640 M0 360 H640"/>
+            <path d="M40 0 V400 M80 0 V400 M120 0 V400 M160 0 V400 M200 0 V400 M240 0 V400 M280 0 V400 M320 0 V400 M360 0 V400 M400 0 V400 M440 0 V400 M480 0 V400 M520 0 V400 M560 0 V400 M600 0 V400"/>
+          </g>
+          <!-- Oberrhein (nicht priorisiert) -->
+          <path d="M345 362 Q360 378 372 386 L400 404" stroke="#a9cbf7" stroke-width="5" fill="none" stroke-linecap="round" opacity=".6"/>
+          <!-- Mittelrhein -->
+          <path d="M345 362 Q330 340 318 310 Q300 285 290 258" stroke="#cbefe7" stroke-width="9" fill="none" stroke-linecap="round"/>
+          <!-- Niederrhein -->
+          <path d="M290 258 Q278 245 272 228 Q258 205 255 180 Q256 160 262 140 Q258 115 250 95 Q228 65 200 40 L168 0" stroke="#39c7c9" stroke-width="9" fill="none" stroke-linecap="round"/>
+          <!-- Westdeutsches Kanalnetz -->
+          <g stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M262 140 L340 134 L420 128"/>
+            <path d="M250 95 L340 101 L425 108"/>
+            <path d="M425 108 L510 118"/>
+            <path d="M445 160 L420 128 L425 108"/>
+            <path d="M425 108 L450 55 L466 0"/>
+          </g>
+          <!-- Orte -->
+          <g fill="#7e1889" stroke="#fff" stroke-width="2.5">
+            <circle cx="200" cy="40" r="5"/><circle cx="250" cy="95" r="5"/><circle cx="262" cy="140" r="6"/><circle cx="255" cy="180" r="5"/>
+            <circle cx="272" cy="228" r="5"/><circle cx="290" cy="258" r="5"/><circle cx="318" cy="310" r="5"/><circle cx="345" cy="362" r="5"/>
+            <circle cx="425" cy="108" r="5"/><circle cx="445" cy="160" r="5"/><circle cx="510" cy="118" r="5"/><circle cx="450" cy="55" r="5"/>
+          </g>
+          <g font-family="Barlow, Arial, sans-serif" font-size="16" fill="#fff">
+            <text x="188" y="45" text-anchor="end">Emmerich</text>
+            <text x="238" y="100" text-anchor="end">Wesel</text>
+            <text x="250" y="145" text-anchor="end" font-weight="600">Duisburg</text>
+            <text x="243" y="185" text-anchor="end">Düsseldorf</text>
+            <text x="260" y="233" text-anchor="end">Köln</text>
+            <text x="278" y="263" text-anchor="end">Bonn</text>
+            <text x="306" y="315" text-anchor="end">Koblenz</text>
+            <text x="333" y="367" text-anchor="end">Bingen</text>
+            <text x="436" y="96">Datteln</text>
+            <text x="456" y="176">Dortmund</text>
+            <text x="520" y="123">Hamm</text>
+            <text x="462" y="60">Münster</text>
+            <text x="150" y="20" text-anchor="end" font-size="14" opacity=".75">zu den Seehäfen ↖</text>
+          </g>
+          <!-- Legende -->
+          <g font-family="Barlow, Arial, sans-serif" fill="#fff">
+            <text x="430" y="268" font-size="13" font-weight="600" letter-spacing="1.5">PRIORITÄRE ABSCHNITTE</text>
+            <path d="M430 292 H460" stroke="#39c7c9" stroke-width="9"/><text x="472" y="298" font-size="16">Niederrhein</text>
+            <path d="M430 322 H460" stroke="#cbefe7" stroke-width="9"/><text x="472" y="328" font-size="16">Mittelrhein</text>
+            <path d="M430 352 H460" stroke="#fff" stroke-width="5"/><text x="472" y="358" font-size="16">Westdt. Kanalnetz</text>
+          </g>
+        </svg>
+            <figure class="port-chart">
+              <figcaption>Binnenhafenumschlag 2024 nach Wasserstraßengebiet</figcaption>
+              <p class="chart-key"><span class="swatch" aria-hidden="true"></span>Rhein- und Westdeutsches Kanalgebiet zusammen: 79,0 %</p>
+              <ol class="bars">
+              <li class="prio" title="Rheingebiet: 134,1 Mio. t, 65,4 %"><span class="rank">1</span><span class="name">Rheingebiet</span><span class="track"><span class="bar" style="width:100.0%"></span></span><span class="val">134,1 Mio. t · 65,4 %</span></li>
+              <li class="prio" title="Westdeutsches Kanalgebiet: 27,9 Mio. t, 13,6 %"><span class="rank">2</span><span class="name">Westdeutsches Kanalgebiet</span><span class="track"><span class="bar" style="width:20.8%"></span></span><span class="val">27,9 Mio. t · 13,6 %</span></li>
+              <li title="Elbegebiet: 15,0 Mio. t, 7,3 %"><span class="rank">3</span><span class="name">Elbegebiet</span><span class="track"><span class="bar" style="width:11.2%"></span></span><span class="val">15,0 Mio. t · 7,3 %</span></li>
+              <li title="Mittellandkanalgebiet: 14,2 Mio. t, 6,9 %"><span class="rank">4</span><span class="name">Mittellandkanalgebiet</span><span class="track"><span class="bar" style="width:10.6%"></span></span><span class="val">14,2 Mio. t · 6,9 %</span></li>
+              <li title="Wesergebiet: 8,7 Mio. t, 4,2 %"><span class="rank">5</span><span class="name">Wesergebiet</span><span class="track"><span class="bar" style="width:6.5%"></span></span><span class="val">8,7 Mio. t · 4,2 %</span></li>
+              <li title="Donaugebiet: 2,7 Mio. t, 1,3 %"><span class="rank">6</span><span class="name">Donaugebiet</span><span class="track"><span class="bar" style="width:2.0%"></span></span><span class="val">2,7 Mio. t · 1,3 %</span></li>
+              <li title="Berliner Wasserstraßen: 1,4 Mio. t, 0,7 %"><span class="rank">7</span><span class="name">Berliner Wasserstraßen</span><span class="track"><span class="bar" style="width:1.0%"></span></span><span class="val">1,4 Mio. t · 0,7 %</span></li>
+              <li title="Brandenburg/Mecklenburg-Vorpommern: 1,2 Mio. t, 0,6 %"><span class="rank">8</span><span class="name">Brandenburg/Mecklenburg-Vorpommern</span><span class="track"><span class="bar" style="width:0.9%"></span></span><span class="val">1,2 Mio. t · 0,6 %</span></li>
+              </ol>
+              <p class="chart-note">Amtliche Gebietsauswertung, Stand 2024 (aktuellste vollständig vergleichbare Auswertung)</p>
+            </figure>
+          </div>
+        </details>
+      </div>
+    </article>
+
+    <!-- 5: Grafik-Slider -->
+    <article class="card slider-card" id="grafiken" aria-roledescription="Karussell" aria-label="Grafiken zur Wasserstraße">
+      <div class="slider-viewport" tabindex="0">
+      <div class="slider-track">
+          <div class="slide chem" role="group" aria-roledescription="Folie" aria-label="1 von 5: Chemieindustrie × Wasserstraße">
+            <div class="slide-head">
+              <span class="label">Chemieindustrie × Wasserstraße</span>
+              <h2>Die Wasserstraßen ermöglichen Wertschöpfung in der Chemie.</h2>
+            </div>
+            <div class="chem-body">
+              <img class="chem-map" src="img/karte-chemie.png" width="1200" height="1282" alt="Schematische Karte: Chemiestandorte und Häfen entlang der deutschen Wasserstraßen">
+              <div class="chem-side">
+                <ul class="chem-legend">
+                  <li><span class="lg-dot"></span>Chemiestandort (Produktion)</li>
+                  <li><span class="lg-port"></span>Hafen / Logistikstandort</li>
+                  <li><span class="lg-line"></span>Schiffbare Wasserstraße</li>
+                </ul>
+                <p class="chem-lead"><strong>Zuverlässige Wasserstraßen – starke Wertschöpfung.</strong> Chemische Rohstoffe und Produkte brauchen sichere, leistungsfähige Transportwege. Wasserstraßen verbinden Standorte, Häfen und internationale Märkte.</p>
+              </div>
+            </div>
+            <ul class="chain"><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="7" width="13" height="19" fill="#7e1889"/><rect x="3" y="12" width="13" height="2" fill="#cbefe7"/><rect x="3" y="19" width="13" height="2" fill="#cbefe7"/><path d="M15 27L22 14L30 27Z" fill="#7e1889"/></svg></span><strong>Rohstoffe</strong><span>Mineralöl, Salz, Gase, Grundstoffe</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 4H16V6H15V13L22 26H2L9 13V6H8Z" fill="#7e1889"/><rect x="24" y="5" width="5" height="21" fill="#7e1889"/><rect x="23" y="4" width="7" height="2" fill="#7e1889"/></svg></span><strong>Grundchemikalien</strong><span>Basischemikalien und Zwischenprodukte</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 28V15L9 19V15L16 19V15L23 19V6H28V28Z" fill="#7e1889"/><rect x="6" y="22" width="3" height="3" fill="#cbefe7"/><rect x="13" y="22" width="3" height="3" fill="#cbefe7"/><rect x="20" y="22" width="3" height="3" fill="#cbefe7"/></svg></span><strong>Produktion</strong><span>Chemieparks entlang der Wasserstraßen</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="12" width="12" height="7" fill="#7e1889"/><rect x="19" y="8" width="4" height="11" fill="#7e1889"/><rect x="24" y="12" width="4" height="7" fill="#7e1889"/><path d="M1 20H31L28 26H4Z" fill="#7e1889"/></svg></span><strong>Distribution</strong><span>Tank-, Container- und Massengutlogistik</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5A11 11 0 0 1 26.5 13" fill="none" stroke="#7e1889" stroke-width="3.5"/><path d="M29 10L27.5 16L22 13Z" fill="#7e1889"/><path d="M25 22A11 11 0 0 1 9 25" fill="none" stroke="#7e1889" stroke-width="3.5"/><path d="M11 29L6 24L12 22Z" fill="#7e1889"/><path d="M6 19A11 11 0 0 1 9 7.5" fill="none" stroke="#7e1889" stroke-width="3.5"/><path d="M5 6L11 5L10 11Z" fill="#7e1889"/></svg></span><strong>Kreislaufwirtschaft</strong><span>Rücknahme, Recycling, Wiederverwendung</span></li></ul>
+            <p class="chem-claim">Die Wasserstraße verbindet die Chemie entlang ihrer gesamten Wertschöpfungskette.</p>
+          </div>
+          <div class="slide chem" role="group" aria-roledescription="Folie" aria-label="2 von 5: Tourismus × Wasserstraße">
+            <div class="slide-head">
+              <span class="label">Tourismus × Wasserstraße</span>
+              <h2>Wie Deutschlands Flüsse Reiseziele und Regionen verbinden.</h2>
+            </div>
+            <div class="chem-body">
+              <img class="chem-map" src="img/karte-tourismus.png" width="1200" height="1282" alt="Schematische Karte: touristische Reiseziele und Anleger an Deutschlands Flüssen">
+              <div class="chem-side">
+                <ul class="chem-legend">
+                  <li><span class="lg-dot"></span>Touristisches Reiseziel</li>
+                  <li><span class="lg-port"></span>Anleger / Tourismushafen</li>
+                  <li><span class="lg-line"></span>Schiffbare Wasserstraße</li>
+                </ul>
+                <p class="chem-lead"><strong>Lebendige Wasserstraßen – starke Reiseregionen.</strong> Flüsse verbinden Städte, Kultur, Natur und Genuss. Attraktive Wasserwege stärken Tourismus, Gastronomie und regionale Wertschöpfung.</p>
+              </div>
+            </div>
+            <ul class="chain"><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 20H30L27 26H5Z" fill="#7e1889"/><rect x="5" y="14" width="21" height="6" fill="#7e1889"/><rect x="9" y="9" width="12" height="5" fill="#7e1889"/><rect x="7" y="16" width="3" height="2" fill="#cbefe7"/><rect x="12" y="16" width="3" height="2" fill="#cbefe7"/><rect x="17" y="16" width="3" height="2" fill="#cbefe7"/><rect x="22" y="16" width="2" height="2" fill="#cbefe7"/></svg></span><strong>Flusskreuzfahrt</strong><span>Mehrtägige Reisen zwischen Regionen</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 21H29L26 26H6Z" fill="#7e1889"/><rect x="8" y="15" width="14" height="6" fill="#7e1889"/><rect x="6" y="12" width="18" height="2.5" fill="#7e1889"/><rect x="10" y="17" width="3" height="2" fill="#cbefe7"/><rect x="15" y="17" width="3" height="2" fill="#cbefe7"/></svg></span><strong>Ausflugsschifffahrt</strong><span>Tagesfahrten und Panoramarouten</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 21Q16 28 30 21Q16 24 2 21Z" fill="#7e1889"/><path d="M8 7L24 29" stroke="#7e1889" stroke-width="2.5"/><rect x="4" y="3" width="6" height="7" fill="#7e1889" transform="rotate(-35 7 6.5)"/><rect x="22" y="26" width="6" height="7" fill="#7e1889" transform="rotate(-35 25 29.5)"/></svg></span><strong>Wassersport</strong><span>Hausboot, Kanu und Freizeitboote</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="12" width="20" height="16" fill="#7e1889"/><rect x="6" y="8" width="4" height="4" fill="#7e1889"/><rect x="14" y="8" width="4" height="4" fill="#7e1889"/><rect x="22" y="8" width="4" height="4" fill="#7e1889"/><rect x="14" y="20" width="4" height="8" fill="#cbefe7"/><rect x="9" y="15" width="3" height="3" fill="#cbefe7"/><rect x="20" y="15" width="3" height="3" fill="#cbefe7"/></svg></span><strong>Landgänge</strong><span>Kultur, Natur, Wein und Kulinarik</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 14L16 4L29 14V28H3Z" fill="#7e1889"/><rect x="13" y="19" width="6" height="9" fill="#cbefe7"/><rect x="6" y="17" width="4" height="4" fill="#cbefe7"/><rect x="22" y="17" width="4" height="4" fill="#cbefe7"/></svg></span><strong>Regionale Wertschöpfung</strong><span>Häfen, Gastronomie, Handel und Hotels</span></li></ul>
+            <p class="chem-claim">Die Wasserstraße verbindet Reiseerlebnisse, Städte und Regionen.</p>
+          </div>
+          <div class="slide chem" role="group" aria-roledescription="Folie" aria-label="3 von 5: Stromerzeugung × Wasserstraße">
+            <div class="slide-head">
+              <span class="label">Stromerzeugung × Wasserstraße</span>
+              <h2>Wie Deutschlands Wasserstraßen die Energieversorgung verbinden.</h2>
+            </div>
+            <div class="chem-body">
+              <img class="chem-map" src="img/karte-stromerzeugung.png" width="1200" height="1282" alt="Schematische Karte: Standorte der Stromerzeugung und Energiehäfen entlang der Wasserstraßen">
+              <div class="chem-side">
+                <ul class="chem-legend">
+                  <li><span class="lg-dot"></span>Standort Stromerzeugung</li>
+                  <li><span class="lg-port"></span>Energiehafen / Logistik</li>
+                  <li><span class="lg-line"></span>Schiffbare Wasserstraße</li>
+                </ul>
+                <p class="chem-lead"><strong>Zuverlässige Wasserstraßen – sichere Energieversorgung.</strong> Brennstoffe, Großkomponenten und Anlagen brauchen leistungsfähige Transportwege. Wasserstraßen verbinden Erzeugungsstandorte, Energiehäfen und internationale Märkte.</p>
+              </div>
+            </div>
+            <ul class="chain"><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="12.5" y="12" width="2.5" height="17" fill="#7e1889"/><path d="M13.8 11L11 2L15.5 10Z" fill="#7e1889"/><path d="M14.5 11.5L23 15L14 13Z" fill="#7e1889"/><path d="M13 12.5L5 17L12.5 11Z" fill="#7e1889"/><path d="M25 14Q30 22 25 26Q20 22 25 14Z" fill="#7e1889"/></svg></span><strong>Energieträger</strong><span>Wind, Wasser, Gas, Kohle, Biomasse</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="12" width="12" height="7" fill="#7e1889"/><rect x="19" y="8" width="4" height="11" fill="#7e1889"/><rect x="24" y="12" width="4" height="7" fill="#7e1889"/><path d="M1 20H31L28 26H4Z" fill="#7e1889"/></svg></span><strong>Anlieferung</strong><span>Brennstoffe, Anlagen und Großkomponenten</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 28L6 11H13L16 28Z" fill="#7e1889"/><path d="M16 28L19 7H26L29 28Z" fill="#7e1889"/></svg></span><strong>Stromerzeugung</strong><span>Kraftwerke und erneuerbare Energien</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3L8 29H11.5L16 13L20.5 29H24Z" fill="#7e1889"/><rect x="6" y="8" width="20" height="2.5" fill="#7e1889"/><rect x="8" y="14" width="16" height="2.5" fill="#7e1889"/></svg></span><strong>Netzintegration</strong><span>Umspannung, Speicher und Regelenergie</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5A11 11 0 0 1 26.5 13" fill="none" stroke="#7e1889" stroke-width="3.5"/><path d="M29 10L27.5 16L22 13Z" fill="#7e1889"/><path d="M25 22A11 11 0 0 1 9 25" fill="none" stroke="#7e1889" stroke-width="3.5"/><path d="M11 29L6 24L12 22Z" fill="#7e1889"/><path d="M6 19A11 11 0 0 1 9 7.5" fill="none" stroke="#7e1889" stroke-width="3.5"/><path d="M5 6L11 5L10 11Z" fill="#7e1889"/></svg></span><strong>Transformation</strong><span>Umbau, Recycling, Wiederverwendung</span></li></ul>
+            <p class="chem-claim">Die Wasserstraße stärkt die Energieversorgung entlang der gesamten Wertschöpfungskette.</p>
+          </div>
+          <div class="slide chem" role="group" aria-roledescription="Folie" aria-label="4 von 5: Stahlindustrie × Wasserstraße">
+            <div class="slide-head">
+              <span class="label">Stahlindustrie × Wasserstraße</span>
+              <h2>Wie Deutschlands Wasserstraßen die Stahl-Wertschöpfung verbinden.</h2>
+            </div>
+            <div class="chem-body">
+              <img class="chem-map" src="img/karte-stahl.png" width="1200" height="1282" alt="Schematische Karte: Stahlstandorte und Häfen entlang der deutschen Wasserstraßen">
+              <div class="chem-side">
+                <ul class="chem-legend">
+                  <li><span class="lg-dot"></span>Stahlstandort (Produktion)</li>
+                  <li><span class="lg-port"></span>Hafen / Logistikstandort</li>
+                  <li><span class="lg-line"></span>Schiffbare Wasserstraße</li>
+                </ul>
+                <p class="chem-lead"><strong>Zuverlässige Wasserstraßen – starke Wertschöpfung.</strong> Eisenerz, Kohle, Schrott und Stahlprodukte brauchen leistungsfähige Transportwege. Wasserstraßen verbinden Werke, Häfen und internationale Märkte.</p>
+              </div>
+            </div>
+            <ul class="chain"><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="8" cy="21" r="5" fill="#7e1889"/><circle cx="15" cy="17" r="5" fill="#7e1889"/><circle cx="12" cy="25" r="4" fill="#7e1889"/><path d="M17 28L19.5 22H29L31 28Z" fill="#7e1889"/></svg></span><strong>Rohstoffe</strong><span>Eisenerz, Kokskohle, Schrott</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="8" y="11" width="16" height="18" fill="#7e1889"/><rect x="13" y="3" width="6" height="8" fill="#7e1889"/><path d="M16 15Q21 20 16 26Q11 20 16 15Z" fill="#cbefe7"/></svg></span><strong>Stahlerzeugung</strong><span>Hochofen, Direktreduktion, Elektrostahl</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="12" cy="17" r="9" fill="#7e1889"/><circle cx="12" cy="17" r="3" fill="#cbefe7"/><rect x="23" y="7" width="8" height="2.5" fill="#7e1889"/><rect x="25.8" y="9" width="2.4" height="15" fill="#7e1889"/><rect x="23" y="23.5" width="8" height="2.5" fill="#7e1889"/></svg></span><strong>Weiterverarbeitung</strong><span>Gießen, Walzen, Beschichten</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="12" width="12" height="7" fill="#7e1889"/><rect x="19" y="8" width="4" height="11" fill="#7e1889"/><rect x="24" y="12" width="4" height="7" fill="#7e1889"/><path d="M1 20H31L28 26H4Z" fill="#7e1889"/></svg></span><strong>Distribution</strong><span>Coils, Bleche und Profile per Schiff</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5A11 11 0 0 1 26.5 13" fill="none" stroke="#7e1889" stroke-width="3.5"/><path d="M29 10L27.5 16L22 13Z" fill="#7e1889"/><path d="M25 22A11 11 0 0 1 9 25" fill="none" stroke="#7e1889" stroke-width="3.5"/><path d="M11 29L6 24L12 22Z" fill="#7e1889"/><path d="M6 19A11 11 0 0 1 9 7.5" fill="none" stroke="#7e1889" stroke-width="3.5"/><path d="M5 6L11 5L10 11Z" fill="#7e1889"/></svg></span><strong>Kreislaufwirtschaft</strong><span>Schrottsammlung, Recycling, Wiederverwendung</span></li></ul>
+            <p class="chem-claim">Die Wasserstraße verbindet den Stahl entlang seiner gesamten Wertschöpfungskette.</p>
+          </div>
+          <div class="slide chem" role="group" aria-roledescription="Folie" aria-label="5 von 5: Automobilindustrie × Wasserstraße">
+            <div class="slide-head">
+              <span class="label">Automobilindustrie × Wasserstraße</span>
+              <h2>Wie Deutschlands Wasserstraßen industrielle Lieferketten verbinden.</h2>
+            </div>
+            <div class="chem-body">
+              <img class="chem-map" src="img/karte-automobil.png" width="1200" height="1282" alt="Schematische Karte: Automobilstandorte und Häfen entlang der deutschen Wasserstraßen">
+              <div class="chem-side">
+                <ul class="chem-legend">
+                  <li><span class="lg-dot"></span>Automobilstandort (Produktion / Entwicklung)</li>
+                  <li><span class="lg-port"></span>Hafen / Logistikstandort</li>
+                  <li><span class="lg-line"></span>Schiffbare Wasserstraße</li>
+                </ul>
+                <p class="chem-lead"><strong>Zuverlässige Wasserstraßen – starke Wertschöpfung.</strong> Eine leistungsfähige Infrastruktur sichert Wettbewerbsfähigkeit, standortnahe Arbeitsplätze und klimafreundliche Logistik.</p>
+              </div>
+            </div>
+            <ul class="chain"><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="13" cy="16" r="10" fill="#7e1889"/><circle cx="13" cy="16" r="3.5" fill="#cbefe7"/><path d="M22 28L25 22L31 28Z" fill="#7e1889"/></svg></span><strong>Rohstoffe</strong><span>Stahl, Aluminium, Kunststoffe, Chemikalien</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="10.5" y="4.5" width="3" height="4" fill="#7e1889" transform="rotate(0 12 16)"/><rect x="10.5" y="4.5" width="3" height="4" fill="#7e1889" transform="rotate(45 12 16)"/><rect x="10.5" y="4.5" width="3" height="4" fill="#7e1889" transform="rotate(90 12 16)"/><rect x="10.5" y="4.5" width="3" height="4" fill="#7e1889" transform="rotate(135 12 16)"/><rect x="10.5" y="4.5" width="3" height="4" fill="#7e1889" transform="rotate(180 12 16)"/><rect x="10.5" y="4.5" width="3" height="4" fill="#7e1889" transform="rotate(225 12 16)"/><rect x="10.5" y="4.5" width="3" height="4" fill="#7e1889" transform="rotate(270 12 16)"/><rect x="10.5" y="4.5" width="3" height="4" fill="#7e1889" transform="rotate(315 12 16)"/><circle cx="12" cy="16" r="8" fill="#7e1889"/><circle cx="12" cy="16" r="3" fill="#cbefe7"/><rect x="24" y="8" width="4" height="20" fill="#7e1889"/><rect x="22" y="5" width="8" height="4" fill="#7e1889"/></svg></span><strong>Zulieferteile</strong><span>Komponenten, Module, CKD-Bausätze</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 27V22L7 18H19L23 22H29V27Z" fill="#7e1889"/><circle cx="9" cy="27" r="2.5" fill="#7e1889"/><circle cx="23" cy="27" r="2.5" fill="#7e1889"/><rect x="21" y="3" width="3" height="10" fill="#7e1889"/><rect x="12" y="3" width="12" height="3" fill="#7e1889"/><rect x="11" y="3" width="3" height="8" fill="#7e1889"/></svg></span><strong>Produktion</strong><span>Werke entlang der Wasserstraßen</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 15V11L5 8H13L16 11H17V15Z" fill="#7e1889"/><circle cx="6" cy="15" r="2" fill="#7e1889"/><circle cx="13" cy="15" r="2" fill="#7e1889"/><rect x="19" y="11" width="4" height="8" fill="#7e1889"/><rect x="24" y="14" width="5" height="5" fill="#7e1889"/><path d="M1 20H31L28 27H4Z" fill="#7e1889"/></svg></span><strong>Fahrzeugexport</strong><span>Pkw und Nutzfahrzeuge zu den Seehäfen und in die Welt</span></li><li><span class="chain-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="8" width="13" height="20" fill="#7e1889"/><rect x="8" y="5" width="5" height="3" fill="#7e1889"/><rect x="9.5" y="13" width="2" height="7" fill="#cbefe7"/><rect x="7" y="15.5" width="7" height="2" fill="#cbefe7"/><path d="M24 9A7 7 0 0 1 29 19" fill="none" stroke="#7e1889" stroke-width="3"/><path d="M31 17L29 22L26 18Z" fill="#7e1889"/><path d="M26 25A7 7 0 0 1 20 13" fill="none" stroke="#7e1889" stroke-width="3"/><path d="M18 15L20 10L23 14Z" fill="#7e1889"/></svg></span><strong>Batterie & Recycling</strong><span>Batterieproduktion, Kreislaufwirtschaft, Rückführung von Materialien</span></li></ul>
+            <p class="chem-claim">Die Wasserstraße begleitet das Auto über seinen gesamten industriellen Lebenszyklus.</p>
+          </div>
+      </div>
+      </div>
+      <div class="slider-nav">
+        <button class="sl-btn sl-prev" type="button" aria-label="Vorherige Grafik"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <div class="sl-dots" role="tablist" aria-label="Grafik auswählen"></div>
+        <span class="sl-count" aria-live="polite">1 / 5</span>
+        <button class="sl-btn sl-next" type="button" aria-label="Nächste Grafik"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ================= BREITE TEASER ================= -->
+<section class="wide-section" id="aktuell">
+  <div class="wrap">
+
+
+
+    <script>
+      // PDF-Download: im Artifact-Viewer über die Download-Freigabe, sonst als normaler Link
+      (() => {
+        const links = document.querySelectorAll('.pdf-dl');
+        if (!links.length || !window.claude || !window.claude.use) return;
+        let dl = null;
+        window.claude.use('downloads').then(d => { dl = d; }).catch(() => {});
+        links.forEach(a => a.addEventListener('click', async e => {
+          if (!dl) return;
+          e.preventDefault();
+          try {
+            const blob = await (await fetch(a.getAttribute('href'))).blob();
+            await dl.save({ filename: a.getAttribute('download'), data: blob });
+          } catch (err) { /* abgelehnt oder nicht verfügbar */ }
+        }));
+      })();
+    </script>
+
+    <!-- Kongress 2027: Programm vorläufig, bewusst ohne Namen der Mitwirkenden -->
+    <article class="event" id="kongress-2027">
+      <div class="event-grid">
+        <div>
+          <span class="label">Veranstaltung</span>
+          <p class="press-date">16. März 2027 · Futurium Berlin</p>
+          <h2>Kongress Wasserstraße und Binnenschifffahrt 2027</h2>
+          <p class="sub">Wichtige Teile des Wirtschaftsstandorts Deutschland hängen an leistungsfähigen Wasserstraßen und einer verlässlichen Binnenschifffahrt. 2027 müssen die richtigen Entscheidungen für die Zukunft getroffen werden. Die Allianz Wasserstraße versammelt Politik, Wirtschaft, Verbände, Verwaltung und Wissenschaft in Berlin, um neue Ideen und erfolgreiche Konzepte zu diskutieren.</p>
+        </div>
+        <div>
+          <dl class="event-facts">
+            <div><dt>Datum</dt><dd>Dienstag, 16. März 2027</dd></div>
+            <div><dt>Zeit</dt><dd>10.00 bis 16.00 Uhr</dd></div>
+            <div><dt>Ort</dt><dd>Futurium<br>Alexanderufer 2, 10117 Berlin</dd></div>
+          </dl>
+          <a class="btn event-cta" href="mailto:kongress@allianz-wasserstrasse.de?subject=Einladung%20zum%20Kongress%20Wasserstra%C3%9Fe%20und%20Binnenschifffahrt%202027&amp;body=Guten%20Tag%2C%0D%0A%0D%0Aich%20m%C3%B6chte%20gern%20zum%20Kongress%20Wasserstra%C3%9Fe%20und%20Binnenschifffahrt%202027%20am%2016.%20M%C3%A4rz%202027%20im%20Futurium%20Berlin%20eingeladen%20werden.%0D%0A%0D%0AName%3A%0D%0AFunktion%3A%0D%0AUnternehmen%20%2F%20Organisation%3A%0D%0A%0D%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen%0D%0A" target="_blank" rel="noopener">Eingeladen werden
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3zM3 7l9 7 9-7"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Agenda Wasserstraße 2035 -->
+    <article class="agenda" id="agenda-2035">
+      <div class="agenda-head">
+        <span class="label">Fokus auf Wirtschaftskraft</span>
+        <h2>Agenda Wasserstraße 2035</h2>
+        <p class="sub">Wir müssen mehr bauen, mehr finanzieren und schneller werden. Und dafür braucht es nicht nur mehr Geld, sondern vor allem eine bessere Struktur für die Planung und Umsetzung, damit der Bedarf realisiert werden kann. Dies sollte nach fünf Prinzipien organisiert werden, mit denen die Wasserstraße in die Zukunft geführt werden kann.</p>
+      </div>
+      <h3 class="agenda-sub">Neue Prinzipien für moderne Wasserstraßen</h3>
+      <div class="principles">
+        <details class="principle">
+          <summary><span class="pnum">1</span><span class="ptitle">In Clustern denken.</span></summary>
+          <div class="pbody">
+            <p>Bisher wurde das Gesamtsystem Wasserstraße betrachtet. Das ist zu unscharf. Wir müssen die einzelnen Wasserwege und deren Bedeutung für die Transportleistung in den Blick nehmen.</p>
+            <p>Wir haben den Niederrhein, den Mittelrhein, das westdeutsche Kanalnetz, das Gebiet Main-Donau, Mosel, Saar, Neckar, Elbe, Weser, die Kanäle und die Wasserwege im Nordosten.</p>
+            <p>Gemeinsam mit dem Bund und mit der Wissenschaft wollen wir einen Vorschlag entwickeln, wie diese Wasserwege zu zusammenhängenden Clustern gruppiert werden können.</p>
+            <p>Ein Cluster hat Haupt- und Nebenflüsse, Häfen, Schleusen und Wehre. Und alles zusammen muss funktionieren.</p>
+            <p>Die Cluster müssen zusammenhängend geplant und instandgesetzt werden. Dafür müssen die Wasser- und Schifffahrtsämter des Bundes und der Länder hier und da in neuer Weise zusammenarbeiten. Jedes Cluster braucht einen Verantwortungsträger, der die Zusammenarbeit koordiniert und für Ergebnisse sorgt.</p>
+            <p>Das gibt es bisher nicht, und das müssen wir ändern.</p>
+            <p>Verfügbarkeit muss die zentrale Kategorie für die Planung und Bewirtschaftung der Wasserstraße werden. Ein Cluster muss für einen durchgehenden Transport immer vollständig verfügbar sein, sonst wird der Wasserweg seiner Funktion nicht gerecht. Das gilt für den Güterverkehr genauso wie für die Personenschifffahrt.</p>
+            <p>Wenn einzelne Abschnitte in einem Cluster nicht passierbar sind, fällt das gesamte Cluster aus, und es bedarf entsprechender Ausweichrouten über andere Cluster sowie einer Priorisierung von Maßnahmen, die die Schiffbarkeit wiederherstellen.</p>
+          <figure class="cluster-fig">
+            <svg class="cluster-map" viewBox="0 0 600 670" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematische Karte der Wasserstraßen in Deutschland. Hervorgehoben: Niederrhein in Türkis, Mittelrhein in Lila, Westdeutsches Kanalnetz in Blau; übrige Flüsse und Kanäle in Hellblau">
+              <rect width="600" height="670" fill="#fff"/>
+              <g stroke="#2b2e34" stroke-opacity=".07" stroke-width="1"><path d="M0 40H600"/><path d="M0 80H600"/><path d="M0 120H600"/><path d="M0 160H600"/><path d="M0 200H600"/><path d="M0 240H600"/><path d="M0 280H600"/><path d="M0 320H600"/><path d="M0 360H600"/><path d="M0 400H600"/><path d="M0 440H600"/><path d="M0 480H600"/><path d="M0 520H600"/><path d="M0 560H600"/><path d="M0 600H600"/><path d="M0 640H600"/><path d="M40 0V670"/><path d="M80 0V670"/><path d="M120 0V670"/><path d="M160 0V670"/><path d="M200 0V670"/><path d="M240 0V670"/><path d="M280 0V670"/><path d="M320 0V670"/><path d="M360 0V670"/><path d="M400 0V670"/><path d="M440 0V670"/><path d="M480 0V670"/><path d="M520 0V670"/><path d="M560 0V670"/></g>
+              <g font-family="Barlow, Arial, sans-serif" font-size="15" font-style="italic" fill="#5b7fd6"><text x="70" y="70">Nordsee</text><text x="400" y="30">Ostsee</text></g>
+              <g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M227 84 L260 49 L289 47" stroke="#a9cbf7" stroke-width="4"/><path d="M280 115 L248 111 L227 84 L200 87" stroke="#a9cbf7" stroke-width="4"/><path d="M206 157 L186 135 L192 115" stroke="#a9cbf7" stroke-width="4"/><path d="M316 132 L323 108 L323 87" stroke="#a9cbf7" stroke-width="4"/><path d="M491 206 L481 186 L517 179 L536 174" stroke="#a9cbf7" stroke-width="4"/><path d="M568 239 L563 222 L567 201 L536 174 L546 158 L553 98" stroke="#a9cbf7" stroke-width="4"/><path d="M491 206 L533 220 L568 239" stroke="#a9cbf7" stroke-width="4"/><path d="M469 84 L510 88 L538 82" stroke="#a9cbf7" stroke-width="4"/><path d="M411 68 L409 58" stroke="#a9cbf7" stroke-width="4"/><path d="M541 348 L512 335 L485 313 L445 263 L397 254 L381 236 L403 204 L389 164 L358 151 L316 132 L280 115" stroke="#a9cbf7" stroke-width="4"/><path d="M316 132 L315 166 L329 215" stroke="#a9cbf7" stroke-width="4"/><path d="M402 301 L388 269 L397 254" stroke="#a9cbf7" stroke-width="4"/><path d="M381 236 L414 216 L439 216 L470 216 L491 206" stroke="#a9cbf7" stroke-width="4"/><path d="M132 225 L213 226 L264 219 L329 215 L381 236" stroke="#a9cbf7" stroke-width="4"/><path d="M259 303 L241 243 L213 226 L231 195 L206 157" stroke="#a9cbf7" stroke-width="4"/><path d="M173 428 L199 418 L228 430 L276 446 L336 437 L347 476 L397 523 L411 514 L495 553 L512 562" stroke="#a9cbf7" stroke-width="4"/><path d="M173 428 L186 472 L181 516 L141 552 L130 601 L131 642" stroke="#a9cbf7" stroke-width="4"/><path d="M186 472 L232 503 L244 541" stroke="#a9cbf7" stroke-width="4"/><path d="M131 396 L105 415 L72 448 L68 454 L55 474" stroke="#a9cbf7" stroke-width="4"/><path d="M68 454 L94 495" stroke="#a9cbf7" stroke-width="4"/><path d="M80 302 L101 293 L115 287" stroke="#1b42cc" stroke-width="5.5"/><path d="M71 282 L115 282 L145 280" stroke="#1b42cc" stroke-width="5.5"/><path d="M124 295 L115 287 L115 282 L133 255 L132 225 L115 167 L119 157 L107 131" stroke="#1b42cc" stroke-width="5.5"/><path d="M115 167 L169 151 L185 142" stroke="#1b42cc" stroke-width="5.5"/><path d="M92 345 L101 363 L131 396 L150 430 L173 428" stroke="#7e1889" stroke-width="7"/><path d="M29 264 L48 267 L71 282 L80 302 L81 319 L92 345" stroke="#39c7c9" stroke-width="7"/></g>
+              <g fill="#fff" stroke="#2b2e34" stroke-width="2.2"><circle cx="107" cy="131" r="4.5"/><circle cx="206" cy="157" r="4.5"/><circle cx="280" cy="115" r="4.5"/><circle cx="289" cy="47" r="4.5"/><circle cx="491" cy="206" r="4.5"/><circle cx="381" cy="236" r="4.5"/><circle cx="264" cy="219" r="4.5"/><circle cx="512" cy="335" r="4.5"/><circle cx="80" cy="302" r="4.5"/><circle cx="92" cy="345" r="4.5"/><circle cx="131" cy="396" r="4.5"/><circle cx="173" cy="428" r="4.5"/><circle cx="199" cy="418" r="4.5"/><circle cx="186" cy="472" r="4.5"/><circle cx="244" cy="541" r="4.5"/><circle cx="347" cy="476" r="4.5"/><circle cx="495" cy="553" r="4.5"/><circle cx="131" cy="642" r="4.5"/><circle cx="94" cy="495" r="4.5"/><circle cx="72" cy="448" r="4.5"/></g>
+              <g font-family="Barlow, Arial, sans-serif" font-size="13.5" fill="#2b2e34"><text x="98" y="135" text-anchor="end">Emden</text><text x="215" y="152" text-anchor="start">Bremen</text><text x="289" y="109" text-anchor="start">Hamburg</text><text x="298" y="51" text-anchor="start">Kiel</text><text x="500" y="199" text-anchor="start">Berlin</text><text x="372" y="229" text-anchor="end">Magdeburg</text><text x="264" y="239" text-anchor="middle">Hannover</text><text x="521" y="340" text-anchor="start">Dresden</text><text x="70" y="307" text-anchor="end">Duisburg</text><text x="82" y="350" text-anchor="end">Köln</text><text x="121" y="401" text-anchor="end">Koblenz</text><text x="164" y="444" text-anchor="end">Mainz</text><text x="207" y="410" text-anchor="start">Frankfurt</text><text x="176" y="477" text-anchor="end">Mannheim</text><text x="253" y="546" text-anchor="start">Stuttgart</text><text x="356" y="481" text-anchor="start">Nürnberg</text><text x="495" y="573" text-anchor="middle">Passau</text><text x="140" y="647" text-anchor="start">Basel</text><text x="94" y="515" text-anchor="middle">Saarbrücken</text><text x="63" y="464" text-anchor="end">Trier</text></g>
+            </svg>
+            <figcaption><span class="cluster-note">Quelle: GDWS 2024, Darstellung: Allianz Wasserstraße.</span></figcaption>
+          </figure>
+          </div>
+        </details>
+        <details class="principle">
+          <summary><span class="pnum">2</span><span class="ptitle">Flexibler Budget-Einsatz.</span></summary>
+          <div class="pbody">
+            <p>Bei den Investitionen geht es um Fahrrinnenvertiefung, Erneuerung und Ausbau der Schleusen, Verbesserung der Kaimauern für Niedrigwasserlagen und anderes.</p>
+            <p>Abgeleitet aus dem Paradigmenwechsel des Planens in Clustern und der Sicherstellung der Verfügbarkeit müssen die im Haushalt vorgesehenen Maßnahmen innerhalb eines Clusters gegenseitig deckungsfähig sein.</p>
+            <p>Wenn im Laufe der Planung der Mittelabfluss für eine Schleusenerweiterung stockt, müssen die Mittel innerhalb desselben Clusters z.&#8239;B. in Kaimauern für Niedrigwasserlagen oder in die Fahrrinne gelenkt werden können.</p>
+          </div>
+        </details>
+        <details class="principle">
+          <summary><span class="pnum">3</span><span class="ptitle">Priorität auf die Lebensader Rhein setzen.</span></summary>
+          <div class="pbody">
+            <p>Im Bundeswasserstraßenausbaugesetz (WaStrAbG) sind bisher Maßnahmen für das kommende Jahr enthalten. Sie verteilen sich über das ganze Bundesgebiet.</p>
+            <p>Die Mittel aus dem Sondervermögen müssen dort investiert werden, wo sie am meisten gebraucht werden, um die Wirtschaftskraft Deutschlands zu stabilisieren.</p>
+            <p>Aufgrund der wirtschaftlichen Bedeutung der Wasserstraßen sollten die Maßnahmen rund um den Hauptschifffahrtsweg Rhein deutlich ausgeweitet und priorisiert werden.</p>
+            <p>Es geht um die Anbindung an die Seehäfen und einen sicheren Transport zu den industriellen Clustern Energie, Chemie, Automobil, Stahl, um die Ernährungswirtschaft, die Bauwirtschaft.</p>
+            <p>Es geht um den Rhein als die bedeutende Achse des Tourismus.</p>
+            <p>Und wir brauchen ein Konzept, wie das Wasser im Rhein in den Sommermonaten auch im Mittelrhein auf einem guten Niveau gehalten werden kann.</p>
+            <p>Der Rhein muss schiffbar bleiben, das müssen wir sicherstellen.</p>
+          </div>
+        </details>
+        <details class="principle">
+          <summary><span class="pnum">4</span><span class="ptitle">Sofortiger Aufbau einer Niedrigwasserflotte.</span></summary>
+          <div class="pbody">
+            <p>Europaweit sind bisher nur dreizehn Frachtschiffe auf Niedrigwasser ausgelegt. Neun davon fahren für HGK. Von den in Deutschland angemeldeten vier gehören drei Rhenus.</p>
+            <p>Diese kleine Flotte ist deutlich zu wenig.</p>
+            <p>Wir brauchen allein für Deutschland rund 350 neue Schiffe bis 2035, die bei niedrigen und hohen Wasserständen fahren und künftig emissionsfrei betrieben werden können – als Beitrag zu bis zu 1.000 modernen Güterschiffen in Europa. Bestehende Referenzschiffe zeigen, dass Tiefgänge von etwa 1,00 bis 1,20 Metern im Regelbetrieb realisierbar sind. Jetzt geht es um die Serienfertigung.</p>
+            <p>Dafür braucht es Serienbau statt Einzelanfertigungen und wachsende europäische Werftkapazitäten. Bisher werden in Europa im Schnitt nur rund 120 Binnenschiffe pro Jahr gebaut. Das muss aufgebaut werden, und dafür braucht es jetzt die Nachfrage.</p>
+            <p>Ein erheblicher Teil der Flotte wird von kleinen und mittleren Unternehmen sowie selbstständigen Schiffseignern – sogenannten Partikulieren – betrieben. Die hohen Investitionssummen und langen Amortisationszeiten moderner Neubauten stellen gerade für diese Unternehmen eine erhebliche Hürde dar.</p>
+            <p>Wir als Allianz Wasserstraße schlagen deshalb ein „Flottenerneuerungsprogramm Binnenschifffahrt 2035“ vor: Der Bund stellt ab 2027 mindestens 400 Millionen Euro jährlich bereit und fördert bei Neubauten und Umbauten die Mehrkosten für Resilienz und Zukunftsfähigkeit. Die Basiskosten tragen die Eigner.</p>
+            <p><strong>Der Industriestandort Deutschland ist ohne ein solches Programm nicht zukunftsfähig.</strong></p>
+          </div>
+        </details>
+        <details class="principle">
+          <summary><span class="pnum">5</span><span class="ptitle">Die Wasserstraße braucht Verbindlichkeit.</span></summary>
+          <div class="pbody">
+            <p>Bisher werden Ausbau und Instandhaltung von Bundeswasserstraßen und Infrastruktur im Investitionsrahmenplan 2025–2029 des Bundes geregelt, der mit dem Bundeswasserstraßenausbaugesetz (WaStrAbG) parlamentarisch beschlossen wird.</p>
+            <p>Der Investitionsrahmenplan ist bisher ausdrücklich aber nur ein Planungsrahmen, eine Momentaufnahme, aber kein verbindlicher Finanzierungsplan. Daran ändert auch die Verabschiedung als Bundesgesetz nichts. Die Aufnahme eines Projekts garantiert weder den Baubeginn noch die vollständige Finanzierung. Das muss sich jetzt ändern.</p>
+            <p>In diesem Sinne muss jetzt zum November der im Koalitionsvertrag enthaltene „Finanzierungs- und Realisierungsplan“ aufgestellt und gemeinsam mit Umsetzungsprinzipien zur Beschleunigung im Zuge der Haushaltsberatungen beschlossen werden.</p>
+          </div>
+        </details>
+      </div>
+    </article>
+
+    <!-- Die Binnenschifffahrt in Zahlen -->
+    <section class="facts-box" id="zahlen" aria-label="Die Bedeutung der Binnenschifffahrt in Zahlen">
+      <details class="principle facts">
+        <summary><span class="pnum pnum-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="17" width="6" height="12"/><rect x="13" y="9" width="6" height="20"/><rect x="23" y="3" width="6" height="26"/></svg></span><span class="ptitle">Die Bedeutung der Binnenschifffahrt in Zahlen</span></summary>
+        <div class="pbody facts-body">
+            <h3>Die Binnenschifffahrt in Deutschland</h3>
+            <p>Die Unternehmen der Binnenschifffahrt in Deutschland betreiben mehr als 1.700 Güterschiffe, mehr als 350 Schlepper und Schubboote, rund 1.000 Fahrgastschiffe für Ausflüge und Flusskreuzfahrten sowie Hafenanlagen (Stand 2025).</p>
+            <p>In 2025 wurden durch die Binnenschifffahrt rund 171 Mio. t Güter bewegt, und das meist über weite Strecken. Jede Tonne Ladung fährt im Schnitt rund 250 km per Schiff. In Summe ergibt das 43 Mrd. Tonnenkilometer. Wir nennen das die Transportleistung der Binnenschifffahrt.</p>
+            <p>Bei der Fahrgastschifffahrt bieten rund 950 Ausflugsschiffe Platz für rund 210.000 Gäste – die größte Flotte dieser Art in Europa. Hinzu kommen 47 Kabinenschiffe mit rund 6.900 Betten.</p>
+            <p class="facts-source">Quelle Flottenzahlen: BDB, Daten &amp; Fakten 2025/2026 (nach GDWS), Stand 2025.</p>
+            <h3>Personenschifffahrt und Tourismus</h3>
+            <ul>
+              <li><strong>Rund 1,2 Mrd. € Umsatz im Jahr</strong> lösen Flusskreuzfahrten und Ausflugsschiffe entlang der deutschen Wasserstraßen aus (direkter Bruttoumsatz in heutigen Preisen): rund 824 Mio. € durch Tagesausflüge und rund 362 Mio. € durch Flusskreuzfahrten.</li>
+              <li><strong>1,5 Mio. Gäste</strong> reisten 2025 auf Flusskreuzfahrten in Europa, 8 % mehr als im Vorjahr; der Ticketumsatz stieg auf 3,7 Mrd. €. 39 % der Gäste kommen aus Deutschland, Österreich und der Schweiz, 37 % aus den USA und Kanada.</li>
+              <li><strong>863.200 Deutsche</strong> buchten 2025 eine Flusskreuzfahrt, gut ein Drittel mehr als 2022.</li>
+              <li><strong>Rund 3,9 Mio. Gästetage</strong> im Jahr verbringen Flusskreuzfahrtgäste auf deutschen Wasserstraßen (Schätzung).</li>
+              <li><strong>Rund 24 Mio. Fahrgäste</strong> im Jahr nutzen die rund 950 Ausflugsschiffe in Deutschland (Schätzung; eine amtliche Zählung gibt es nicht).</li>
+              <li><strong>420 Flusskreuzfahrtschiffe</strong> fahren in Europa, gut sieben von zehn auf Rhein, Main, Main-Donau-Kanal, Donau und Elbe-Oder. Für 2026 und 2027 werden 42 neue erwartet.</li>
+              <li><strong>4.706 Kreuzfahrtschiffe</strong> passierten 2025 die deutsch-niederländische Grenze bei Lobith, 4.606 die Donauschleuse Jochenstein und 3.340 die Rheinschleuse Iffezheim.</li>
+              <li><strong>Köln</strong> ist mit mindestens 460.000 Kreuzfahrtgästen im Jahr der größte Flusskreuzfahrthafen Deutschlands, es folgen Passau (rund 300.000), Würzburg (rund 160.000) und Bamberg (rund 130.000).</li>
+              <li><strong>5.862 Beschäftigte</strong> arbeiten in der Personen-Binnenschifffahrt in Deutschland (2024), mehr als in jedem anderen Land Europas; die 368 Unternehmen setzten 592 Mio. € um.</li>
+            </ul>
+            <p class="facts-source">Quellen: Bundeswirtschaftsministerium, Potenziale des Wassertourismus in Deutschland (2016), umgerechnet mit dem Verbraucherpreisindex; ZKR, Marktbeobachtung Jahresbericht 2026; DRV, Zahlen und Fakten 2026; IHK Köln/ift (2020); Eurostat; Schätzungen der Allianz Wasserstraße. Details im Positionspapier „Wirtschaftsfaktor Personenschifffahrt“.</p>
+            <h3>Neuer Finanzierungsrahmen für Bundeswasserstraßen</h3>
+            <p>Der Bund hat die Unterfinanzierung der Bundeswasserstraßen erkannt und im Sondervermögen zusätzliche Investitionen bereitgestellt. Zugleich wurde der Kernetat gekürzt.</p>
+            <p><strong>Bundeshaushalt:</strong> Der Entwurf des Bundeshaushaltes 2027 sieht im Kapitel 1203 Bundeswasserstraßen rund 849 Mio. € vor. 2026 waren noch 1,82 Mrd. € eingestellt. Das Gros der Mittel ist jetzt für den Erhalt vorgesehen: Für Aus- und Neubaumaßnahmen stehen lediglich 263,5 Mio. € zur Verfügung. 2026 waren es noch 863,09 Mio. €.</p>
+            <p><strong>Sondervermögen:</strong> Der Wirtschaftsplan des Sondervermögens weist für die Erhaltung und den Ersatz der Infrastruktur der Bundeswasserstraßen im Jahr 2027 1,2 Mrd. € aus. Zusätzlich sind im Wirtschaftsplan des Sondervermögens Verpflichtungsermächtigungen in Höhe von weiteren 1,92 Mrd. € für die kommenden Haushaltsjahre eingeplant. Damit sollen die Wasserstraßen- und Schifffahrtsverwaltung sowie die Bauwirtschaft Planungssicherheit erhalten.</p>
+            <h3>Hohes Alter der Anlagen</h3>
+            <p>Die Wasserstraßen- und Schifffahrtsverwaltung des Bundes (WSV) betreibt an den 7.300 km Binnenwasserstraßen insgesamt:</p>
+            <ul><li>315 Schleusenanlagen</li><li>3 Schiffshebewerke</li><li>307 Wehranlagen</li></ul>
+            <ul><li>Zusammen sind das 625 Bauwerke, die Flüsse und Kanäle schiffbar machen.</li><li>Mehr als die Hälfte der Schleusen und Wehre (346 von 617) ist älter als 80 Jahre, stammt also aus der Zeit vor 1946.</li><li>Bei den Schleusen und Wehren sind 529 älter als 40 Jahre, davon 205 sogar älter als 100 Jahre.</li></ul>
+            <p>Die Bundesregierung hat in 2026 die genaue Liste der akut sanierungsbedürftigen Bauwerke als „VS-Vertraulich“ eingestuft und in der Geheimschutzstelle des Bundestags hinterlegt – mit Verweis auf „Belange des Staatswohls“. Eine öffentliche, bauwerksscharfe Liste gibt es nicht.</p>
+            <h3>Aufbau der Wasserstraßen-Verwaltung in Deutschland</h3>
+            <p><strong>Bundesministerium für Verkehr:</strong> Es steuert die WSV politisch und finanziell.</p>
+            <p><strong>Generaldirektion Wasserstraßen und Schifffahrt (GDWS):</strong> Sitz in Bonn, weitere Standorte in Kiel, Aurich, Hannover, Münster, Mainz, Würzburg und Magdeburg. Sie ist die Zentralbehörde, verteilt die Mittel und ist zugleich Planfeststellungsbehörde, genehmigt also die Bauvorhaben.</p>
+            <p>Darunter arbeiten zwei Arten von Ämtern:</p>
+            <p><strong>17 Wasserstraßen- und Schifffahrtsämter (WSA):</strong> Sie sind je für ein Revier zuständig, betreiben und unterhalten die Wasserstraßen und ersetzen alte Bauwerke.</p>
+            <ul class="cols"><li>Rhein</li><li>Oberrhein</li><li>Westdeutsche Kanäle</li><li>Mosel-Saar-Lahn</li><li>Main</li><li>Neckar</li><li>Donau MDK</li><li>Weser</li><li>Weser-Jade-Nordsee</li><li>Ems-Nordsee</li><li>Mittellandkanal/Elbe-Seitenkanal</li><li>Elbe</li><li>Elbe-Nordsee</li><li>Spree-Havel</li><li>Oder-Havel</li><li>Nord-Ostsee-Kanal</li><li>Ostsee</li></ul>
+            <p><strong>Wasserstraßen-Neubauämter (WNA):</strong> Sie planen und bauen große Aus- und Neubauprojekte, zum Beispiel neue Schleusen oder Kanalausbau.</p>
+            <ul class="cols"><li>Aschaffenburg</li><li>Berlin</li><li>Datteln</li><li>Hannover</li><li>Heidelberg</li><li>Helmstedt</li><li>Magdeburg</li><li>Nord-Ostsee-Kanal</li></ul>
+            <p>Beratende Fachbehörden des Bundes, ebenfalls unter dem Verkehrsministerium:</p>
+            <ul><li><strong>Bundesanstalt für Wasserbau (BAW)</strong> in Karlsruhe: Gutachten zu Bautechnik und Wasserbau</li><li><strong>Bundesanstalt für Gewässerkunde (BfG)</strong> in Koblenz: Gewässer, Umwelt, Pegel- und Abflussvorhersagen</li></ul>
+            <h3>Von der Wasserstraße Rhein abhängige Industrie</h3>
+            <h4>Niederrhein und Ruhrgebiet</h4>
+            <ul><li><strong>thyssenkrupp Steel, Duisburg:</strong> Europas größter Stahlstandort. Erz und Kohle kommen per Schiff von Rotterdam, das Werk hat eigene Häfen.</li><li><strong>Hüttenwerke Krupp Mannesmann (HKM), Duisburg-Huckingen:</strong> Stahl.</li><li><strong>ArcelorMittal, Duisburg:</strong> Stahl.</li><li><strong>Hydro Rheinwerk, Neuss:</strong> Aluminium.</li></ul>
+            <h4>Rheinland (Krefeld bis Köln)</h4>
+            <ul><li><strong>Chempark Krefeld-Uerdingen, Dormagen und Leverkusen:</strong> Covestro, Lanxess, Bayer und weitere Chemiefirmen.</li><li><strong>Shell Energy and Chemicals Park Rheinland, Wesseling/Godorf:</strong> Raffinerie.</li><li><strong>LyondellBasell und Evonik, Wesseling:</strong> Chemie.</li><li><strong>Ford-Werke, Köln-Niehl:</strong> Automobil, mit eigenem Rheinanleger.</li></ul>
+            <h4>Mittel- und Oberrhein</h4>
+            <ul><li><strong>BASF, Ludwigshafen:</strong> der größte Chemiestandort der Welt, mit eigenen Rheinhäfen.</li><li><strong>Großkraftwerk Mannheim:</strong> Steinkohle per Schiff. Block 9 erzeugt Strom, Fernwärme und Bahnstrom, zwei ältere Blöcke stehen in der Netzreserve.</li><li><strong>MiRO, Karlsruhe:</strong> Deutschlands größte Raffinerie.</li><li><strong>EnBW Rheinhafen-Dampfkraftwerk, Karlsruhe:</strong> Steinkohle per Schiff. Der Kohleblock RDK 8 ist am Netz und soll bis 2028 durch ein Gaskraftwerk ersetzt werden.</li></ul>
+            <h3>Verteilung des Umschlags auf die Wasserstraßen</h3>
+            <figure class="port-chart"> <figcaption>Binnenhafenumschlag 2024 nach Wasserstraßengebiet</figcaption> <p class="chart-key"><span class="swatch" aria-hidden="true"></span>Rhein- und Westdeutsches Kanalgebiet zusammen: 79,0 %</p> <ol class="bars"> <li class="prio" title="Rheingebiet: 134,1 Mio. t, 65,4 %"><span class="rank">1</span><span class="name">Rheingebiet</span><span class="track"><span class="bar" style="width:100.0%"></span></span><span class="val">134,1 Mio. t · 65,4 %</span></li> <li class="prio" title="Westdeutsches Kanalgebiet: 27,9 Mio. t, 13,6 %"><span class="rank">2</span><span class="name">Westdeutsches Kanalgebiet</span><span class="track"><span class="bar" style="width:20.8%"></span></span><span class="val">27,9 Mio. t · 13,6 %</span></li> <li title="Elbegebiet: 15,0 Mio. t, 7,3 %"><span class="rank">3</span><span class="name">Elbegebiet</span><span class="track"><span class="bar" style="width:11.2%"></span></span><span class="val">15,0 Mio. t · 7,3 %</span></li> <li title="Mittellandkanalgebiet: 14,2 Mio. t, 6,9 %"><span class="rank">4</span><span class="name">Mittellandkanalgebiet</span><span class="track"><span class="bar" style="width:10.6%"></span></span><span class="val">14,2 Mio. t · 6,9 %</span></li> <li title="Wesergebiet: 8,7 Mio. t, 4,2 %"><span class="rank">5</span><span class="name">Wesergebiet</span><span class="track"><span class="bar" style="width:6.5%"></span></span><span class="val">8,7 Mio. t · 4,2 %</span></li> <li title="Donaugebiet: 2,7 Mio. t, 1,3 %"><span class="rank">6</span><span class="name">Donaugebiet</span><span class="track"><span class="bar" style="width:2.0%"></span></span><span class="val">2,7 Mio. t · 1,3 %</span></li> <li title="Berliner Wasserstraßen: 1,4 Mio. t, 0,7 %"><span class="rank">7</span><span class="name">Berliner Wasserstraßen</span><span class="track"><span class="bar" style="width:1.0%"></span></span><span class="val">1,4 Mio. t · 0,7 %</span></li> <li title="Brandenburg/Mecklenburg-Vorpommern: 1,2 Mio. t, 0,6 %"><span class="rank">8</span><span class="name">Brandenburg/Mecklenburg-Vorpommern</span><span class="track"><span class="bar" style="width:0.9%"></span></span><span class="val">1,2 Mio. t · 0,6 %</span></li> </ol> <p class="chart-note">Amtliche Gebietsauswertung, Stand 2024 (aktuellste vollständig vergleichbare Auswertung)</p> </figure>
+            <h3>Geplante Investitionen in den Rhein-Clustern</h3>
+            <h4>Niederrhein: 265,9 Mio. €</h4>
+            <ul><li>Abladeverbesserung und Sohlstabilisierung Duisburg–Stürzelberg: 169,0 Mio. €</li><li>Liegestelle Köln-Rheinauhafen: 17,2 Mio. €</li><li>Ruhehafen Ossenberg: 38,4 Mio. €</li><li>Ruhehafen Niedermörmter: 41,3 Mio. €</li></ul>
+            <h4>Mittelrhein: 245 Mio. €</h4>
+            <ul><li>Abladeoptimierung der Fahrrinnen am Mittelrhein: 219,7 Mio. €</li><li>Liegestellen am Ober- und Mittelrhein: zusätzlich 25,3 Mio. €. Da der IRP diese Maßnahme nicht zwischen beiden Rheinabschnitten aufteilt, ist eine ausschließlich dem Mittelrhein zuzurechnende Summe nicht verfügbar.</li></ul>
+            <h4>Westdeutsches Kanalnetz: 2.452,7 Mio. €</h4>
+            <ul><li>Dortmund-Ems-Kanal Nordstrecke: 999 Mio. €</li><li>Dortmund-Ems-Kanal Südstrecke: 413 Mio. €</li><li>Rhein-Herne-Kanal, Ausbau östlich Gelsenkirchen: 158 Mio. €</li><li>Ersatz zweite Schleusenkammer Wanne-Eickel: 199,1 Mio. €</li><li>Elektro- und Anlagentechnik der westdeutschen Kanäle: 210 Mio. €</li><li>Ruhrwehr Duisburg: 121,1 Mio. €</li></ul>
+            <p class="facts-source">Quelle: Investitionsrahmenplan (IRP) 2025–2029 für die Verkehrsinfrastruktur des Bundes</p>
+        </div>
+      </details>
+      <script>
+        (() => {
+          const d = document.querySelector('#zahlen details');
+          const open = () => { if (location.hash === '#zahlen' && d) d.open = true; };
+          document.querySelectorAll('a[href="#zahlen"]').forEach(a => a.addEventListener('click', () => { if (d) d.open = true; }));
+          window.addEventListener('hashchange', open); open();
+        })();
+      </script>
+    </section>
+
+    <!-- Niedrigwasserflotte -->
+    <article class="wide feature" id="niedrigwasserflotte">
+      <div class="wide-img lowwater">
+        <svg viewBox="0 0 640 400" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flaches Güterschiff bei Niedrigwasser, Uferböschung trockengefallen, Pegellatte zeigt niedrigen Wasserstand">
+          <defs>
+            <linearGradient id="lowwater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fb2ef"/><stop offset="1" stop-color="#1b42cc"/></linearGradient>
+          </defs>
+          <rect width="640" height="400" fill="#a9cbf7"/>
+          <circle cx="520" cy="70" r="34" fill="#fff" opacity=".85"/>
+          <path d="M0 140 Q160 100 320 130 T640 120 V200 H0Z" fill="#b6e3dc"/>
+          <!-- Ufer, trockengefallen -->
+          <path d="M0 160 Q200 150 400 165 T640 158 V200 H0Z" fill="#8fd3c7"/>
+          <rect x="0" y="190" width="640" height="62" fill="#e4dcc6"/>
+          <g fill="#cfc6ad"><ellipse cx="120" cy="215" rx="10" ry="4"/><ellipse cx="300" cy="236" rx="14" ry="5"/><ellipse cx="470" cy="210" rx="9" ry="3"/><ellipse cx="410" cy="240" rx="12" ry="4"/><ellipse cx="230" cy="205" rx="8" ry="3"/></g>
+          <!-- Wasser -->
+          <rect x="0" y="250" width="640" height="150" fill="url(#lowwater)"/>
+          <ellipse cx="150" cy="256" rx="60" ry="7" fill="#e4dcc6"/>
+          <g stroke="#fff" stroke-width="3" opacity=".35" fill="none"><path d="M90 320 q20 -6 40 0 t40 0 M360 350 q20 -6 40 0 t40 0 M230 380 q20 -6 40 0 t40 0"/></g>
+          <!-- Mittelwasser-Linie -->
+          <path d="M0 190 H640" stroke="#2b2e34" stroke-width="2" stroke-dasharray="10 8" opacity=".55"/>
+          <text x="70" y="182" font-family="Barlow, Arial, sans-serif" font-size="15" font-weight="600" fill="#2b2e34">Mittelwasser</text>
+          <!-- Absenkung -->
+          <path d="M84 196 V240" stroke="#7e1889" stroke-width="3"/>
+          <path d="M76 234 L84 246 L92 234Z" fill="#7e1889"/>
+          <text x="98" y="226" font-family="Barlow, Arial, sans-serif" font-size="15" font-weight="600" fill="#7e1889">Niedrigwasser</text>
+          <!-- Niedrigwasserschiff: lang, flach, geringer Tiefgang -->
+          <g transform="translate(200 214)">
+            <path d="M0 24 H300 L292 44 H10 Q2 38 0 24Z" fill="#2b2e34"/>
+            <path d="M0 24 H300 L298 30 H1Z" fill="#7e1889"/>
+            <rect x="16" y="6" width="44" height="18" fill="#39c7c9"/><rect x="62" y="6" width="44" height="18" fill="#1b42cc"/>
+            <rect x="108" y="6" width="44" height="18" fill="#cbefe7"/><rect x="154" y="6" width="44" height="18" fill="#7e1889"/>
+            <rect x="200" y="6" width="44" height="18" fill="#39c7c9"/>
+            <rect x="254" y="-12" width="38" height="36" fill="#fff"/>
+            <rect x="259" y="-6" width="28" height="9" fill="#1b42cc" opacity=".85"/>
+            <path d="M-20 44 Q-6 40 4 44" stroke="#fff" stroke-width="3" opacity=".6" fill="none"/>
+          </g>
+          <!-- Pegellatte -->
+          <g>
+            <text x="549" y="136" font-family="Barlow, Arial, sans-serif" font-size="14" font-weight="600" fill="#2b2e34" text-anchor="middle">Pegel</text>
+            <rect x="540" y="144" width="18" height="170" fill="#fff" stroke="#2b2e34" stroke-width="1.5"/>
+            <g stroke="#2b2e34" stroke-width="2"><path d="M540 154 H552 M540 174 H548 M540 194 H552 M540 214 H548 M540 234 H552 M540 254 H548 M540 274 H552 M540 294 H548"/></g>
+            <rect x="540" y="250" width="18" height="64" fill="#1b42cc" opacity=".55"/>
+          </g>
+        </svg>
+        <img class="photo" src="img/niedrigwasserflotte-4.webp" alt="Güterschiff im Mittelrheintal bei Niedrigwasser, breite Kiesbänke liegen trocken" onerror="this.remove()">
+      </div>
+      <div class="feature-head">
+        <span class="label">Flottenerneuerung</span>
+        <h2>Deutschland braucht eine Niedrigwasser-Flotte.</h2>
+      </div>
+      <div class="wide-copy">
+        <div class="feature-text">
+        <p class="sub">Europaweit sind bisher nur dreizehn Frachtschiffe auf Niedrigwasser ausgelegt. Alle gehören den Mitgliedern der Allianz und sind auf deutschen Wasserstraßen unterwegs.</p>
+        <p class="body">Wir bringen neue Schiffe in den Markt, aber es braucht allein für Deutschland rund 350 neue Schiffe bis 2035, die bei niedrigen und hohen Wasserständen fahren und künftig emissionsfrei betrieben werden können. Denn der Großteil der deutschen und europäischen Flotte ist im Schnitt 50 Jahre alt und für die neuen Niedrigwasserextreme ungeeignet. Neben Neubauten gehören auch Umbauten und die Modernisierung der Bestandsflotte dazu.</p>
+        <details class="toggle readmore">
+          <summary>Flottenprogramm</summary>
+          <p>Rund 350 deutsche Neubauten bis 2035 sind der Mindestbeitrag zu einem europäischen Ziel von bis zu 1.000 modernen, resilienten und energieeffizienten Güterschiffen. Dafür braucht es Serienbau und wachsende europäische Werftkapazitäten.</p>
+          <p>Das ist beträchtlicher Aufwuchs. Zum Vergleich: In Europa kommen derzeit insgesamt rund 100 bis 150 neue Binnenschiffe aller Kategorien jährlich auf den Markt; der Durchschnitt 2017–2024 lag bei etwa 120.</p>
+          <p>Ein solches Flottenprogramm für rund 350 neue Schiffe bis 2035 lässt sich nicht aus freien Restkapazitäten bedienen.</p>
+          <p>Ein Neubau kostet im Mittel rund 12,5&nbsp;Mio.&nbsp;€, davon entfallen rund 40 Prozent auf die Mehrkosten für Resilienz und Zukunftsfähigkeit. Gefördert werden sollen nur diese Mehrkosten, zu 80 Prozent. Mit mindestens 400&nbsp;Mio.&nbsp;€ jährlich ab 2027 lassen sich so rechnerisch rund 100 Neubauten pro Jahr anreizen. Rund 350 Neubauten lösen ein Investitionsvolumen von rund 4,4&nbsp;Mrd.&nbsp;€ aus, davon tragen die Eigner rund zwei Drittel.</p>
+          <p>Die Allianz Wasserstraße schlägt deshalb ein „Flottenerneuerungsprogramm Binnenschifffahrt 2035“ vor, mit dem die notwendigen Investitionssummen von den Unternehmen gemeinsam mit dem Bund mobilisiert werden.</p>
+          <p>Ein solches Programm würde eine Nachfrage nach modernen Schiffen schaffen und zugleich dazu beitragen, europäische Schiffbaukapazitäten und technologische Kompetenz zu sichern und weiterzuentwickeln.</p>
+          <p><strong>Der Industriestandort Deutschland ist ohne ein solches „Flottenerneuerungsprogramm Binnenschifffahrt“ nicht überlebensfähig.</strong></p>
+        </details>
+        </div>
+        <div class="feature-side">
+        <div class="figures">
+          <div><strong>13</strong><span>Niedrigwasserschiffe sind heute in Deutschland im Einsatz.</span></div>
+          <div><strong>350</strong><span>neue, resiliente Güterschiffe brauchen wir bis 2035.</span></div>
+          <div><strong>400 Mio. €</strong><span>Bundesmittel jährlich ab 2027 für die Flottenerneuerung.</span></div>
+        </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Häfen -->
+    <article class="wide expand-full" id="haefen">
+      <div class="wide-img">
+        <svg viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Binnenhafen mit Containerterminal">
+          <rect width="640" height="400" fill="#cbefe7"/>
+          <rect y="0" width="640" height="220" fill="#a9cbf7"/>
+          <circle cx="120" cy="80" r="36" fill="#fff" opacity=".8"/>
+          <g stroke="#7e1889" stroke-width="7" stroke-linecap="square" fill="none">
+            <path d="M300 250 V90 M360 250 V90 M290 90 H500 M300 170 L360 110 M360 170 L300 110"/>
+            <path d="M470 90 V140"/>
+          </g>
+          <rect x="460" y="140" width="22" height="14" fill="#7e1889"/>
+          <g stroke="#1b42cc" stroke-width="6" stroke-linecap="square" fill="none">
+            <path d="M440 250 V130 M490 250 V130 M430 130 H600 M440 190 L490 140"/>
+          </g>
+          <g>
+            <rect x="40" y="200" width="60" height="26" fill="#39c7c9"/><rect x="102" y="200" width="60" height="26" fill="#1b42cc"/><rect x="164" y="200" width="60" height="26" fill="#7e1889"/>
+            <rect x="70" y="174" width="60" height="26" fill="#1b42cc"/><rect x="132" y="174" width="60" height="26" fill="#39c7c9"/>
+            <rect x="40" y="226" width="60" height="26" fill="#7e1889"/><rect x="102" y="226" width="60" height="26" fill="#a9cbf7"/><rect x="164" y="226" width="60" height="26" fill="#39c7c9"/>
+          </g>
+          <rect x="0" y="250" width="640" height="14" fill="#6d7282"/>
+          <rect x="0" y="264" width="640" height="136" fill="#1b42cc"/>
+          <path d="M60 310 q20 -6 40 0 t40 0 M380 340 q20 -6 40 0 t40 0 M230 370 q20 -6 40 0 t40 0" stroke="#fff" stroke-width="3" opacity=".35" fill="none"/>
+          <path d="M260 262 H600 L588 292 H274Z" fill="#2b2e34"/>
+          <rect x="290" y="240" width="54" height="22" fill="#39c7c9"/><rect x="346" y="240" width="54" height="22" fill="#cbefe7"/><rect x="402" y="240" width="54" height="22" fill="#7e1889"/>
+          <rect x="540" y="226" width="46" height="36" fill="#fff"/>
+        </svg>
+        <img class="photo" src="img/hafen-3.webp" alt="Binnenhafen am Rhein mit Containerkränen, Silos, Containerschiff und Schubverband" style="object-position: 88% 50%" onerror="this.remove()">
+      </div>
+      <div class="wide-copy">
+        <span class="label">Häfen und Terminals</span>
+        <h2>Schlagader der Versorgung.</h2>
+        <p class="sub">Mehr als 80 Prozent des Binnenhafen-Umschlags entfallen auf den Rhein und das westdeutsche Kanalnetz.</p>
+        <p class="body">Häfen verbinden Wasser, Schiene und Straße. Damit die Transportkette auch bei Niedrigwasser funktioniert, brauchen Häfen leistungsfähige Umschlaganlagen, erreichbare Liegeplätze und ausreichend Flächen.</p>
+        <details class="toggle readmore">
+          <summary><span class="when-closed">mehr</span><span class="when-open">weniger</span></summary>
+          <p>In den Binnenhäfen werden Erz und Kohle für die Stahlwerke, Mineralöl und Chemikalien, Baustoffe, Agrargüter und Container umgeschlagen, gelagert und weiterverteilt. Über die Seehäfen Rotterdam, Antwerpen und Amsterdam sind sie mit dem Welthandel verbunden: Von den mehr als 171 Millionen Tonnen, die 2025 auf deutschen Wasserstraßen transportiert wurden, entfielen rund 120 Millionen Tonnen auf den grenzüberschreitenden Verkehr.</p>
+          <p>Der Rhein und das westdeutsche Kanalnetz vereinen mehr als 80 Prozent des Binnenhafen-Umschlags. Allein die Duisburger Hafengruppe schlug 2025 rund 50,8 Millionen Tonnen und 4,1 Millionen Standardcontainer (TEU) um.</p>
+          <figure class="inline-photo"><img src="img/hafen-3.webp" alt="Binnenhafen am Rhein mit Containerkränen, Silos, Containerschiff und Schubverband" width="1672" height="941" loading="lazy"></figure>
+          <p>Bei Niedrigwasser zeigt sich, wie wichtig die Häfen für die Versorgungssicherheit sind: Wenn Schiffe teils nur noch zehn Prozent ihrer Ladung tragen können, müssen mehr Fahrten abgewickelt, Güter zwischengelagert oder auf Schiene und Straße umgeleitet werden. Häfen und Terminals gehören deshalb in jede Strategie für eine widerstandsfähige Wasserstraße.</p>
+          <p>Ob Schleuse, Kaimauer oder Liegestelle: Die Allianz Wasserstraße fordert, dass Mittel zwischen Maßnahmen flexibel umgeschichtet werden können – damit sie dort eingesetzt werden, wo sie am dringendsten gebraucht werden.</p>
+        </details>
+      </div>
+    </article>
+
+    <!-- Personenschifffahrt -->
+    <article class="wide reverse expand-full" id="personenschifffahrt">
+      <div class="wide-img">
+        <svg viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flusslandschaft mit Brücke und Flusskreuzfahrtschiff">
+          <rect width="640" height="400" fill="#f6f7f4"/>
+          <rect width="640" height="230" fill="#a9cbf7"/>
+          <path d="M0 200 Q160 150 320 190 T640 180 V240 H0Z" fill="#8fd3c7"/>
+          <path d="M0 220 Q200 190 400 215 T640 210 V250 H0Z" fill="#6ec3b6"/>
+          <rect x="0" y="240" width="640" height="160" fill="#4f8fe0"/>
+          <rect x="0" y="300" width="640" height="100" fill="#1b42cc"/>
+          <path d="M0 150 H640" stroke="#2b2e34" stroke-width="12"/>
+          <path d="M40 156 Q180 240 320 156 Q460 240 600 156" stroke="#7e1889" stroke-width="10" fill="none"/>
+          <g fill="#2b2e34"><rect x="310" y="156" width="20" height="100"/><rect x="30" y="156" width="20" height="100"/><rect x="590" y="156" width="20" height="100"/></g>
+          <g transform="translate(150 262)">
+            <path d="M0 18 H260 L244 44 H14Z" fill="#fff"/>
+            <path d="M0 18 H260 L255 26 H4Z" fill="#7e1889"/>
+            <rect x="30" y="0" width="200" height="18" fill="#fff"/>
+            <rect x="60" y="-14" width="140" height="15" fill="#cbefe7"/>
+            <g fill="#1b42cc" opacity=".8"><rect x="40" y="5" width="14" height="8"/><rect x="62" y="5" width="14" height="8"/><rect x="84" y="5" width="14" height="8"/><rect x="106" y="5" width="14" height="8"/><rect x="128" y="5" width="14" height="8"/><rect x="150" y="5" width="14" height="8"/><rect x="172" y="5" width="14" height="8"/><rect x="194" y="5" width="14" height="8"/></g>
+          </g>
+          <path d="M40 340 q20 -6 40 0 t40 0 M420 360 q20 -6 40 0 t40 0" stroke="#fff" stroke-width="3" opacity=".4" fill="none"/>
+        </svg>
+        <img class="photo" src="img/personenschifffahrt-3.webp" alt="Flusskreuzfahrtschiff vor einer Ortschaft am Flussufer, dahinter bewaldete Hügel im Abendlicht" style="object-position: 45% 50%" onerror="this.remove()">
+      </div>
+      <div class="wide-copy">
+        <span class="label">Personenschifffahrt</span>
+        <h2>Flüsse als Achse des Tourismus.</h2>
+        <p class="sub">Verfügbarkeit ist für Fahrgastschiffe genauso wichtig wie für den Güterverkehr.</p>
+        <p class="body">Flusskreuzfahrten und Ausflugsschiffe bringen Gäste aus aller Welt an Rhein, Elbe, Mosel, Main und viele weitere Orte. Ist ein Abschnitt nicht passierbar, drohen große Einnahmeverluste für die Kommunen entlang der Strecke. Gerade internationale Gäste sorgen für viel Umsatz. Deshalb muss die Wasserstraße in zusammenhängenden Abschnitten geplant werden, die durchgehend verfügbar sind.</p>
+        <details class="toggle readmore">
+          <summary><span class="when-closed">mehr</span><span class="when-open">weniger</span></summary>
+          <p>Flusskreuzfahrten sind ein bedeutender Bestandteil des Deutschlandtourismus. Sie verbinden Mobilität, Beherbergung, Gastronomie und Kulturvermittlung in einem Produkt und bringen Gäste unmittelbar in Städte und ländliche Regionen entlang der Wasserstraßen. Besonders der Rhein besitzt eine herausragende Stellung: Gemeinsam mit der Donau gehört er zu den meistbefahrenen europäischen Flusskreuzfahrtgebieten. Seine Stärke liegt in der Verbindung international bekannter Städte, historischer Kulturlandschaften und guter Verkehrsverbindungen. 2025 passierten allein an der deutsch-niederländischen Grenze bei Lobith 4.706 Kreuzfahrtschiffe mit fast 823.000 Gästen.</p>
+          <p>2025 reisten auf europäischen Flüssen rund 1,5 Millionen Gäste mit Flusskreuzfahrten, 8 Prozent mehr als im Vorjahr. Der Brutto-Ticketumsatz stieg um 5 Prozent auf rund 3,7 Milliarden Euro. Im Jahr 2024 wurden knapp 10 Millionen Passagierübernachtungen gezählt; rechnerisch entsprach der Ticketumsatz damals etwa 2.545 Euro je Reisendem, darin sind die zusätzlichen Ausgaben der Gäste an Land noch nicht enthalten. 39 Prozent der Gäste kommen aus Deutschland, Österreich und der Schweiz, 37 Prozent aus den USA und Kanada. Aus Deutschland buchten 2025 rund 863.000 Menschen eine Flusskreuzfahrt, gut ein Drittel mehr als 2022.</p>
+          <figure class="inline-photo"><img src="img/personenschifffahrt-3.webp" alt="Flusskreuzfahrtschiff vor einer Ortschaft am Flussufer, dahinter bewaldete Hügel im Abendlicht" width="1672" height="941" loading="lazy"></figure>
+          <p>2025 waren in Europa nach Angaben der Zentralkommission für die Rheinschifffahrt 420 Flusskreuzfahrtschiffe im Einsatz, gut sieben von zehn davon auf Rhein, Main, Main-Donau-Kanal, Donau und Elbe-Oder. Ein typisches Schiff ist 110 oder 135 Meter lang und hat 150 bis 190 Gäste an Bord. Unter deutscher Flagge fahren 47 Kabinenschiffe mit 6.903 Betten. Der Neubau zieht wieder an: 2025 kamen 14 neue Schiffe auf den Markt, für 2026 werden 17 und für 2027 25 erwartet.</p>
+          <p>Neben den mehrtägigen Kreuzfahrten spielt die Tagesausflugsschifffahrt eine große Rolle. 2025 waren in Deutschland 953 Ausflugsschiffe mit 209.972 Plätzen gemeldet. Nach der Elberegion besitzt der Rhein die zweithöchste regionale Kapazität. Eine amtliche Fahrgastzahl gibt es nicht; nach Erfahrungswerten nutzen sie rund 24 Millionen Fahrgäste im Jahr. Die größten Schiffe fahren auf Donau, Mosel und Rhein, die kleineren in Städten wie Berlin und Hamburg.</p>
+          <p>Zusammen lösen Flusskreuzfahrten und Ausflugsschiffe nach einer Studie im Auftrag des Bundeswirtschaftsministeriums, umgerechnet in heutige Preise, entlang der deutschen Wasserstraßen einen Bruttoumsatz von rund 1,2 Milliarden Euro im Jahr aus. In der Personen-Binnenschifffahrt arbeiten in Deutschland 5.862 Menschen, mehr als in jedem anderen Land Europas.</p>
+          <p class="facts-source">Quellen: ZKR, Marktbeobachtung Jahresbericht 2026; BDB, Daten &amp; Fakten 2025/2026 (nach GDWS); DRV, Zahlen und Fakten 2026; Bundeswirtschaftsministerium, Potenziale des Wassertourismus in Deutschland (2016), umgerechnet mit dem Verbraucherpreisindex; Eurostat. Details im Positionspapier „Wirtschaftsfaktor Personenschifffahrt“.</p>
+        </details>
+        <a class="btn btn-outline more-link" href="#beitrag-personenschifffahrt">Zum Beitrag „Wirtschaftsfaktor Personenschifffahrt“
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+</main>
+
+<!-- ================= IMPRESSUM ================= -->
+<section class="legal" id="impressum" aria-labelledby="impressum-title">
+  <div class="wrap"><div class="legal-inner">
+    <div class="legal-head"><h2 id="impressum-title">Impressum</h2><a class="legal-close" href="#kontakt">schließen ×</a></div>
+    <h3>Angaben gemäß § 5 DDG</h3>
+    <p>Allianz Wasserstraße e.&#8239;V.<br>Reinhardtstraße 55, R5212<br>10117 Berlin</p>
+    <p>Vertreten durch den Vorstand: Markus Bangen, Steffen Bauer, Thomas Bogler, Michael de Reese</p>
+    <p>Registergericht: Amtsgericht Charlottenburg<br>Registernummer: VR 42879 B</p>
+    <h3>Lobbyregister</h3>
+    <p>Beim Deutschen Bundestag registrierte Interessenvertretung.<br>Registernummer: R008305</p>
+    <h3>Kontakt</h3>
+    <p>Telefon: <a href="tel:+4930232558153">+49 (0)30 232 558 153</a><br>E-Mail: <a href="mailto:office@allianz-wasserstrasse.de">office@allianz-wasserstrasse.de</a></p>
+    <h3>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3>
+    <p>Dr. Lutz Meyer<br>Leiter Interessenvertretung Allianz Wasserstraße e.&#8239;V., Reinhardtstraße 55, R5212, 10117 Berlin<br>E-Mail: <a href="mailto:lutz.meyer@allianz-wasserstrasse.de">lutz.meyer@allianz-wasserstrasse.de</a></p>
+    <h3>Haftung für Inhalte</h3>
+    <p>Wir erstellen die Inhalte dieser Website mit größtmöglicher Sorgfalt. Für ihre Richtigkeit, Vollständigkeit und Aktualität können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir für eigene Inhalte nach den allgemeinen Gesetzen verantwortlich. Wir sind nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen. Sobald uns eine konkrete Rechtsverletzung bekannt wird, entfernen wir die betreffenden Inhalte umgehend.</p>
+    <h3>Haftung für Links</h3>
+    <p>Diese Website kann Links zu Websites Dritter enthalten, auf deren Inhalte wir keinen Einfluss haben. Für diese Inhalte ist der jeweilige Anbieter oder Betreiber verantwortlich. Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Werden uns Rechtsverletzungen bekannt, entfernen wir die betreffenden Links umgehend.</p>
+    <h3>Urheberrecht</h3>
+    <p>Texte, Bilder, Grafiken und das Logo auf dieser Website sind urheberrechtlich geschützt. Vervielfältigung, Bearbeitung und Verbreitung außerhalb der Grenzen des Urheberrechts bedürfen der vorherigen schriftlichen Zustimmung der Allianz Wasserstraße e.&#8239;V.</p>
+    <h3>Bildnachweis</h3>
+    <p>Allianz Wasserstraße, mit KI-Elementen.</p>
+  </div></div>
+</section>
+
+<!-- ================= DATENSCHUTZ ================= -->
+<section class="legal" id="datenschutz" aria-labelledby="datenschutz-title">
+  <div class="wrap"><div class="legal-inner">
+    <div class="legal-head"><h2 id="datenschutz-title">Datenschutzerklärung</h2><a class="legal-close" href="#kontakt">schließen ×</a></div>
+    <h3>1. Verantwortliche Stelle</h3>
+    <p>Verantwortlich für die nachfolgend beschriebenen Verarbeitungen personenbezogener Daten ist:</p>
+    <p>Allianz Wasserstraße e.&#8239;V.<br>Reinhardtstraße 55, R5212<br>10117 Berlin<br>Telefon: <a href="tel:+4930232558153">+49 (0)30 232 558 153</a><br>E-Mail: <a href="mailto:office@allianz-wasserstrasse.de">office@allianz-wasserstrasse.de</a></p>
+    <p>Verantwortlicher Ansprechpartner für den Datenschutz:<br>Dr. Lutz Meyer<br>E-Mail: <a href="mailto:lutz.meyer@allianz-wasserstrasse.de">lutz.meyer@allianz-wasserstrasse.de</a></p>
+    <h3>2. Allgemeines</h3>
+    <p>Wir verarbeiten personenbezogene Daten im Rahmen unseres Internetauftritts, unserer Kommunikation, unserer Verbandsarbeit sowie bei der Planung, Durchführung und Nachbereitung von Veranstaltungen.</p>
+    <p>Die Verarbeitung erfolgt auf Grundlage der jeweils anwendbaren datenschutzrechtlichen Bestimmungen, insbesondere der Datenschutz-Grundverordnung (DSGVO) und des Bundesdatenschutzgesetzes (BDSG).</p>
+    <p>Welche personenbezogenen Daten wir verarbeiten, zu welchen Zwecken dies erfolgt und welche Rechtsgrundlagen gelten, erläutern wir in den nachfolgenden Abschnitten.</p>
+    <h3>3. Hosting und Server-Logfiles</h3>
+    <p>Diese Website wird bei GoDaddy.com betrieben. Beim Aufruf der Website speichert der Server automatisch Informationen, die Ihr Browser übermittelt: IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, Referrer-URL, Browsertyp und Betriebssystem.</p>
+    <p>Diese Daten sind technisch erforderlich, um die Website auszuliefern und ihre Sicherheit zu gewährleisten. Rechtsgrundlage ist unser berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO.</p>
+    <p>Die Logfiles werden nach sieben Tagen gelöscht, sofern sie nicht zur Aufklärung eines Sicherheitsvorfalls länger benötigt werden. Mit dem Hosting-Anbieter besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.</p>
+    <h3>4. Kontaktaufnahme</h3>
+    <p>Wenn Sie uns per E-Mail oder Telefon kontaktieren, verarbeiten wir Ihre Angaben, etwa Name, E-Mail-Adresse, Telefonnummer und den Inhalt Ihrer Anfrage, um Ihr Anliegen zu bearbeiten.</p>
+    <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit Ihre Anfrage mit einem Vertrag oder einer Mitgliedschaft zusammenhängt, im Übrigen unser berechtigtes Interesse an der Beantwortung von Anfragen nach Art. 6 Abs. 1 lit. f DSGVO.</p>
+    <p>Wir löschen die Daten, sobald sie für diesen Zweck nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+    <h3>5. Schriftarten (Google Fonts)</h3>
+    <p>Diese Website verwendet die Schriftarten „Barlow“ und „Barlow Semi Condensed“ von Google Fonts, einem Dienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
+    <p>Beim Aufruf der Seite lädt Ihr Browser die Schriftarten von Servern von Google. Dabei wird Ihre IP-Adresse an Google übermittelt; eine Übermittlung in die USA kann nicht ausgeschlossen werden.</p>
+    <p>Rechtsgrundlage ist unser berechtigtes Interesse an einer einheitlichen Darstellung nach Art. 6 Abs. 1 lit. f DSGVO.</p>
+    <p>Weitere Informationen finden Sie in der Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy">policies.google.com/privacy</a>.</p>
+    <h3>6. Videos</h3>
+    <p>Das Video auf dieser Website wird von unserem eigenen Server ausgeliefert. Dabei werden keine Daten an Videoplattformen Dritter übermittelt.</p>
+    <h3>7. Cookies und Analyse auf unserer Website</h3>
+    <p>Diese Website setzt nach unserem derzeitigen Kenntnisstand keine Cookies und verwendet keine Analyse- oder Tracking-Werkzeuge zur Auswertung des Besucherverhaltens auf der Website.</p>
+    <p>Die statistische Auswertung unserer E-Mail-Kommunikation ist hiervon unabhängig und wird in Abschnitt 10 erläutert.</p>
+    <h3>8. Newsletter</h3>
+    <p>Auf unserer Website besteht die Möglichkeit, unseren Newsletter zu abonnieren. Über diesen informieren wir insbesondere über aktuelle Entwicklungen, Positionen, Veranstaltungen und Aktivitäten der Allianz Wasserstraße.</p>
+    <p>Für die Anmeldung verarbeiten wir Ihre E-Mail-Adresse sowie die zur Dokumentation Ihrer Einwilligung erforderlichen Informationen.</p>
+    <p>Die Verarbeitung erfolgt auf Grundlage Ihrer Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, beispielsweise über einen Abmeldelink in unseren Newslettern oder durch eine Nachricht an <a href="mailto:office@allianz-wasserstrasse.de">office@allianz-wasserstrasse.de</a>.</p>
+    <p>Für den Versand nutzen wir den Dienst Brevo (Sendinblue SAS, Frankreich), der personenbezogene Daten in unserem Auftrag verarbeitet.</p>
+    <p>Nach Ihrer Abmeldung wird Ihre E-Mail-Adresse aus dem aktiven Newsletterverteiler entfernt, soweit keine gesetzlichen Aufbewahrungspflichten oder berechtigten Gründe für eine begrenzte Speicherung, beispielsweise zur Dokumentation des Widerrufs, entgegenstehen.</p>
+    <h3>9. Veranstaltungs- und Gästemanagement</h3>
+    <p>Im Rahmen der Organisation, Durchführung und Nachbereitung unserer Veranstaltungen verarbeiten wir personenbezogene Daten von eingeladenen Personen, angemeldeten Teilnehmerinnen und Teilnehmern, Referierenden sowie weiteren Beteiligten.</p>
+    <p>Hierzu können insbesondere folgende Daten gehören:</p>
+    <ul>
+      <li>Vor- und Nachname</li>
+      <li>Unternehmen, Organisation und berufliche Funktion</li>
+      <li>E-Mail-Adresse und gegebenenfalls Telefonnummer</li>
+      <li>Einladungs- und Anmeldestatus</li>
+      <li>Angaben zur Teilnahme und zu organisatorischen Anforderungen</li>
+      <li>Ticket-, QR-Code- und Check-in-Informationen</li>
+      <li>freiwillig mitgeteilte Verpflegungswünsche</li>
+      <li>veranstaltungsbezogene Kommunikation</li>
+    </ul>
+    <p>Die Verarbeitung dient der Erstellung und Verwaltung von Einladungsverteilern, dem Versand von Einladungen und organisatorischen Informationen, der Erfassung von Anmeldungen, der Teilnehmerbetreuung, der Zugangskontrolle sowie der Nachbereitung unserer Veranstaltungen.</p>
+    <p>Je nach Art der Veranstaltung und des jeweiligen Kontakts erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, Art. 6 Abs. 1 lit. f DSGVO oder Art. 6 Abs. 1 lit. a DSGVO.</p>
+    <p>Unser berechtigtes Interesse besteht insbesondere in der ordnungsgemäßen Organisation unserer Veranstaltungen, der Kommunikation mit relevanten beruflichen Ansprechpartnern und der Durchführung unserer Verbandsarbeit.</p>
+    <p>Für das operative Gästemanagement setzen wir die Beissel von Mathieu Guest GmbH, Berlin, als Auftragsverarbeiter gemäß Art. 28 DSGVO ein.</p>
+    <h3>10. Versand, Zustellkontrolle und statistische Auswertung von E-Mails</h3>
+    <p>Für den Versand von Newslettern, Veranstaltungseinladungen und organisatorischen Informationen nutzen wir Brevo (Sendinblue SAS, Frankreich).</p>
+    <h4>Technische Zustellkontrolle</h4>
+    <p>Zur Überprüfung der technischen Zustellung verarbeiten wir Informationen über den Versandstatus unserer E-Mails. Hierzu gehören insbesondere Versandzeitpunkte, Zustellstatus sowie Fehlermeldungen bei unzustellbaren E-Mails (Bounces).</p>
+    <p>Diese Informationen verwenden wir, um Versandprobleme zu erkennen, fehlerhafte E-Mail-Adressen zu identifizieren und eine zuverlässige Kommunikation sicherzustellen.</p>
+    <p>Die Verarbeitung erfolgt, soweit keine andere Rechtsgrundlage einschlägig ist, auf Grundlage unseres berechtigten Interesses gemäß Art. 6 Abs. 1 lit. f DSGVO.</p>
+    <h4>Statistische Auswertung von Öffnungen und Linkklicks</h4>
+    <p>Für Newsletter und veranstaltungsbezogene E-Mails haben wir die Funktion des anonymisierten E-Mail-Trackings von Brevo aktiviert.</p>
+    <p>Damit möchten wir die Öffnungs- und Klickraten unserer E-Mail-Aussendungen statistisch auswerten. Die Auswertung dient dazu, die Reichweite unserer Kommunikation einzuschätzen und unsere Informationsangebote zu verbessern.</p>
+    <p>Die Öffnungs- und Klickereignisse werden im Rahmen dieser Einstellung nicht einzelnen Kontaktprofilen als personenbezogene Trackingereignisse zugeordnet.</p>
+    <p>Die technische Ermittlung von Öffnungen kann durch den Abruf eingebundener Zählpixel erfolgen. Die Ermittlung von Linkklicks kann über entsprechend gestaltete Links erfolgen. Dabei können technisch bedingt zunächst Informationen verarbeitet werden, die einen Personenbezug aufweisen.</p>
+    <h3>11. Recherche und Ergänzung beruflicher Kontaktdaten</h3>
+    <p>Im Rahmen unserer Verbandsarbeit und der Organisation von Fachveranstaltungen können wir berufliche Kontaktdaten auch aus öffentlich zugänglichen Quellen oder von beteiligten Organisationen erhalten.</p>
+    <p>Hierzu zählen insbesondere Namen, berufliche Funktionen, Unternehmen beziehungsweise Organisationen und geschäftliche Kontaktdaten.</p>
+    <p>Die Verarbeitung dient der Identifikation und Ansprache relevanter Ansprechpartner sowie der Zusammenstellung veranstaltungsbezogener Einladungsverteiler.</p>
+    <p>Soweit zulässig, erfolgt die Verarbeitung auf Grundlage unseres berechtigten Interesses gemäß Art. 6 Abs. 1 lit. f DSGVO. Dabei berücksichtigen wir insbesondere den beruflichen Bezug, die Erforderlichkeit der Kontaktaufnahme und die schutzwürdigen Interessen der betroffenen Personen.</p>
+    <p>Die Zulässigkeit einer Kontaktaufnahme per E-Mail richtet sich zusätzlich nach den einschlägigen wettbewerbsrechtlichen Vorschriften.</p>
+    <p>Soweit wir personenbezogene Daten nicht unmittelbar bei den betroffenen Personen erheben, erfüllen wir die Informationspflichten nach Art. 14 DSGVO.</p>
+    <h3>12. Online-Anmeldungen und Formulare</h3>
+    <p>Für die Erfassung von Veranstaltungsanmeldungen und veranstaltungsbezogenen Rückmeldungen können wir Onlineformulare des Dienstes Tally (Tally BV, Belgien) einsetzen.</p>
+    <p>Dabei verarbeiten wir die von Ihnen in das jeweilige Formular eingegebenen Informationen. Abhängig vom Formular können dies insbesondere Kontaktdaten, Angaben zur Teilnahme und weitere organisatorische Informationen sein.</p>
+    <p>Die Verarbeitung erfolgt zur Bearbeitung Ihrer Anmeldung und zur Organisation der jeweiligen Veranstaltung.</p>
+    <p>Rechtsgrundlage ist je nach Veranstaltung Art. 6 Abs. 1 lit. b DSGVO, Art. 6 Abs. 1 lit. f DSGVO oder Art. 6 Abs. 1 lit. a DSGVO.</p>
+    <p>Bei der Nutzung der Formulare können außerdem technisch erforderliche Verbindungsdaten verarbeitet werden.</p>
+    <h3>13. Verpflegungswünsche und Allergieangaben</h3>
+    <p>Bei einzelnen Veranstaltungen können wir freiwillig Angaben zu Verpflegungswünschen erheben, beispielsweise zur vegetarischen oder veganen Ernährung.</p>
+    <p>Soweit zusätzlich Angaben zu Allergien oder gesundheitlich bedingten Unverträglichkeiten abgefragt werden, kann es sich um Gesundheitsdaten im Sinne des Art. 9 Abs. 1 DSGVO handeln.</p>
+    <p>Solche Angaben werden ausschließlich erhoben, soweit dies für die Berücksichtigung individueller Verpflegungsanforderungen erforderlich ist.</p>
+    <p>Die Angabe ist freiwillig. Für die Verarbeitung von Gesundheitsdaten holen wir eine ausdrückliche Einwilligung gemäß Art. 9 Abs. 2 lit. a DSGVO in Verbindung mit Art. 6 Abs. 1 lit. a DSGVO ein.</p>
+    <p>Die Angaben werden nur den Personen oder Dienstleistern zugänglich gemacht, die sie für die Organisation der Verpflegung benötigen. Eine Weitergabe erfolgt dabei nur im erforderlichen Umfang.</p>
+    <p>Eine erteilte Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden.</p>
+    <h3>14. Kalenderfunktionen</h3>
+    <p>In unserer E-Mail-Kommunikation können wir Links verwenden, über die Veranstaltungstermine in persönliche Kalender übernommen werden können.</p>
+    <p>Hierfür nutzen wir gegebenenfalls den Dienst AddCal (AddCal Pty Ltd, Australien).</p>
+    <p>Die Kalenderlinks werden als allgemeine, nicht personalisierte Links bereitgestellt. Wir übermitteln im Rahmen dieser Funktion keine individuellen Gästedaten an AddCal.</p>
+    <p>Beim Aufruf eines entsprechenden Links kann der externe Anbieter jedoch technische Verbindungsdaten, insbesondere die IP-Adresse und Browserinformationen, verarbeiten.</p>
+    <p>Die weitere Verarbeitung richtet sich nach den Datenschutzbestimmungen des jeweiligen Anbieters.</p>
+    <h3>15. Eingesetzte Dienstleister und Empfänger personenbezogener Daten</h3>
+    <p>Zur Durchführung unserer Aufgaben setzen wir externe Dienstleister ein, die personenbezogene Daten in unserem Auftrag verarbeiten oder im Rahmen ihrer jeweiligen Leistungen erhalten können.</p>
+    <p>Hierzu gehören insbesondere:</p>
+    <ul>
+      <li>Beissel von Mathieu Guest GmbH, Deutschland: operatives Veranstaltungs- und Gästemanagement</li>
+      <li>Brevo / Sendinblue SAS, Frankreich: Versand von Newslettern und veranstaltungsbezogenen E-Mails</li>
+      <li>Tally BV, Belgien: Bereitstellung von Onlineformularen</li>
+      <li>Microsoft Ireland Operations Limited, Irland: Microsoft-365-Dienste, Dokumentenverwaltung und Datensicherung</li>
+      <li>Notion Labs Inc., USA: gegebenenfalls projektbezogene Organisation und Dokumentation</li>
+      <li>AddCal Pty Ltd, Australien: Bereitstellung von Kalenderfunktionen, soweit eingesetzt</li>
+    </ul>
+    <p>Soweit Dienstleister als Auftragsverarbeiter tätig werden, schließen wir die erforderlichen Vereinbarungen gemäß Art. 28 DSGVO.</p>
+    <p>Eine Übermittlung personenbezogener Daten in Staaten außerhalb der Europäischen Union beziehungsweise des Europäischen Wirtschaftsraums erfolgt nur unter Beachtung der gesetzlichen Anforderungen der Art. 44 ff. DSGVO.</p>
+    <h3>16. Speicherdauer im Veranstaltungsmanagement</h3>
+    <p>Wir speichern personenbezogene Daten nur so lange, wie dies für die jeweiligen Verarbeitungszwecke erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen.</p>
+    <p>Veranstaltungsbezogene Daten werden grundsätzlich für die Vorbereitung, Durchführung und erforderliche Nachbereitung der jeweiligen Veranstaltung verarbeitet.</p>
+    <p>Die operative Nachbereitung kann einen Zeitraum von bis zu sechs Monaten nach der Veranstaltung umfassen.</p>
+    <p>Daten, die darüber hinaus für unsere laufende Verbandsarbeit oder eine zulässige weitere Kommunikation erforderlich sind, können auf Grundlage einer jeweils einschlägigen Rechtsgrundlage länger gespeichert werden.</p>
+    <p>Bei den von uns eingesetzten Dienstleistern können technische Sicherungskopien bestehen, die nach den jeweiligen Lösch- und Sicherungsprozessen entfernt werden.</p>
+    <h3>17. Ihre Rechte</h3>
+    <p>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16 DSGVO), Löschung (Art. 17 DSGVO), Einschränkung der Verarbeitung (Art. 18 DSGVO) und Datenübertragbarkeit (Art. 20 DSGVO), soweit die jeweiligen gesetzlichen Voraussetzungen vorliegen.</p>
+    <p>Einer Verarbeitung auf Grundlage unseres berechtigten Interesses können Sie nach Maßgabe des Art. 21 DSGVO widersprechen.</p>
+    <p>Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3 DSGVO). Wenden Sie sich dazu an die oben genannte Stelle.</p>
+    <p>Sie haben außerdem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Für uns zuständig ist die Berliner Beauftragte für Datenschutz und Informationsfreiheit, Alt-Moabit 59–61, 10555 Berlin.</p>
+    <h3>18. Datensicherheit</h3>
+    <p>Die Übertragung dieser Website erfolgt verschlüsselt über HTTPS.</p>
+    <p>Darüber hinaus setzen wir angemessene technische und organisatorische Maßnahmen ein, um personenbezogene Daten vor unbefugtem Zugriff, Verlust, Veränderung und unberechtigter Offenlegung zu schützen.</p>
+    <p class="legal-date">Stand: November 2026</p>
+  </div></div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer id="kontakt">
+  <div class="stripe"></div>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <span class="footer-logo"><img src="img/logo.png" alt="Allianz Wasserstraße"></span>
+        <p class="claim">Der Zusammenschluss führender Unternehmen im System Wasserstraße.</p>
+        <div class="social" aria-label="Social Media" hidden>
+          <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.8 15.1V8.9l5.4 3.1z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h3>Kontakt</h3>
+        <ul>
+          <li>Allianz Wasserstraße e.&#8239;V.<br>Reinhardtstraße 55, R5212<br>10117 Berlin</li>
+          <li><a href="mailto:office@allianz-wasserstrasse.de">office@allianz-wasserstrasse.de</a></li>
+          <li><a href="tel:+4930232558153">+49 (0)30 232 558 153</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="#die-allianz">Die Allianz</a></li>
+          <li><a href="#versorgung">Versorgungssicherheit</a></li>
+          <li><a href="#schleusen">Schleusen und Wehre</a></li>
+          <li><a href="#grafiken">Industrien</a></li>
+          <li><a href="#beitrag-personenschifffahrt">Wirtschaftsfaktor Personenschifffahrt</a></li>
+          <li><a href="#beitrag-personal">Personalsituation</a></li>
+          <li><a href="#kongress-2027">Kongress 2027</a></li>
+          <li><a href="#agenda-2035">Agenda Wasserstraße 2035</a></li>
+          <li><a href="#zahlen">Zahlen</a></li>
+          <li><a href="#niedrigwasserflotte">Niedrigwasserflotte</a></li>
+          <li><a href="#haefen">Häfen und Terminals</a></li>
+          <li><a href="#personenschifffahrt">Personenschifffahrt</a></li>
+          <li><a href="mailto:office@allianz-wasserstrasse.de">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-newsletter" hidden>
+        <h3>Newsletter</h3>
+        <p>Neuigkeiten zur Agenda Wasserstraße 2035 direkt ins Postfach.</p>
+        <form class="newsletter" id="newsletter-form" novalidate>
+          <input type="email" id="newsletter-email" name="email" autocomplete="email" placeholder="E-Mail-Adresse" aria-label="E-Mail-Adresse" required>
+          <button type="submit">OK</button>
+        </form>
+        <p class="newsletter-msg" id="newsletter-msg" role="status" hidden></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Allianz Wasserstraße</span>
+      <nav aria-label="Rechtliches">
+        <a href="#impressum">Impressum</a>
+        <a href="#datenschutz">Datenschutz</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Newsletter: Bis ein Versanddienst angebunden ist, gibt das Formular einen Hinweis statt stumm nichts zu tun.
+  document.getElementById('newsletter-form')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const input = document.getElementById('newsletter-email');
+    const msg = document.getElementById('newsletter-msg');
+    msg.hidden = false;
+    if (!input.value || !input.checkValidity()) {
+      msg.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+      input.focus();
+      return;
+    }
+    msg.innerHTML = 'Die Newsletter-Anmeldung wird gerade eingerichtet. Bis dahin schreiben Sie uns gern an <a href="mailto:office@allianz-wasserstrasse.de">office@allianz-wasserstrasse.de</a>.';
+  });
+  // Karusselle (Anzeigen, Grafiken): Pfeile, Punkte, Wischen, Pfeiltasten; wechseln alle 6 s, pausieren bei Maus/Fokus.
+  document.querySelectorAll('.slider-card').forEach(function (root) {
+    const view = root.querySelector('.slider-viewport');
+    const track = root.querySelector('.slider-track');
+    const slides = [...track.querySelectorAll('.slide')];
+    const dotsBox = root.querySelector('.sl-dots');
+    const count = root.querySelector('.sl-count');
+    const n = slides.length;
+    let cur = 0, timer = null, paused = false;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) track.style.transition = 'none';
+    const dots = slides.map((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'sl-dot'; b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', (root.dataset.item || 'Grafik') + ' ' + (i + 1));
+      b.addEventListener('click', () => { go(i); restart(); });
+      dotsBox.appendChild(b); return b;
+    });
+    function go(i) {
+      cur = (i + n) % n;
+      track.style.transform = 'translateX(' + (-cur * 100) + '%)';
+      slides.forEach((sl, j) => { sl.inert = j !== cur; sl.setAttribute('aria-hidden', j === cur ? 'false' : 'true'); });
+      dots.forEach((d, j) => d.setAttribute('aria-selected', j === cur ? 'true' : 'false'));
+      count.textContent = (cur + 1) + ' / ' + n;
+    }
+    root.querySelector('.sl-prev').addEventListener('click', () => { go(cur - 1); restart(); });
+    root.querySelector('.sl-next').addEventListener('click', () => { go(cur + 1); restart(); });
+    view.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); restart(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); restart(); }
+    });
+    // Wischen mit Finger oder Maus
+    let startX = null, dx = 0;
+    view.addEventListener('pointerdown', e => { startX = e.clientX; dx = 0; track.classList.add('dragging'); });
+    view.addEventListener('pointermove', e => {
+      if (startX === null) return;
+      dx = e.clientX - startX;
+      track.style.transform = 'translateX(calc(' + (-cur * 100) + '% + ' + dx + 'px))';
+    });
+    function endDrag() {
+      if (startX === null) return;
+      track.classList.remove('dragging');
+      startX = null;
+      if (dx < -50) go(cur + 1); else if (dx > 50) go(cur - 1); else go(cur);
+      if (Math.abs(dx) > 50) restart();
+    }
+    view.addEventListener('pointerup', endDrag);
+    view.addEventListener('pointercancel', endDrag);
+    view.addEventListener('pointerleave', endDrag);
+    function restart() {
+      clearInterval(timer);
+      if (reduce) return;
+      timer = setInterval(() => { if (!paused && !document.hidden) go(cur + 1); }, 6000);
+    }
+    root.addEventListener('mouseenter', () => paused = true);
+    root.addEventListener('mouseleave', () => paused = false);
+    root.addEventListener('focusin', () => paused = true);
+    root.addEventListener('focusout', () => paused = false);
+    go(0); restart();
+  });
+</script>
+
+
+</body></html>
